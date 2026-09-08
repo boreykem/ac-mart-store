@@ -553,7 +553,7 @@
       <div class="store-switcher" id="storeSwitcherBtn" title="Your Official Private Store">
         <div class="store-switcher-left">
           <span class="store-icon">🛡️</span>
-          <span id="sidebarStoreName">AC MART (បូវ Store)</span>
+          <span id="sidebarStoreName">AC STORE</span>
         </div>
         <span style="font-size: 0.72rem; background: rgba(16, 185, 129, 0.2); color: #10b981; padding: 2px 8px; border-radius: 99px; font-weight: 700;">Owner</span>
       </div>
@@ -661,7 +661,7 @@
         <!-- Header -->
         <div class="dash-header">
           <h2 class="dash-title" data-i18n="dash_title">Store Dashboard</h2>
-          <p class="dash-subtitle" id="dashStoreSubtitle" data-i18n="dash_subtitle">Overview metrics for បូវ</p>
+          <p class="dash-subtitle" id="dashStoreSubtitle" data-i18n="dash_subtitle">Overview metrics for AC STORE</p>
         </div>
 
         <!-- Store Setup & Launch Checklist (Matches Screenshot 1 UI) -->
@@ -967,7 +967,7 @@
             <h3 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 16px;">🏪 Store Profile</h3>
             <div class="form-group">
               <label class="form-label">Store Display Name</label>
-              <input type="text" id="settingStoreNameTab" class="form-control" value="AC MART" placeholder="Your Store Name">
+              <input type="text" id="settingStoreNameTab" class="form-control" value="AC STORE" placeholder="Your Store Name">
             </div>
             <div class="form-group">
               <label class="form-label">Live Store Website URL</label>
@@ -980,7 +980,7 @@
             </div>
             <div class="form-group">
               <label class="form-label">Contact Phone & Telegram</label>
-              <input type="text" id="settingContactPhone" class="form-control" value="+855 88 6666 584 (@kemborey)" placeholder="e.g. +855 88 6666 584 (@kemborey)">
+              <input type="text" id="settingContactPhone" class="form-control" value="+855 16905354 (@Acmart6666)" placeholder="e.g. +855 16905354 (@Acmart6666)">
             </div>
             <div class="form-group">
               <label class="form-label" style="color: var(--brand-primary); font-weight: 700; display: flex; align-items: center; justify-content: space-between;">
@@ -1007,7 +1007,7 @@
             <h3 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 16px; color: #dc2626;">🇰🇭 Payment & Notification Settings</h3>
             <div class="form-group">
               <label class="form-label">ABA / Bank Account or Phone Number</label>
-              <input type="text" id="settingAbaAccount" class="form-control" value="088 6666 584" placeholder="e.g. 088 6666 584 or 001 889 231">
+              <input type="text" id="settingAbaAccount" class="form-control" value="000138112 (BOREY KEM)" placeholder="e.g. 000138112 (BOREY KEM)">
             </div>
             <div class="form-group">
               <label class="form-label" style="display: flex; justify-content: space-between; align-items: center;">
@@ -1021,7 +1021,7 @@
                 <span>Telegram Order Alert Bot Token</span>
                 <span style="font-size: 0.76rem; color: #10b981; font-weight: 600;">(Optional - Can leave empty)</span>
               </label>
-              <input type="text" id="settingTelegramToken" class="form-control" placeholder="Optional (Leave blank if you do not have one)">
+              <input type="text" id="settingTelegramToken" class="form-control" value="8884699311:AAFuShbd_PRcGrPZWH9Ntc-zFA34" placeholder="Optional (Leave blank if you do not have one)">
             </div>
           </div>
 
@@ -1153,7 +1153,7 @@
               </svg>
             </div>
             <div class="khqr-amount" id="khqrDisplayAmount">$129.00</div>
-            <div class="khqr-merchant">GOSHOPE - SOVANN TECH</div>
+            <div class="khqr-merchant" id="khqrMerchantDisplay">000138112 (BOREY KEM)</div>
           </div>
           <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 12px;">
             Scan with <strong>ABA Mobile</strong>, <strong>Bakong</strong>, or any Cambodian Banking App.
@@ -1251,15 +1251,15 @@
       <div class="modal-body">
         <div class="form-group">
           <label class="form-label" data-i18n="label_store_name">Store Display Name</label>
-          <input type="text" id="settingStoreName" class="form-control" value="បូវ Store">
+          <input type="text" id="settingStoreName" class="form-control" value="AC STORE">
         </div>
         <div class="form-group">
           <label class="form-label">ABA KHQR Merchant ID / Account Number</label>
-          <input type="text" id="settingMerchantId" class="form-control" value="001 889 231 (SOVANN TECH)">
+          <input type="text" id="settingMerchantId" class="form-control" value="000138112 (BOREY KEM)">
         </div>
         <div class="form-group">
           <label class="form-label">Telegram Order Notification Bot Token</label>
-          <input type="text" class="form-control" value="bot691823910:AAHq_mock_token_connected">
+          <input type="text" id="settingTelegramModalToken" class="form-control" value="8884699311:AAFuShbd_PRcGrPZWH9Ntc-zFA34">
         </div>
         <div class="form-group">
           <label class="form-label" style="color: var(--brand-primary); font-weight: 700;">⚡ Digital Delivery & License Key Dispatch</label>

@@ -96,7 +96,7 @@ const translations = {
     panel_title: "Store Owner Panel",
     btn_view_marketplace: "View Marketplace",
     dash_title: "Store Dashboard",
-    dash_subtitle: "Overview metrics for បូវ",
+    dash_subtitle: "Overview metrics for AC STORE",
     metric_revenue: "Total Revenue",
     metric_orders: "Total Orders",
     metric_active_apps: "Active Products",
@@ -160,7 +160,7 @@ const translations = {
     cta_marketplace: "មើលទីផ្សារកម្មវិធី",
     announcement_text: "✨ ហាងផ្លូវការ AC MART: ផ្តល់ជូនកូដកម្មវិធីដើម (Source Code) ពេញលេញ និងទូទាត់ភ្លាមៗតាម ABA KHQR!",
     hero_title_1: "កម្មវិធី & គេហទំព័រ Software រួចរាល់សម្រាប់លក់",
-    hero_title_2: "ហាងផ្លូវការ AC MART (បូវ Store)",
+    hero_title_2: "ហាងផ្លូវការ AC STORE",
     hero_subtitle: "អភិវឌ្ឍន៍ និងលក់ផ្តាច់មុខដោយ AC MART។ សាកល្បង Live Demo ភ្លាមៗ និងទិញកូដកម្មវិធីដើម (Source Code) ជាមួយការទូទាត់រហ័សតាម ABA KHQR។",
     btn_get_started_free: "មើលបញ្ជីកម្មវិធី / Catalog",
     btn_explore_demo: "សាកល្បង Demo ហាង",
@@ -236,7 +236,7 @@ const translations = {
     panel_title: "ផ្ទាំងគ្រប់គ្រងម្ចាស់ហាង",
     btn_view_marketplace: "ហាងអតិថិជន",
     dash_title: "ផ្ទាំងគ្រប់គ្រងហាង",
-    dash_subtitle: "ទិដ្ឋភាពទូទៅនៃស្ថិតិសម្រាប់ បូវ",
+    dash_subtitle: "ទិដ្ឋភាពទូទៅនៃស្ថិតិសម្រាប់ AC STORE",
     metric_revenue: "ចំណូលសរុប",
     metric_orders: "ការបញ្ជាទិញសរុប",
     metric_active_apps: "ផលិតផលសកម្ម",
@@ -503,17 +503,35 @@ let categoriesList = JSON.parse(localStorage.getItem('acmart_categories')) || in
 let couponsList = JSON.parse(localStorage.getItem('acmart_coupons')) || initialCoupons;
 let customersList = JSON.parse(localStorage.getItem('acmart_customers')) || initialCustomers;
 let ordersList = JSON.parse(localStorage.getItem('acmart_orders')) || initialOrders;
-let storeSettings = JSON.parse(localStorage.getItem('acmart_store_settings')) || {
-  name: "AC MART",
-  merchantId: "088 6666 584",
-  contactPhone: "+855 88 6666 584 (@kemborey)",
+const DEFAULT_STORE_SETTINGS = {
+  name: "AC STORE",
+  merchantId: "000138112 (BOREY KEM)",
+  contactPhone: "+855 16905354 (@Acmart6666)",
   bakongId: "",
-  telegramToken: "",
+  telegramToken: "8884699311:AAFuShbd_PRcGrPZWH9Ntc-zFA34",
   adminPin: "1234"
 };
-if (!storeSettings.adminPin) storeSettings.adminPin = "1234";
-if (!storeSettings.contactPhone) storeSettings.contactPhone = "+855 88 6666 584 (@kemborey)";
-if (!storeSettings.merchantId) storeSettings.merchantId = "088 6666 584";
+
+let storeSettings = JSON.parse(localStorage.getItem('acmart_store_settings')) || { ...DEFAULT_STORE_SETTINGS };
+
+// Cleanse old placeholder / mock data from previous sessions and migrate to user's real defaults
+if (!storeSettings.name || storeSettings.name === "AC MART" || storeSettings.name.includes("បូវ")) {
+  storeSettings.name = DEFAULT_STORE_SETTINGS.name;
+}
+if (!storeSettings.merchantId || storeSettings.merchantId === "088 6666 584" || storeSettings.merchantId.includes("SOVANN TECH") || storeSettings.merchantId.includes("001 889 231")) {
+  storeSettings.merchantId = DEFAULT_STORE_SETTINGS.merchantId;
+}
+if (!storeSettings.contactPhone || storeSettings.contactPhone.includes("88 6666 584") || storeSettings.contactPhone.includes("12 889 231") || storeSettings.contactPhone.includes("kemborey")) {
+  storeSettings.contactPhone = DEFAULT_STORE_SETTINGS.contactPhone;
+}
+if (!storeSettings.telegramToken || storeSettings.telegramToken.includes("mock_token") || storeSettings.telegramToken.includes("bot691823910")) {
+  storeSettings.telegramToken = DEFAULT_STORE_SETTINGS.telegramToken;
+}
+if (!storeSettings.adminPin) {
+  storeSettings.adminPin = DEFAULT_STORE_SETTINGS.adminPin;
+}
+
+localStorage.setItem('acmart_store_settings', JSON.stringify(storeSettings));
 
 let isAdminAuthenticated = sessionStorage.getItem('acmart_admin_auth') === 'true';
 let currentView = 'marketplace';
@@ -738,18 +756,28 @@ function populateSettingsTab() {
   const telegramInput = document.getElementById('settingTelegramToken');
   const pinInput = document.getElementById('settingAdminPin');
 
-  if (nameInput) nameInput.value = storeSettings.name || 'AC MART';
+  if (nameInput) nameInput.value = storeSettings.name || DEFAULT_STORE_SETTINGS.name;
   if (urlInput) {
     const origin = window.location.origin;
     urlInput.value = (origin && !origin.includes('file://') && !origin.includes('localhost')) 
       ? origin 
       : 'https://ac-mart-offical.vercel.app';
   }
-  if (phoneInput) phoneInput.value = storeSettings.contactPhone || '+855 88 6666 584 (@kemborey)';
-  if (abaInput) abaInput.value = storeSettings.merchantId || '088 6666 584';
+  if (phoneInput) phoneInput.value = storeSettings.contactPhone || DEFAULT_STORE_SETTINGS.contactPhone;
+  if (abaInput) abaInput.value = storeSettings.merchantId || DEFAULT_STORE_SETTINGS.merchantId;
   if (bakongInput) bakongInput.value = storeSettings.bakongId || '';
-  if (telegramInput) telegramInput.value = storeSettings.telegramToken || '';
-  if (pinInput) pinInput.value = storeSettings.adminPin || '1234';
+  if (telegramInput) telegramInput.value = storeSettings.telegramToken || DEFAULT_STORE_SETTINGS.telegramToken;
+  if (pinInput) pinInput.value = storeSettings.adminPin || DEFAULT_STORE_SETTINGS.adminPin;
+}
+
+function populateSettingsModal() {
+  const nameEl = document.getElementById('settingStoreName');
+  const merchantEl = document.getElementById('settingMerchantId');
+  const tokenEl = document.getElementById('settingTelegramModalToken');
+
+  if (nameEl) nameEl.value = storeSettings.name || DEFAULT_STORE_SETTINGS.name;
+  if (merchantEl) merchantEl.value = storeSettings.merchantId || DEFAULT_STORE_SETTINGS.merchantId;
+  if (tokenEl) tokenEl.value = storeSettings.telegramToken || DEFAULT_STORE_SETTINGS.telegramToken;
 }
 
 function switchDashboardTab(tabName) {
@@ -1423,6 +1451,8 @@ window.openCheckout = function(appId) {
   checkoutAppName.textContent = app.name;
   checkoutAppPrice.textContent = `$${app.price}.00`;
   khqrDisplayAmount.textContent = `$${app.price}.00`;
+  const khqrMerchantEl = document.getElementById('khqrMerchantDisplay');
+  if (khqrMerchantEl) khqrMerchantEl.textContent = storeSettings.merchantId || DEFAULT_STORE_SETTINGS.merchantId;
 
   openModal(checkoutModal);
 };
@@ -1715,8 +1745,14 @@ function setupEventListeners() {
   // Checklist Actions (Matching Screenshot 1)
   btnChecklistAddProduct.addEventListener('click', () => openModal(appFormModal));
   addNewAppTableBtn.addEventListener('click', () => openModal(appFormModal));
-  btnChecklistPayment.addEventListener('click', () => openModal(settingsModal));
-  btnChecklistDelivery.addEventListener('click', () => openModal(settingsModal));
+  btnChecklistPayment.addEventListener('click', () => {
+    populateSettingsModal();
+    openModal(settingsModal);
+  });
+  btnChecklistDelivery.addEventListener('click', () => {
+    populateSettingsModal();
+    openModal(settingsModal);
+  });
   btnChecklistTestStore.addEventListener('click', () => {
     switchView('marketplace');
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -1795,6 +1831,7 @@ function setupEventListeners() {
         storeSettings.adminPin = pinEl.value.trim();
       }
       localStorage.setItem('acmart_store_settings', JSON.stringify(storeSettings));
+      populateSettingsModal();
       showToast("✓ All store settings & contact information saved!");
     });
   }
@@ -1901,13 +1938,23 @@ function setupEventListeners() {
   }
 
   // Settings & Store Switcher
-  storeSwitcherBtn.addEventListener('click', () => openModal(settingsModal));
+  storeSwitcherBtn.addEventListener('click', () => {
+    populateSettingsModal();
+    openModal(settingsModal);
+  });
   saveSettingsBtn.addEventListener('click', () => {
-    const newName = settingStoreName.value.trim() || "បូវ Store";
+    const newName = settingStoreName.value.trim() || DEFAULT_STORE_SETTINGS.name;
+    const newMerchant = document.getElementById('settingMerchantId')?.value.trim() || DEFAULT_STORE_SETTINGS.merchantId;
+    const newToken = document.getElementById('settingTelegramModalToken')?.value.trim() || DEFAULT_STORE_SETTINGS.telegramToken;
+
     storeSettings.name = newName;
+    storeSettings.merchantId = newMerchant;
+    storeSettings.telegramToken = newToken;
+
     sidebarStoreName.textContent = newName;
     dashStoreSubtitle.textContent = `Overview metrics for ${newName}`;
     localStorage.setItem('acmart_store_settings', JSON.stringify(storeSettings));
+    populateSettingsTab();
     closeModal(settingsModal);
     showToast("✓ Store settings updated successfully!");
   });
