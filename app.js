@@ -14,10 +14,10 @@ const translations = {
     nav_demo: "Live Sandbox",
     nav_pricing: "App Licenses",
     nav_tutorial: "Tutorial",
-    nav_sign_in: "Owner Login",
+    nav_sign_in: "🔐 Owner Login",
     nav_seller_panel: "Store Owner Panel",
-    cta_owner_panel: "Owner Login 🔐",
-    cta_marketplace: "Customer Storefront",
+    cta_owner_panel: "🛍️ Browse Apps",
+    cta_marketplace: "🛒 Customer Storefront",
     announcement_text: "🚀 Official AC MART Release: Full source code licenses with instant ABA KHQR active!",
     hero_title_1: "Production-Ready Web Apps &",
     hero_title_2: "SaaS Software For Sale",
@@ -154,10 +154,10 @@ const translations = {
     nav_demo: "សាកល្បង Demo",
     nav_pricing: "កញ្ចប់តម្លៃ",
     nav_tutorial: "វីដេអូបង្រៀន",
-    nav_sign_in: "🔐 ម្ចាស់ហាង (Owner Only)",
+    nav_sign_in: "🔐 ម្ចាស់ហាង (Owner Login)",
     nav_seller_panel: "ផ្ទាំងគ្រប់គ្រងម្ចាស់ហាង",
-    cta_owner_panel: "🔐 ម្ចាស់ហាង",
-    cta_marketplace: "មើលទីផ្សារកម្មវិធី",
+    cta_owner_panel: "🛍️ មើលបញ្ជីកម្មវិធី",
+    cta_marketplace: "🛒 មើលទីផ្សារកម្មវិធី",
     announcement_text: "✨ ហាងផ្លូវការ AC MART: ផ្តល់ជូនកូដកម្មវិធីដើម (Source Code) ពេញលេញ និងទូទាត់ភ្លាមៗតាម ABA KHQR!",
     hero_title_1: "កម្មវិធី & គេហទំព័រ Software រួចរាល់សម្រាប់លក់",
     hero_title_2: "ហាងផ្លូវការ AC STORE",
@@ -2322,11 +2322,13 @@ function setupEventListeners() {
     if (currentView === 'dashboard') {
       switchView('marketplace');
     } else {
-      requestAdminAccess();
+      const catalogEl = document.getElementById('marketplaceCatalog');
+      if (catalogEl) {
+        const offsetPosition = catalogEl.getBoundingClientRect().top + window.pageYOffset - 76;
+        window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+      }
     }
   });
-
-  heroGetStartedBtn.addEventListener('click', requestAdminAccess);
 
   if (mobNavDashboardBtn) {
     mobNavDashboardBtn.addEventListener('click', () => {
