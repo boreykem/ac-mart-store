@@ -109,12 +109,12 @@ const translations = {
     step2_desc: "Enable Cash on Delivery (COD) or connect ABA KHQR",
     step3_title: "Set up delivery",
     step3_desc: "Offer local delivery, pickup, J&T Express, or VET options",
-    step4_title: "Test Your Store",
-    step4_desc: "Preview your customer checkout and verify your products",
+    step4_title: "Test Customer App Demos",
+    step4_desc: "Test-drive category-specific interactive simulators for each software product",
     btn_add: "Add",
     btn_configure: "Configure",
     btn_setup: "Set up",
-    btn_test_store: "Test Store",
+    btn_test_store: "Test Demos",
     table_recent_orders: "Recent App Sales & Orders",
     table_recent_orders_desc: "Real-time buyer purchases, license keys and KHQR settlements",
     btn_new_app: "Add New App",
@@ -249,12 +249,12 @@ const translations = {
     step2_desc: "ភ្ជាប់គណនីធនាគារ ABA របស់អ្នកដើម្បីទទួលប្រាក់ទាន់ចិត្ត",
     step3_title: "ការផ្ញើកូដ & អាជ្ញាប័ណ្ណស្វ័យប្រវត្តិ",
     step3_desc: "ប្រព័ន្ធផ្ញើកូដកម្មវិធី និងកូនសោអាជ្ញាប័ណ្ណទៅអ៊ីមែលអតិថិជនភ្លាមៗ",
-    step4_title: "សាកល្បងទិញកម្មវិធីរបស់អ្នក",
-    step4_desc: "មើលជាមុននូវការទូទាត់របស់អតិថិជន និងផ្ទៀងផ្ទាត់ផលិតផលរបស់អ្នក",
+    step4_title: "សាកល្បង Demo កម្មវិធីអតិថិជន",
+    step4_desc: "សាកល្បងដំណើរការជាក់ស្តែងនៃកម្មវិធីនិមួយៗទៅតាមប្រភេទផលិតផលមុនអតិថិជនទិញ",
     btn_add: "បន្ថែម",
     btn_configure: "កំណត់",
     btn_setup: "រៀបចំ",
-    btn_test_store: "សាកល្បងហាង",
+    btn_test_store: "សាកល្បង Demo",
     table_recent_orders: "ការលក់ & បញ្ជាទិញថ្មីៗ",
     table_recent_orders_desc: "ការបញ្ជាទិញផ្ទាល់ អាជ្ញាប័ណ្ណ និងការទូទាត់តាម KHQR ជាក់ស្តែង",
     btn_new_app: "បន្ថែមកម្មវិធីថ្មី",
@@ -1134,324 +1134,1069 @@ window.openLiveDemo = function(appId) {
   openModal(demoSandboxModal);
 };
 
+
+// =========================================================================
+// CATEGORY-SPECIFIC LIVE DEMO ENGINES
+// Replaces generic demo shop with working interactive application simulators
+// tailored to each software product category before customers purchase.
+// =========================================================================
+
 function generateDemoFrameHtml(app) {
+  const type = (app.demoType || '').toLowerCase();
+  const cat = (app.category || '').toLowerCase();
+  const name = (app.name || '').toLowerCase();
+
+  if (type === 'pos' || cat.includes('pos') || cat.includes('retail') || name.includes('pos') || name.includes('inventory')) {
+    return generatePosDemoHtml(app);
+  }
+  if (type === 'delivery' || type === 'food' || cat.includes('food') || cat.includes('delivery') || name.includes('food') || name.includes('kitchen') || name.includes('restaurant')) {
+    return generateFoodDeliveryDemoHtml(app);
+  }
+  if (type === 'clinic' || cat.includes('clinic') || cat.includes('medical') || cat.includes('health') || name.includes('clinic') || name.includes('doctor')) {
+    return generateClinicDemoHtml(app);
+  }
+  if (type === 'realestate' || cat.includes('estate') || cat.includes('property') || name.includes('estate')) {
+    return generateRealEstateDemoHtml(app);
+  }
+  if (type === 'saas' || cat.includes('saas') || cat.includes('boilerplate') || name.includes('saas') || name.includes('launchpad')) {
+    return generateSaasDemoHtml(app);
+  }
+  if (type === 'ecommerce' || cat.includes('commerce') || cat.includes('store') || cat.includes('shop')) {
+    return generateEcommerceDemoHtml(app);
+  }
+  return generateGenericAppDemoHtml(app);
+}
+
+// Common Shared Styles
+function getDemoBaseCss() {
+  return `
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif; }
+    body { background: #0b0f19; color: #f8fafc; overflow-x: hidden; min-height: 100vh; display: flex; flex-direction: column; }
+    
+    /* Top Bar */
+    .demo-topbar { background: #111827; border-bottom: 1px solid #1f2937; padding: 12px 20px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 50; }
+    .demo-brand { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 1.1rem; color: #fff; }
+    .demo-badge-cat { background: rgba(249, 115, 22, 0.15); color: #f97316; padding: 4px 10px; border-radius: 99px; font-size: 0.75rem; font-weight: 700; border: 1px solid rgba(249, 115, 22, 0.3); }
+    .demo-status-pill { background: rgba(16, 185, 129, 0.15); color: #10b981; padding: 4px 10px; border-radius: 99px; font-size: 0.75rem; font-weight: 700; display: flex; align-items: center; gap: 6px; }
+    .status-dot { width: 7px; height: 7px; background: #10b981; border-radius: 50%; animation: pulse 2s infinite; }
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+    
+    /* Layout */
+    .demo-body { flex: 1; padding: 20px; max-width: 1100px; margin: 0 auto; width: 100%; display: flex; flex-direction: column; gap: 18px; }
+    
+    /* Tabs Header */
+    .demo-tabs { display: flex; gap: 8px; background: #111827; padding: 6px; border-radius: 10px; border: 1px solid #1f2937; width: fit-content; }
+    .demo-tab-btn { background: transparent; color: #94a3b8; border: none; padding: 8px 16px; border-radius: 8px; font-size: 0.85rem; font-weight: 700; cursor: pointer; transition: 0.2s; display: flex; align-items: center; gap: 6px; }
+    .demo-tab-btn.active { background: #f97316; color: #fff; }
+    
+    /* Cards */
+    .demo-card { background: #111827; border: 1px solid #1f2937; border-radius: 14px; padding: 20px; }
+    
+    /* Buttons */
+    .btn-act { background: #f97316; color: #fff; border: none; padding: 8px 16px; border-radius: 8px; font-weight: 700; font-size: 0.85rem; cursor: pointer; transition: 0.2s; display: inline-flex; align-items: center; gap: 6px; }
+    .btn-act:hover { background: #ea580c; transform: translateY(-1px); }
+    .btn-outline { background: #1e293b; color: #e2e8f0; border: 1px solid #334155; padding: 8px 16px; border-radius: 8px; font-weight: 700; font-size: 0.85rem; cursor: pointer; transition: 0.2s; }
+    .btn-outline:hover { background: #334155; }
+    
+    /* KHQR Overlay */
+    .khqr-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.85); backdrop-filter: blur(5px); z-index: 200; display: none; align-items: center; justify-content: center; padding: 20px; }
+    .khqr-overlay.active { display: flex; }
+    .khqr-box { background: #dc2626; border-radius: 18px; width: 100%; max-width: 320px; color: white; padding: 24px; text-align: center; box-shadow: 0 20px 50px rgba(0,0,0,0.7); }
+    .khqr-qr-wrap { background: white; border-radius: 14px; padding: 16px; margin: 16px auto; width: 180px; height: 180px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+    .btn-pay-sim { background: #10b981; color: white; border: none; width: 100%; padding: 12px; border-radius: 8px; font-weight: 800; font-size: 0.95rem; cursor: pointer; margin-top: 12px; }
+    .btn-pay-close { background: rgba(255,255,255,0.2); color: white; border: none; width: 100%; padding: 8px; border-radius: 6px; font-size: 0.8rem; cursor: pointer; margin-top: 8px; }
+    
+    /* Toast */
+    .demo-toast { position: fixed; bottom: 20px; right: 20px; background: #10b981; color: white; padding: 12px 20px; border-radius: 10px; font-weight: 700; font-size: 0.88rem; box-shadow: 0 10px 30px rgba(0,0,0,0.5); z-index: 300; display: none; }
+  `;
+}
+
+// 1. POS TERMINAL DEMO ENGINE
+function generatePosDemoHtml(app) {
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>${app.name} - Interactive Demo</title>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <title>${app.name} - POS Terminal Simulator</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
   <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; }
-    body { background: #0b0f19; color: #f8fafc; overflow-x: hidden; min-height: 100vh; display: flex; flex-direction: column; }
+    ${getDemoBaseCss()}
+    .pos-grid { display: grid; grid-template-columns: 1fr 340px; gap: 20px; flex: 1; }
+    @media (max-width: 820px) { .pos-grid { grid-template-columns: 1fr; } }
+    .pos-categories { display: flex; gap: 8px; margin-bottom: 14px; overflow-x: auto; }
+    .pos-cat-btn { background: #1e293b; color: #94a3b8; border: 1px solid #334155; padding: 8px 16px; border-radius: 8px; font-size: 0.82rem; font-weight: 700; cursor: pointer; white-space: nowrap; }
+    .pos-cat-btn.active { background: #f97316; color: white; border-color: #f97316; }
+    .pos-items-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 12px; }
+    .pos-item-card { background: #111827; border: 1px solid #1f2937; border-radius: 12px; padding: 14px; text-align: center; cursor: pointer; transition: 0.2s; user-select: none; }
+    .pos-item-card:hover { border-color: #f97316; transform: translateY(-2px); background: #162032; }
+    .pos-item-icon { font-size: 2.2rem; margin-bottom: 8px; }
+    .pos-item-name { font-weight: 700; font-size: 0.88rem; margin-bottom: 4px; color: #f8fafc; }
+    .pos-item-price { font-weight: 800; color: #10b981; font-size: 0.95rem; }
     
-    /* Demo Header */
-    .top-header { background: #111827; border-bottom: 1px solid #1f2937; padding: 12px 20px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 50; }
-    .brand { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 1.15rem; color: #f97316; }
-    .nav-tabs { display: flex; gap: 6px; background: #0f172a; padding: 4px; border-radius: 8px; border: 1px solid #1e293b; }
-    .tab-btn { background: transparent; color: #94a3b8; border: none; padding: 6px 14px; border-radius: 6px; font-size: 0.82rem; font-weight: 700; cursor: pointer; transition: 0.2s; }
-    .tab-btn.active { background: #f97316; color: white; }
-    .cart-trigger { background: #1e293b; color: #38bdf8; border: 1px solid #334155; padding: 6px 14px; border-radius: 8px; font-size: 0.85rem; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 6px; }
-    .cart-badge { background: #ef4444; color: white; font-size: 0.72rem; padding: 2px 7px; border-radius: 99px; }
-
-    /* Main Container */
-    .content-area { flex-grow: 1; padding: 20px; max-width: 1000px; margin: 0 auto; width: 100%; }
-
-    /* Storefront View */
-    .hero-banner { background: linear-gradient(135deg, #1e293b, #0f172a); border: 1px solid #334155; border-radius: 14px; padding: 20px; margin-bottom: 24px; display: flex; align-items: center; justify-content: space-between; }
-    .hero-title { font-size: 1.3rem; font-weight: 800; margin-bottom: 6px; }
-    .hero-sub { font-size: 0.85rem; color: #94a3b8; }
-    .banner-pill { background: rgba(16, 185, 129, 0.15); color: #10b981; padding: 4px 10px; border-radius: 99px; font-size: 0.78rem; font-weight: 700; }
-
-    /* Product Grid */
-    .prod-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 16px; margin-bottom: 24px; }
-    .prod-card { background: #111827; border: 1px solid #1f2937; border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; transition: 0.2s; }
-    .prod-card:hover { border-color: #f97316; transform: translateY(-3px); }
-    .prod-img { width: 100%; height: 130px; object-fit: cover; background: #1e293b; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; }
-    .prod-info { padding: 14px; flex-grow: 1; display: flex; flex-direction: column; }
-    .prod-name { font-weight: 700; font-size: 0.95rem; margin-bottom: 6px; color: #fff; }
-    .prod-price-row { display: flex; align-items: center; justify-content: space-between; margin-top: auto; padding-top: 10px; }
-    .prod-price { font-weight: 800; font-size: 1.1rem; color: #10b981; }
-    .btn-add { background: #f97316; color: white; border: none; padding: 6px 12px; border-radius: 6px; font-size: 0.8rem; font-weight: 700; cursor: pointer; transition: 0.2s; }
-    .btn-add:hover { background: #ea580c; }
-
-    /* Admin View */
-    .metrics-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 20px; }
-    .metric-card { background: #111827; border: 1px solid #1f2937; border-radius: 12px; padding: 16px; }
-    .metric-card h5 { font-size: 0.8rem; color: #94a3b8; margin-bottom: 6px; }
-    .metric-card .val { font-size: 1.4rem; font-weight: 800; color: #fff; }
-    .table-card { background: #111827; border: 1px solid #1f2937; border-radius: 12px; overflow: hidden; }
-    .table-title { padding: 14px 18px; font-weight: 700; border-bottom: 1px solid #1f2937; font-size: 0.95rem; }
-    .orders-table { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
-    .orders-table th, .orders-table td { padding: 10px 16px; text-align: left; border-bottom: 1px solid #1f2937; }
-    .orders-table th { color: #94a3b8; font-weight: 600; }
-
-    /* Cart / Checkout Drawer */
-    .cart-drawer { position: fixed; top: 0; right: -360px; width: 340px; height: 100vh; background: #111827; border-left: 1px solid #1f2937; z-index: 100; display: flex; flex-direction: column; transition: 0.3s; box-shadow: -10px 0 30px rgba(0,0,0,0.5); }
-    .cart-drawer.open { right: 0; }
-    .cart-header { padding: 16px; border-bottom: 1px solid #1f2937; display: flex; justify-content: space-between; align-items: center; }
-    .cart-items { flex-grow: 1; overflow-y: auto; padding: 16px; display: flex; flex-direction: column; gap: 12px; }
-    .cart-item { display: flex; justify-content: space-between; align-items: center; background: #1e293b; padding: 10px; border-radius: 8px; }
-    .cart-footer { padding: 16px; border-top: 1px solid #1f2937; background: #0f172a; }
-    .total-row { display: flex; justify-content: space-between; font-weight: 800; font-size: 1.1rem; margin-bottom: 14px; }
-    .btn-checkout { width: 100%; background: #dc2626; color: white; border: none; padding: 12px; border-radius: 8px; font-weight: 800; font-size: 0.9rem; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; }
-
-    /* KHQR Simulation Modal */
-    .khqr-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.85); backdrop-filter: blur(5px); z-index: 200; display: none; align-items: center; justify-content: center; padding: 20px; }
-    .khqr-overlay.active { display: flex; }
-    .khqr-box { background: #dc2626; border-radius: 18px; width: 100%; max-width: 320px; color: white; padding: 24px; text-align: center; box-shadow: 0 20px 50px rgba(0,0,0,0.7); }
-    .khqr-qr-wrap { background: white; border-radius: 14px; padding: 16px; margin: 16px auto; width: 200px; height: 200px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
-    .btn-pay-sim { background: #10b981; color: white; border: none; width: 100%; padding: 12px; border-radius: 8px; font-weight: 800; font-size: 0.95rem; cursor: pointer; margin-top: 12px; }
-    .btn-pay-close { background: rgba(255,255,255,0.2); color: white; border: none; width: 100%; padding: 8px; border-radius: 6px; font-size: 0.8rem; cursor: pointer; margin-top: 8px; }
-
-    /* Success Screen */
-    .success-box { display: none; background: #111827; border: 1px solid #10b981; border-radius: 16px; padding: 24px; text-align: center; margin: 20px 0; }
-    .success-icon { font-size: 3rem; margin-bottom: 10px; }
+    /* Register Slip */
+    .register-panel { background: #111827; border: 1px solid #1f2937; border-radius: 14px; display: flex; flex-direction: column; overflow: hidden; }
+    .register-header { padding: 14px; border-bottom: 1px solid #1f2937; display: flex; justify-content: space-between; align-items: center; background: #0f172a; }
+    .register-items { flex: 1; max-height: 320px; overflow-y: auto; padding: 12px; display: flex; flex-direction: column; gap: 8px; }
+    .register-row { display: flex; justify-content: space-between; align-items: center; background: #1e293b; padding: 8px 10px; border-radius: 8px; font-size: 0.82rem; }
+    .qty-controls { display: flex; align-items: center; gap: 6px; }
+    .qty-btn { background: #334155; color: white; border: none; width: 22px; height: 22px; border-radius: 4px; cursor: pointer; font-weight: bold; }
+    .register-summary { padding: 14px; border-top: 1px solid #1f2937; background: #0f172a; font-size: 0.85rem; }
+    .summary-line { display: flex; justify-content: space-between; margin-bottom: 6px; color: #94a3b8; }
+    .summary-total { display: flex; justify-content: space-between; font-weight: 800; font-size: 1.15rem; color: #fff; margin-top: 8px; padding-top: 8px; border-top: 1px dashed #334155; }
+    .tender-actions { padding: 12px; display: flex; flex-direction: column; gap: 8px; background: #111827; border-top: 1px solid #1f2937; }
+    
+    /* Thermal Slip Modal */
+    .receipt-modal { position: fixed; inset: 0; background: rgba(0,0,0,0.8); display: none; align-items: center; justify-content: center; z-index: 250; padding: 20px; }
+    .receipt-modal.active { display: flex; }
+    .thermal-paper { background: #fff; color: #111; font-family: 'JetBrains Mono', monospace; width: 100%; max-width: 300px; padding: 20px; border-radius: 8px; box-shadow: 0 20px 40px rgba(0,0,0,0.6); font-size: 0.78rem; line-height: 1.4; }
   </style>
 </head>
 <body>
-
-  <!-- Top Navigation Bar -->
-  <header class="top-header">
-    <div class="brand">
-      <span>⚡</span>
+  <div class="demo-topbar">
+    <div class="demo-brand">
+      <span>💳</span>
       <span>${app.name}</span>
+      <span class="demo-badge-cat">POS & Cashier Simulator</span>
     </div>
-    <div class="nav-tabs">
-      <button class="tab-btn active" id="tabStore" onclick="switchDemoView('store')">🛍️ Storefront</button>
-      <button class="tab-btn" id="tabAdmin" onclick="switchDemoView('admin')">📊 Owner Dashboard</button>
-    </div>
-    <button class="cart-trigger" onclick="toggleCart()">
-      <span>🛒 Cart</span>
-      <span class="cart-badge" id="cartCount">0</span>
-    </button>
-  </header>
-
-  <main class="content-area">
-
-    <!-- STOREFRONT VIEW -->
-    <div id="viewStore">
-      <div class="hero-banner">
-        <div>
-          <div class="banner-pill">⚡ Interactive Customer Demo</div>
-          <h2 class="hero-title">${app.name}</h2>
-          <p class="hero-sub">Try browsing items, adding to cart, and testing real-time ABA KHQR checkout!</p>
-        </div>
-      </div>
-
-      <div class="prod-grid" id="demoProductGrid">
-        <div class="prod-card">
-          <div class="prod-img">📱</div>
-          <div class="prod-info">
-            <div class="prod-name">Pro Mobile Smart Device</div>
-            <div class="prod-price-row">
-              <span class="prod-price">$120.00</span>
-              <button class="btn-add" onclick="addToDemoCart('Pro Mobile Smart Device', 120)">+ Add</button>
-            </div>
-          </div>
-        </div>
-
-        <div class="prod-card">
-          <div class="prod-img">🎧</div>
-          <div class="prod-info">
-            <div class="prod-name">Wireless ANC Headset</div>
-            <div class="prod-price-row">
-              <span class="prod-price">$45.00</span>
-              <button class="btn-add" onclick="addToDemoCart('Wireless ANC Headset', 45)">+ Add</button>
-            </div>
-          </div>
-        </div>
-
-        <div class="prod-card">
-          <div class="prod-img">💻</div>
-          <div class="prod-info">
-            <div class="prod-name">Mechanical Keyboard RGB</div>
-            <div class="prod-price-row">
-              <span class="prod-price">$65.00</span>
-              <button class="btn-add" onclick="addToDemoCart('Mechanical Keyboard RGB', 65)">+ Add</button>
-            </div>
-          </div>
-        </div>
-
-        <div class="prod-card">
-          <div class="prod-img">⚡</div>
-          <div class="prod-info">
-            <div class="prod-name">Fast Wireless Charger Pad</div>
-            <div class="prod-price-row">
-              <span class="prod-price">$25.00</span>
-              <button class="btn-add" onclick="addToDemoCart('Fast Wireless Charger Pad', 25)">+ Add</button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Payment Success Banner -->
-      <div class="success-box" id="successBox">
-        <div class="success-icon">🎉</div>
-        <h3 style="color: #10b981; margin-bottom: 6px;">ABA KHQR Payment Received!</h3>
-        <p style="color: #94a3b8; font-size: 0.9rem; margin-bottom: 12px;">The transaction was instantly settled and dispatched to the store owner.</p>
-        <button class="btn-add" onclick="document.getElementById('successBox').style.display='none'">Continue Shopping</button>
-      </div>
-    </div>
-
-    <!-- OWNER DASHBOARD VIEW -->
-    <div id="viewAdmin" style="display: none;">
-      <div class="metrics-row">
-        <div class="metric-card">
-          <h5>Total Revenue Today</h5>
-          <div class="val" id="metricSales">$3,840.00</div>
-        </div>
-        <div class="metric-card">
-          <h5>Total Orders</h5>
-          <div class="val" id="metricOrders">28</div>
-        </div>
-        <div class="metric-card">
-          <h5>ABA KHQR Settlement</h5>
-          <div class="val" style="color: #10b981;">100% Instant</div>
-        </div>
-      </div>
-
-      <div class="table-card">
-        <div class="table-title">Recent Real-Time Customer Orders</div>
-        <table class="orders-table">
-          <thead>
-            <tr><th>Order ID</th><th>Customer</th><th>Item</th><th>Amount</th><th>Status</th></tr>
-          </thead>
-          <tbody id="demoOrdersTable">
-            <tr><td>#ORD-8941</td><td>Sok Dara</td><td>Pro Mobile Smart Device</td><td>$120.00</td><td style="color:#10b981;">✓ Paid (KHQR)</td></tr>
-            <tr><td>#ORD-8940</td><td>Bopha Chan</td><td>Wireless ANC Headset</td><td>$45.00</td><td style="color:#10b981;">✓ Paid (KHQR)</td></tr>
-            <tr><td>#ORD-8939</td><td>Vannak Meas</td><td>Mechanical Keyboard RGB</td><td>$65.00</td><td style="color:#10b981;">✓ Paid (KHQR)</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-
-  </main>
-
-  <!-- Sliding Cart Drawer -->
-  <div class="cart-drawer" id="cartDrawer">
-    <div class="cart-header">
-      <h3 style="font-size: 1.1rem; font-weight: 800;">Your Cart</h3>
-      <button onclick="toggleCart()" style="background:none; border:none; color:#94a3b8; font-size:1.4rem; cursor:pointer;">&times;</button>
-    </div>
-    <div class="cart-items" id="cartItemsList">
-      <div style="text-align: center; color: #94a3b8; padding: 40px 0;">Cart is empty. Add an item!</div>
-    </div>
-    <div class="cart-footer">
-      <div class="total-row">
-        <span>Total:</span>
-        <span id="cartTotalDisplay">$0.00</span>
-      </div>
-      <button class="btn-checkout" onclick="openSimKhqr()">
-        <span>🇰🇭 Pay with ABA KHQR</span>
-      </button>
+    <div class="demo-status-pill">
+      <span class="status-dot"></span>
+      <span>Terminal #01 (Cashier: Dara) • Online</span>
     </div>
   </div>
 
-  <!-- Simulated ABA KHQR Modal -->
-  <div class="khqr-overlay" id="khqrModal">
+  <div class="demo-body">
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+      <div>
+        <h2 style="font-size: 1.25rem; font-weight: 800;">Cashier POS Register Terminal</h2>
+        <p style="color: #94a3b8; font-size: 0.85rem;">Click menu items to ring up an order, test tax calculations, and simulate instant KHQR checkout or thermal receipt printing.</p>
+      </div>
+      <button class="btn-outline" onclick="resetRegister()">Clear Register</button>
+    </div>
+
+    <div class="pos-grid">
+      <!-- Left: Item Menu -->
+      <div>
+        <div class="pos-categories">
+          <button class="pos-cat-btn active" onclick="filterCat('all')">All Items</button>
+          <button class="pos-cat-btn" onclick="filterCat('drinks')">☕ Beverages</button>
+          <button class="pos-cat-btn" onclick="filterCat('bakery')">🥐 Bakery</button>
+          <button class="pos-cat-btn" onclick="filterCat('meals')">🥪 Fast Meals</button>
+        </div>
+
+        <div class="pos-items-grid" id="posGrid">
+          <div class="pos-item-card" data-cat="drinks" onclick="addItem('Iced Americano', 2.50)">
+            <div class="pos-item-icon">☕</div>
+            <div class="pos-item-name">Iced Americano</div>
+            <div class="pos-item-price">$2.50</div>
+          </div>
+          <div class="pos-item-card" data-cat="drinks" onclick="addItem('Caramel Macchiato', 3.50)">
+            <div class="pos-item-icon">🥤</div>
+            <div class="pos-item-name">Caramel Macchiato</div>
+            <div class="pos-item-price">$3.50</div>
+          </div>
+          <div class="pos-item-card" data-cat="bakery" onclick="addItem('Butter Croissant', 2.00)">
+            <div class="pos-item-icon">🥐</div>
+            <div class="pos-item-name">Butter Croissant</div>
+            <div class="pos-item-price">$2.00</div>
+          </div>
+          <div class="pos-item-card" data-cat="meals" onclick="addItem('Club Sandwich', 4.50)">
+            <div class="pos-item-icon">🥪</div>
+            <div class="pos-item-name">Club Sandwich</div>
+            <div class="pos-item-price">$4.50</div>
+          </div>
+          <div class="pos-item-card" data-cat="drinks" onclick="addItem('Matcha Green Tea', 3.00)">
+            <div class="pos-item-icon">🍵</div>
+            <div class="pos-item-name">Matcha Green Tea</div>
+            <div class="pos-item-price">$3.00</div>
+          </div>
+          <div class="pos-item-card" data-cat="bakery" onclick="addItem('Chocolate Muffin', 2.20)">
+            <div class="pos-item-icon">🧁</div>
+            <div class="pos-item-name">Chocolate Muffin</div>
+            <div class="pos-item-price">$2.20</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Register Ticket -->
+      <div class="register-panel">
+        <div class="register-header">
+          <span style="font-weight: 800; font-size: 0.9rem;">Receipt Ticket #T-104</span>
+          <span style="font-size: 0.75rem; color: #10b981; background: rgba(16,185,129,0.1); padding: 2px 6px; border-radius: 4px;">Active Shift</span>
+        </div>
+
+        <div class="register-items" id="ticketItems">
+          <div style="text-align: center; color: #64748b; padding: 40px 10px; font-size: 0.85rem;">Tap any item to ring up</div>
+        </div>
+
+        <div class="register-summary">
+          <div class="summary-line"><span>Subtotal:</span><span id="posSubtotal">$0.00</span></div>
+          <div class="summary-line"><span>VAT (10%):</span><span id="posTax">$0.00</span></div>
+          <div class="summary-total"><span>Total USD:</span><span id="posTotal">$0.00</span></div>
+          <div class="summary-line" style="font-size: 0.78rem; margin-top: 4px;"><span>Total KHR:</span><span id="posTotalKhr">0 ៛</span></div>
+        </div>
+
+        <div class="tender-actions">
+          <button class="btn-act" style="background: #dc2626; justify-content: center;" onclick="openKhqr()">🇰🇭 Scan ABA KHQR Pay</button>
+          <button class="btn-outline" style="justify-content: center;" onclick="showThermalReceipt()">🧾 Print Thermal Receipt (80mm)</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Thermal Receipt Modal -->
+  <div class="receipt-modal" id="receiptModal">
+    <div class="thermal-paper">
+      <div style="text-align: center; margin-bottom: 10px;">
+        <h3 style="font-size: 1.05rem; font-weight: bold;">${app.name}</h3>
+        <p>Phnom Penh, Cambodia</p>
+        <p>Tel: +855 16 905 354</p>
+        <p>--------------------------------</p>
+      </div>
+      <div id="receiptContent"></div>
+      <div style="text-align: center; margin-top: 10px;">
+        <p>--------------------------------</p>
+        <p style="font-weight: bold;">THANK YOU FOR YOUR BUSINESS!</p>
+        <p style="margin-top: 4px; font-size: 0.7rem; color: #666;">Powered by ${app.name}</p>
+        <button onclick="closeReceipt()" style="margin-top: 14px; background: #111; color: #fff; border: none; padding: 6px 14px; border-radius: 4px; cursor: pointer; width: 100%;">Close Receipt</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- KHQR Modal -->
+  <div class="khqr-overlay" id="khqrOverlay">
     <div class="khqr-box">
-      <h3 style="font-weight: 800; font-size: 1.15rem; letter-spacing: 1px;">🇰🇭 ABA KHQR</h3>
-      <p style="font-size: 0.78rem; opacity: 0.9; margin-top: 2px;">National Bank of Cambodia</p>
-      
+      <h3>🇰🇭 ABA KHQR</h3>
+      <p style="font-size: 0.78rem; opacity: 0.9;">National Bank of Cambodia</p>
       <div class="khqr-qr-wrap">
-        <svg width="150" height="150" viewBox="0 0 100 100" fill="#000">
+        <svg width="140" height="140" viewBox="0 0 100 100" fill="#000">
           <path d="M0 0h30v30H0zM10 10h10v10H10zM70 0h30v30H70zM80 10h10v10H80zM0 70h30v30H0zM10 80h10v10H10zM40 10h10v10H40zM50 20h10v10H50zM10 40h10v10H10zM20 50h10v10H20zM40 40h20v20H40zM70 40h10v10H70zM80 50h20v10H80zM40 70h10v20H40zM60 70h20v10H60zM70 80h10v20H70zM90 70h10v30H90z"/>
         </svg>
       </div>
+      <div style="font-size: 1.4rem; font-weight: 800;" id="khqrPosTotal">$0.00</div>
+      <button class="btn-pay-sim" onclick="finishPayment()">✓ Simulate KHQR Scan & Pay</button>
+      <button class="btn-pay-close" onclick="closeKhqr()">Cancel</button>
+    </div>
+  </div>
 
-      <div style="font-size: 1.3rem; font-weight: 800; margin-bottom: 2px;" id="khqrAmount">$0.00</div>
-      <div style="font-size: 0.8rem; opacity: 0.9;">Store: ${app.name}</div>
+  <div class="demo-toast" id="toastMsg">✓ Action Executed</div>
 
-      <button class="btn-pay-sim" onclick="simulateSuccessfulPayment()">
-        📱 Simulate Customer Payment
-      </button>
-      <button class="btn-pay-close" onclick="closeSimKhqr()">Cancel</button>
+  <script>
+    let ticket = [];
+    function addItem(name, price) {
+      const exist = ticket.find(i => i.name === name);
+      if (exist) { exist.qty += 1; } else { ticket.push({ name, price, qty: 1 }); }
+      updateTicket();
+      showToast("Added " + name);
+    }
+    function updateQty(idx, delta) {
+      ticket[idx].qty += delta;
+      if (ticket[idx].qty <= 0) ticket.splice(idx, 1);
+      updateTicket();
+    }
+    function updateTicket() {
+      const container = document.getElementById('ticketItems');
+      if (ticket.length === 0) {
+        container.innerHTML = '<div style="text-align: center; color: #64748b; padding: 40px 10px; font-size: 0.85rem;">Tap any item to ring up</div>';
+        document.getElementById('posSubtotal').textContent = '$0.00';
+        document.getElementById('posTax').textContent = '$0.00';
+        document.getElementById('posTotal').textContent = '$0.00';
+        document.getElementById('posTotalKhr').textContent = '0 ៛';
+        return;
+      }
+      let sub = 0;
+      container.innerHTML = ticket.map((item, idx) => {
+        const itemTotal = item.price * item.qty;
+        sub += itemTotal;
+        return '<div class="register-row"><div><b>' + item.name + '</b><br><small>$' + item.price.toFixed(2) + ' each</small></div><div class="qty-controls"><button class="qty-btn" onclick="updateQty(' + idx + ', -1)">-</button><span>' + item.qty + '</span><button class="qty-btn" onclick="updateQty(' + idx + ', 1)">+</button><span style="margin-left:8px; font-weight:bold; color:#10b981;">$' + itemTotal.toFixed(2) + '</span></div></div>';
+      }).join('');
+      const tax = sub * 0.10;
+      const total = sub + tax;
+      const khr = Math.round(total * 4100);
+      document.getElementById('posSubtotal').textContent = '$' + sub.toFixed(2);
+      document.getElementById('posTax').textContent = '$' + tax.toFixed(2);
+      document.getElementById('posTotal').textContent = '$' + total.toFixed(2);
+      document.getElementById('posTotalKhr').textContent = khr.toLocaleString() + ' ៛';
+    }
+    function resetRegister() { ticket = []; updateTicket(); showToast("Register cleared"); }
+    function openKhqr() {
+      if (ticket.length === 0) { alert("Please ring up at least one item first!"); return; }
+      document.getElementById('khqrPosTotal').textContent = document.getElementById('posTotal').textContent;
+      document.getElementById('khqrOverlay').classList.add('active');
+    }
+    function closeKhqr() { document.getElementById('khqrOverlay').classList.remove('active'); }
+    function finishPayment() {
+      closeKhqr();
+      showToast("🎉 KHQR Paid! Order Settled.");
+      showThermalReceipt();
+      ticket = [];
+      updateTicket();
+    }
+    function showThermalReceipt() {
+      const now = new Date();
+      let total = document.getElementById('posTotal').textContent;
+      let html = '<p>Date: ' + now.toLocaleDateString() + ' ' + now.toLocaleTimeString() + '</p><p>Cashier: Dara | Reg: #01</p><p>--------------------------------</p>';
+      if (ticket.length > 0) {
+        ticket.forEach(i => { html += '<p>' + i.qty + 'x ' + i.name + ' - $' + (i.price * i.qty).toFixed(2) + '</p>'; });
+      } else {
+        html += '<p>1x Sample Transaction - ' + total + '</p>';
+      }
+      html += '<p>--------------------------------</p><p>TOTAL USD: ' + total + '</p><p>PAYMENT: ABA KHQR (SETTLED)</p>';
+      document.getElementById('receiptContent').innerHTML = html;
+      document.getElementById('receiptModal').classList.add('active');
+    }
+    function closeReceipt() { document.getElementById('receiptModal').classList.remove('active'); }
+    function filterCat(cat) {
+      document.querySelectorAll('.pos-cat-btn').forEach(b => b.classList.remove('active'));
+      event.target.classList.add('active');
+      document.querySelectorAll('.pos-item-card').forEach(c => {
+        c.style.display = (cat === 'all' || c.dataset.cat === cat) ? 'block' : 'none';
+      });
+    }
+    function showToast(msg) {
+      const t = document.getElementById('toastMsg');
+      t.textContent = msg;
+      t.style.display = 'block';
+      setTimeout(() => { t.style.display = 'none'; }, 2000);
+    }
+  </script>
+</body>
+</html>`;
+}
+
+// 2. FOOD DELIVERY & MULTI-KITCHEN DEMO ENGINE
+function generateFoodDeliveryDemoHtml(app) {
+  return `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>${app.name} - Food & Delivery Multi-Kitchen Simulator</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    ${getDemoBaseCss()}
+    .food-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px; margin-top: 14px; }
+    .food-card { background: #111827; border: 1px solid #1f2937; border-radius: 14px; overflow: hidden; display: flex; flex-direction: column; transition: 0.2s; }
+    .food-card:hover { border-color: #f97316; transform: translateY(-2px); }
+    .food-img { height: 130px; background: #1e293b; display: flex; align-items: center; justify-content: center; font-size: 3rem; }
+    .food-body { padding: 14px; flex: 1; display: flex; flex-direction: column; }
+    .food-title { font-weight: 800; font-size: 0.95rem; margin-bottom: 4px; }
+    .food-sub { font-size: 0.78rem; color: #94a3b8; margin-bottom: 12px; }
+    .food-price-row { margin-top: auto; display: flex; justify-content: space-between; align-items: center; }
+    
+    /* KDS Grid */
+    .kds-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px; margin-top: 14px; }
+    .kds-card { background: #111827; border-radius: 12px; padding: 14px; border-left: 4px solid #f97316; }
+    .kds-card.ready { border-left-color: #10b981; }
+    
+    /* Driver Timeline */
+    .timeline { display: flex; flex-direction: column; gap: 16px; margin-top: 20px; }
+    .timeline-step { display: flex; gap: 14px; align-items: flex-start; }
+    .step-dot { width: 32px; height: 32px; border-radius: 50%; background: #1e293b; border: 2px solid #334155; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; flex-shrink: 0; }
+    .step-dot.done { background: #10b981; border-color: #10b981; color: white; }
+    .step-dot.active { background: #f97316; border-color: #f97316; color: white; }
+  </style>
+</head>
+<body>
+  <div class="demo-topbar">
+    <div class="demo-brand">
+      <span>🛵</span>
+      <span>${app.name}</span>
+      <span class="demo-badge-cat">Multi-Kitchen & Dispatch</span>
+    </div>
+    <div class="demo-status-pill">
+      <span class="status-dot"></span>
+      <span>Kitchen Live • Dispatch Active</span>
+    </div>
+  </div>
+
+  <div class="demo-body">
+    <div class="demo-tabs">
+      <button class="demo-tab-btn active" id="tabMenu" onclick="showTab('menu')">🍔 Customer Menu</button>
+      <button class="demo-tab-btn" id="tabKds" onclick="showTab('kds')">👨‍🍳 Kitchen Display (KDS)</button>
+      <button class="demo-tab-btn" id="tabDriver" onclick="showTab('driver')">📍 Live Delivery Tracker</button>
+    </div>
+
+    <!-- VIEW 1: CUSTOMER MENU -->
+    <div id="viewMenu">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 10px;">
+        <h3 style="font-size: 1.15rem; font-weight: 800;">Popular Chef Specialties</h3>
+        <span style="font-size: 0.85rem; color: #10b981;">🛵 Free Delivery to Toul Kork</span>
+      </div>
+
+      <div class="food-grid">
+        <div class="food-card">
+          <div class="food-img">🍔</div>
+          <div class="food-body">
+            <div class="food-title">Double Truffle Cheeseburger</div>
+            <div class="food-sub">Angus beef patty, caramelized onions & truffle cheddar</div>
+            <div class="food-price-row">
+              <span style="font-weight: 800; color: #10b981; font-size: 1.1rem;">$5.50</span>
+              <button class="btn-act" onclick="orderFood('Double Truffle Cheeseburger', 5.50)">+ Order</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="food-card">
+          <div class="food-img">🍕</div>
+          <div class="food-body">
+            <div class="food-title">Artisan Pepperoni 12"</div>
+            <div class="food-sub">Hand-stretched sourdough crust, marinara & fresh mozzarella</div>
+            <div class="food-price-row">
+              <span style="font-weight: 800; color: #10b981; font-size: 1.1rem;">$8.90</span>
+              <button class="btn-act" onclick="orderFood('Artisan Pepperoni 12\"', 8.90)">+ Order</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="food-card">
+          <div class="food-img">🍗</div>
+          <div class="food-body">
+            <div class="food-title">Crispy Korean Glazed Wings</div>
+            <div class="food-sub">6pcs double fried wings with sweet garlic soy glaze</div>
+            <div class="food-price-row">
+              <span style="font-weight: 800; color: #10b981; font-size: 1.1rem;">$4.20</span>
+              <button class="btn-act" onclick="orderFood('Crispy Korean Wings', 4.20)">+ Order</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="food-card">
+          <div class="food-img">🧋</div>
+          <div class="food-body">
+            <div class="food-title">Brown Sugar Pearl Milk Tea</div>
+            <div class="food-sub">Slow-cooked tapioca boba, organic fresh milk & roasted tea</div>
+            <div class="food-price-row">
+              <span style="font-weight: 800; color: #10b981; font-size: 1.1rem;">$2.80</span>
+              <button class="btn-act" onclick="orderFood('Brown Sugar Pearl Boba', 2.80)">+ Order</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- VIEW 2: KITCHEN DISPLAY -->
+    <div id="viewKds" style="display: none;">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 10px;">
+        <h3 style="font-size: 1.15rem; font-weight: 800;">Real-Time Kitchen Order Tickets</h3>
+        <span style="background: rgba(249,115,22,0.15); color: #f97316; padding: 4px 10px; border-radius: 6px; font-size: 0.8rem; font-weight: bold;">3 Orders Active</span>
+      </div>
+
+      <div class="kds-grid" id="kdsContainer">
+        <div class="kds-card">
+          <div style="display: flex; justify-content: space-between; font-weight: 800; margin-bottom: 6px;">
+            <span>Ticket #402</span>
+            <span style="color: #f97316;">Cooking (3 min)</span>
+          </div>
+          <p style="font-size: 0.85rem; color: #cbd5e1; margin-bottom: 8px;">• 1x Double Truffle Cheeseburger<br>• Extra Cheddar Melt</p>
+          <button class="btn-act" style="width: 100%; justify-content: center; font-size: 0.78rem;" onclick="markReady(this)">Mark Ready for Driver</button>
+        </div>
+
+        <div class="kds-card ready">
+          <div style="display: flex; justify-content: space-between; font-weight: 800; margin-bottom: 6px;">
+            <span>Ticket #401</span>
+            <span style="color: #10b981;">Ready for Pickup</span>
+          </div>
+          <p style="font-size: 0.85rem; color: #cbd5e1; margin-bottom: 8px;">• 1x Artisan Pepperoni 12"<br>• Spicy Marinara</p>
+          <button class="btn-outline" style="width: 100%; font-size: 0.78rem; text-align: center;">Driver Assigned: Kosal</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- VIEW 3: LIVE TRACKER -->
+    <div id="viewDriver" style="display: none;">
+      <div class="demo-card">
+        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #1f2937; padding-bottom: 14px;">
+          <div>
+            <h4 style="font-weight: 800; font-size: 1.1rem;">Live Order Delivery #DEL-882</h4>
+            <p style="font-size: 0.85rem; color: #94a3b8;">Driver: Kosal Chhorn (Honda Dream 125 • 1A-4821)</p>
+          </div>
+          <span style="background: rgba(16,185,129,0.15); color: #10b981; padding: 6px 12px; border-radius: 99px; font-size: 0.8rem; font-weight: 800;">Estimated Arrival: 12 Mins</span>
+        </div>
+
+        <div class="timeline">
+          <div class="timeline-step">
+            <div class="step-dot done">✓</div>
+            <div>
+              <b style="color: #fff; font-size: 0.9rem;">Order Confirmed & Settled via KHQR</b>
+              <p style="font-size: 0.8rem; color: #94a3b8;">12:30 PM - Payment verified</p>
+            </div>
+          </div>
+          <div class="timeline-step">
+            <div class="step-dot done">✓</div>
+            <div>
+              <b style="color: #fff; font-size: 0.9rem;">Kitchen Freshly Prepared Order</b>
+              <p style="font-size: 0.8rem; color: #94a3b8;">12:42 PM - Bagged and thermal sealed</p>
+            </div>
+          </div>
+          <div class="timeline-step">
+            <div class="step-dot active">🛵</div>
+            <div>
+              <b style="color: #f97316; font-size: 0.9rem;">Driver En Route to Delivery Address</b>
+              <p style="font-size: 0.8rem; color: #94a3b8;">Passing Toul Kork Market • 0.8 km away</p>
+            </div>
+          </div>
+          <div class="timeline-step">
+            <div class="step-dot">📍</div>
+            <div>
+              <b style="color: #64748b; font-size: 0.9rem;">Delivered & Handed to Customer</b>
+              <p style="font-size: 0.8rem; color: #64748b;">Pending driver drop-off</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="demo-toast" id="foodToast">✓ Order Dispatched</div>
+
+  <script>
+    function showTab(t) {
+      document.getElementById('viewMenu').style.display = (t === 'menu' ? 'block' : 'none');
+      document.getElementById('viewKds').style.display = (t === 'kds' ? 'block' : 'none');
+      document.getElementById('viewDriver').style.display = (t === 'driver' ? 'block' : 'none');
+      document.querySelectorAll('.demo-tab-btn').forEach(b => b.classList.remove('active'));
+      document.getElementById('tab' + t.charAt(0).toUpperCase() + t.slice(1)).classList.add('active');
+    }
+    function orderFood(item, price) {
+      showToast("✓ Ordered: " + item + " ($" + price.toFixed(2) + ")");
+      const container = document.getElementById('kdsContainer');
+      const card = document.createElement('div');
+      card.className = 'kds-card';
+      const tid = Math.floor(403 + Math.random() * 50);
+      card.innerHTML = '<div style="display:flex; justify-content:space-between; font-weight:800; margin-bottom:6px;"><span>Ticket #' + tid + '</span><span style="color:#f97316;">Cooking (Fresh)</span></div><p style="font-size:0.85rem; color:#cbd5e1; margin-bottom:8px;">• 1x ' + item + '</p><button class="btn-act" style="width:100%; justify-content:center; font-size:0.78rem;" onclick="markReady(this)">Mark Ready for Driver</button>';
+      container.prepend(card);
+    }
+    function markReady(btn) {
+      const card = btn.closest('.kds-card');
+      card.classList.add('ready');
+      btn.outerHTML = '<button class="btn-outline" style="width:100%; font-size:0.78rem; text-align:center;">✓ Ready • Driver Notified</button>';
+      showToast("Order ready for pickup!");
+    }
+    function showToast(msg) {
+      const t = document.getElementById('foodToast');
+      t.textContent = msg;
+      t.style.display = 'block';
+      setTimeout(() => { t.style.display = 'none'; }, 2000);
+    }
+  </script>
+</body>
+</html>`;
+}
+
+// 3. CLINIC & DOCTOR APPOINTMENT DEMO ENGINE
+function generateClinicDemoHtml(app) {
+  return `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>${app.name} - Smart Clinic & Doctor EMR</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    ${getDemoBaseCss()}
+    .clinic-grid { display: grid; grid-template-columns: 1fr 320px; gap: 20px; }
+    @media (max-width: 840px) { .clinic-grid { grid-template-columns: 1fr; } }
+    .vitals-bar { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 16px; }
+    .vital-box { background: #1e293b; padding: 10px; border-radius: 8px; text-align: center; }
+    .vital-val { font-size: 1.15rem; font-weight: 800; color: #10b981; }
+    .symptom-tag { display: inline-block; background: #1e293b; border: 1px solid #334155; padding: 4px 10px; border-radius: 6px; font-size: 0.8rem; margin: 4px; cursor: pointer; user-select: none; }
+    .symptom-tag.selected { background: #f97316; border-color: #f97316; color: white; }
+    .rx-item { display: flex; justify-content: space-between; align-items: center; background: #1e293b; padding: 8px 12px; border-radius: 6px; margin-bottom: 6px; font-size: 0.82rem; }
+  </style>
+</head>
+<body>
+  <div class="demo-topbar">
+    <div class="demo-brand">
+      <span>🏥</span>
+      <span>${app.name}</span>
+      <span class="demo-badge-cat">Clinical EMR & Appointment Hub</span>
+    </div>
+    <div class="demo-status-pill">
+      <span class="status-dot"></span>
+      <span>Dr. Kalyan Som, MD • On Duty</span>
+    </div>
+  </div>
+
+  <div class="demo-body">
+    <div class="clinic-grid">
+      <!-- Left: Consultation & Prescription Pad -->
+      <div class="demo-card">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; border-bottom: 1px solid #1f2937; padding-bottom: 10px;">
+          <div>
+            <h3 style="font-size: 1.1rem; font-weight: 800;">Electronic Medical Record (EMR)</h3>
+            <p style="font-size: 0.8rem; color: #94a3b8;">Patient: <b>Sokha Meas</b> (Age: 28 • Male • Blood: O+)</p>
+          </div>
+          <span style="background: rgba(16,185,129,0.15); color: #10b981; padding: 4px 10px; border-radius: 99px; font-size: 0.78rem; font-weight: 700;">Active Consultation</span>
+        </div>
+
+        <div class="vitals-bar">
+          <div class="vital-box">
+            <div style="font-size: 0.75rem; color: #94a3b8;">Blood Pressure</div>
+            <div class="vital-val">120/80</div>
+          </div>
+          <div class="vital-box">
+            <div style="font-size: 0.75rem; color: #94a3b8;">Temperature</div>
+            <div class="vital-val" style="color: #f97316;">38.2 °C</div>
+          </div>
+          <div class="vital-box">
+            <div style="font-size: 0.75rem; color: #94a3b8;">Pulse Rate</div>
+            <div class="vital-val">78 bpm</div>
+          </div>
+        </div>
+
+        <div style="margin-bottom: 16px;">
+          <h4 style="font-size: 0.85rem; font-weight: 700; margin-bottom: 6px; color: #cbd5e1;">Reported Symptoms (Click to toggle)</h4>
+          <div>
+            <span class="symptom-tag selected" onclick="toggleTag(this)">Fever (High)</span>
+            <span class="symptom-tag selected" onclick="toggleTag(this)">Dry Cough</span>
+            <span class="symptom-tag" onclick="toggleTag(this)">Headache</span>
+            <span class="symptom-tag" onclick="toggleTag(this)">Sore Throat</span>
+            <span class="symptom-tag" onclick="toggleTag(this)">Fatigue</span>
+          </div>
+        </div>
+
+        <div style="margin-bottom: 16px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+            <h4 style="font-size: 0.85rem; font-weight: 700; color: #cbd5e1;">Prescribed Medications (Rx)</h4>
+            <span style="font-size: 0.75rem; color: #10b981;">+ Quick Prescribe</span>
+          </div>
+          <div id="rxList">
+            <div class="rx-item"><span><b>Paracetamol 500mg</b> - 1 tab TID after meals</span><span style="color:#10b981;">3 Days</span></div>
+            <div class="rx-item"><span><b>Amoxicillin 500mg</b> - 1 cap BID</span><span style="color:#10b981;">5 Days</span></div>
+          </div>
+          <div style="display: flex; gap: 8px; margin-top: 8px;">
+            <button class="btn-outline" style="font-size: 0.75rem; padding: 4px 10px;" onclick="addMed('Vitamin C 1000mg', '1 tab daily')">+ Vitamin C</button>
+            <button class="btn-outline" style="font-size: 0.75rem; padding: 4px 10px;" onclick="addMed('Cough Syrup Dextro', '10ml TID')">+ Cough Syrup</button>
+          </div>
+        </div>
+
+        <button class="btn-act" style="width: 100%; justify-content: center;" onclick="printRx()">🖨️ Generate & Print Medical Prescription (Rx)</button>
+      </div>
+
+      <!-- Right: Patient Waiting Queue -->
+      <div class="demo-card">
+        <h4 style="font-size: 0.95rem; font-weight: 800; margin-bottom: 12px;">Waiting Room Queue</h4>
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+          <div style="background: #1e293b; padding: 10px; border-radius: 8px; border-left: 3px solid #10b981;">
+            <b style="font-size: 0.85rem;">#01 Sokha Meas</b>
+            <div style="font-size: 0.75rem; color: #10b981;">In Consultation Room 1</div>
+          </div>
+          <div style="background: #1e293b; padding: 10px; border-radius: 8px; border-left: 3px solid #f97316;">
+            <b style="font-size: 0.85rem;">#02 Bopha Lim</b>
+            <div style="font-size: 0.75rem; color: #94a3b8;">Waiting (Fever & Cough)</div>
+          </div>
+          <div style="background: #1e293b; padding: 10px; border-radius: 8px; border-left: 3px solid #64748b;">
+            <b style="font-size: 0.85rem;">#03 Piseth Keo</b>
+            <div style="font-size: 0.75rem; color: #94a3b8;">Waiting (Blood Check)</div>
+          </div>
+        </div>
+        <button class="btn-outline" style="width: 100%; justify-content: center; margin-top: 14px; font-size: 0.8rem;" onclick="callNext()">🔔 Call Next Patient</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="demo-toast" id="clinicToast">✓ Prescription Generated</div>
+
+  <script>
+    function toggleTag(el) { el.classList.toggle('selected'); }
+    function addMed(name, dosage) {
+      const list = document.getElementById('rxList');
+      const item = document.createElement('div');
+      item.className = 'rx-item';
+      item.innerHTML = '<span><b>' + name + '</b> - ' + dosage + '</span><span style="color:#10b981;">Active</span>';
+      list.appendChild(item);
+      showToast("Added " + name);
+    }
+    function printRx() {
+      alert("📋 Official Medical Prescription Generated!\\nClinic: ${app.name}\\nDoctor: Dr. Kalyan Som, MD\\nPatient: Sokha Meas\\nRx: Paracetamol + Amoxicillin\\nStatus: Signed & Stamped");
+    }
+    function callNext() { showToast("Calling next patient into consultation room"); }
+    function showToast(msg) {
+      const t = document.getElementById('clinicToast');
+      t.textContent = msg;
+      t.style.display = 'block';
+      setTimeout(() => { t.style.display = 'none'; }, 2000);
+    }
+  </script>
+</body>
+</html>`;
+}
+
+// 4. REAL ESTATE & MORTGAGE HUB DEMO ENGINE
+function generateRealEstateDemoHtml(app) {
+  return `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>${app.name} - Real Estate Showcase & Mortgage</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    ${getDemoBaseCss()}
+    .re-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px; }
+    .re-card { background: #111827; border: 1px solid #1f2937; border-radius: 14px; overflow: hidden; }
+    .re-img { height: 140px; background: #1e293b; display: flex; align-items: center; justify-content: center; font-size: 3rem; }
+    .re-body { padding: 14px; }
+    .calc-box { background: #111827; border: 1px solid #1f2937; border-radius: 14px; padding: 20px; margin-top: 20px; }
+    .calc-slider { width: 100%; margin: 8px 0; accent-color: #f97316; }
+  </style>
+</head>
+<body>
+  <div class="demo-topbar">
+    <div class="demo-brand">
+      <span>🏡</span>
+      <span>${app.name}</span>
+      <span class="demo-badge-cat">Property Showcase & Mortgage</span>
+    </div>
+    <div class="demo-status-pill">
+      <span class="status-dot"></span>
+      <span>Phnom Penh Verified Listings</span>
+    </div>
+  </div>
+
+  <div class="demo-body">
+    <div class="re-grid">
+      <div class="re-card">
+        <div class="re-img">🏰</div>
+        <div class="re-body">
+          <div style="font-weight: 800; font-size: 1rem; margin-bottom: 4px;">Luxury Sky Villa Riverside</div>
+          <p style="color: #94a3b8; font-size: 0.8rem; margin-bottom: 8px;">📍 Chroy Changvar • 4 Bed • 5 Bath • 380 sqm</p>
+          <div style="font-weight: 800; color: #10b981; font-size: 1.15rem;">$385,000</div>
+          <button class="btn-act" style="width: 100%; margin-top: 10px; justify-content: center;" onclick="calcProp(385000)">Calculate Loan</button>
+        </div>
+      </div>
+
+      <div class="re-card">
+        <div class="re-img">🏢</div>
+        <div class="re-body">
+          <div style="font-weight: 800; font-size: 1rem; margin-bottom: 4px;">Modern Sky Condo Residence</div>
+          <p style="color: #94a3b8; font-size: 0.8rem; margin-bottom: 8px;">📍 Sen Sok Central • 2 Bed • 2 Bath • 75 sqm</p>
+          <div style="font-weight: 800; color: #10b981; font-size: 1.15rem;">$88,000</div>
+          <button class="btn-act" style="width: 100%; margin-top: 10px; justify-content: center;" onclick="calcProp(88000)">Calculate Loan</button>
+        </div>
+      </div>
+
+      <div class="re-card">
+        <div class="re-img">🏪</div>
+        <div class="re-body">
+          <div style="font-weight: 800; font-size: 1rem; margin-bottom: 4px;">Commercial Prime Shophouse</div>
+          <p style="color: #94a3b8; font-size: 0.8rem; margin-bottom: 8px;">📍 Toul Kork Main St • 5 Bed • 6 Bath • 240 sqm</p>
+          <div style="font-weight: 800; color: #10b981; font-size: 1.15rem;">$260,000</div>
+          <button class="btn-act" style="width: 100%; margin-top: 10px; justify-content: center;" onclick="calcProp(260000)">Calculate Loan</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Interactive Mortgage Calculator -->
+    <div class="calc-box">
+      <h3 style="font-size: 1.1rem; font-weight: 800; margin-bottom: 12px;">🧮 Interactive Bank Mortgage Calculator</h3>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 16px;">
+        <div>
+          <label style="font-size: 0.8rem; color: #94a3b8;">Property Price ($)</label>
+          <input type="number" id="propPrice" class="calc-slider" value="88000" oninput="updateMortgage()">
+        </div>
+        <div>
+          <label style="font-size: 0.8rem; color: #94a3b8;">Down Payment: <span id="downPctDisplay">20%</span></label>
+          <input type="range" id="downSlider" class="calc-slider" min="10" max="50" value="20" oninput="updateMortgage()">
+        </div>
+        <div>
+          <label style="font-size: 0.8rem; color: #94a3b8;">Loan Term: <span id="termDisplay">15 Years</span></label>
+          <input type="range" id="termSlider" class="calc-slider" min="5" max="25" value="15" oninput="updateMortgage()">
+        </div>
+      </div>
+
+      <div style="background: #1e293b; padding: 16px; border-radius: 10px; display: flex; justify-content: space-between; align-items: center;">
+        <div>
+          <div style="font-size: 0.85rem; color: #94a3b8;">Estimated Monthly Installment (Bank Rate: 7.5%)</div>
+          <div style="font-size: 1.5rem; font-weight: 800; color: #10b981;" id="monthlyPay">$652.80 / mo</div>
+        </div>
+        <button class="btn-act" onclick="bookTour()">📲 Book Private Tour on Telegram</button>
+      </div>
     </div>
   </div>
 
   <script>
-    let cart = [];
-    let totalSales = 3840;
-    let orderCount = 28;
-
-    function switchDemoView(v) {
-      document.getElementById('viewStore').style.display = (v === 'store' ? 'block' : 'none');
-      document.getElementById('viewAdmin').style.display = (v === 'admin' ? 'block' : 'none');
-      document.getElementById('tabStore').classList.toggle('active', v === 'store');
-      document.getElementById('tabAdmin').classList.toggle('active', v === 'admin');
+    function calcProp(val) {
+      document.getElementById('propPrice').value = val;
+      updateMortgage();
+      window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
     }
-
-    function toggleCart() {
-      document.getElementById('cartDrawer').classList.toggle('open');
+    function updateMortgage() {
+      const price = parseFloat(document.getElementById('propPrice').value) || 88000;
+      const downPct = parseInt(document.getElementById('downSlider').value) || 20;
+      const years = parseInt(document.getElementById('termSlider').value) || 15;
+      document.getElementById('downPctDisplay').textContent = downPct + '%';
+      document.getElementById('termDisplay').textContent = years + ' Years';
+      const principal = price * (1 - (downPct / 100));
+      const monthlyRate = 0.075 / 12;
+      const n = years * 12;
+      const monthly = (principal * (monthlyRate * Math.pow(1 + monthlyRate, n))) / (Math.pow(1 + monthlyRate, n) - 1);
+      document.getElementById('monthlyPay').textContent = '$' + monthly.toFixed(2) + ' / mo';
     }
-
-    function addToDemoCart(name, price) {
-      cart.push({ name, price });
-      renderCart();
-      toggleCart();
+    function bookTour() {
+      alert("✓ Telegram Lead Bot Dispatched!\\nAgent: AC Realty Advisor\\nListing: Inquired\\nClient notified instantly.");
     }
+    updateMortgage();
+  </script>
+</body>
+</html>`;
+}
 
-    function renderCart() {
-      const list = document.getElementById('cartItemsList');
-      const countEl = document.getElementById('cartCount');
-      const totalEl = document.getElementById('cartTotalDisplay');
+// 5. SAAS LAUNCHPAD & MULTI-TENANT DEMO ENGINE
+function generateSaasDemoHtml(app) {
+  return `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>${app.name} - SaaS Developer Workspace</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    ${getDemoBaseCss()}
+    .code-box { background: #0f172a; border: 1px solid #1e293b; border-radius: 8px; padding: 12px; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: #38bdf8; overflow-x: auto; margin-top: 8px; }
+    .member-row { display: flex; justify-content: space-between; align-items: center; padding: 10px; border-bottom: 1px solid #1f2937; }
+  </style>
+</head>
+<body>
+  <div class="demo-topbar">
+    <div class="demo-brand">
+      <span>🚀</span>
+      <span>${app.name}</span>
+      <span class="demo-badge-cat">SaaS Multi-Tenant Workspace</span>
+    </div>
+    <div class="demo-status-pill">
+      <span class="status-dot"></span>
+      <span>Acme Corp (Pro Plan)</span>
+    </div>
+  </div>
+
+  <div class="demo-body">
+    <div class="demo-tabs">
+      <button class="demo-tab-btn active" id="tabApi" onclick="showSaas('api')">🔑 API Keys & Webhooks</button>
+      <button class="demo-tab-btn" id="tabTeam" onclick="showSaas('team')">👥 Team Permissions</button>
+      <button class="demo-tab-btn" id="tabBilling" onclick="showSaas('billing')">💳 Subscription Tiers</button>
+    </div>
+
+    <!-- API Keys Tab -->
+    <div id="saasApi" class="demo-card">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+        <div>
+          <h3 style="font-size: 1.05rem; font-weight: 800;">Production API Credentials</h3>
+          <p style="font-size: 0.8rem; color: #94a3b8;">Use these secret keys to authenticate automated requests</p>
+        </div>
+        <button class="btn-act" onclick="genApiKey()">+ Generate New Secret Key</button>
+      </div>
+
+      <div class="code-box" id="apiKeyDisplay">ak_live_8f94a2b97c014e82b7d34</div>
+
+      <div style="margin-top: 20px;">
+        <h4 style="font-size: 0.9rem; font-weight: 800; margin-bottom: 8px;">Simulate Real-Time Webhook Dispatch</h4>
+        <div style="display: flex; gap: 10px;">
+          <button class="btn-outline" onclick="fireWebhook('order.settled_khqr')">⚡ Trigger order.settled_khqr</button>
+          <button class="btn-outline" onclick="fireWebhook('user.subscribed')">⚡ Trigger user.subscribed</button>
+        </div>
+        <div class="code-box" id="webhookLog" style="color: #10b981; display: none;">// Webhook response payload ready</div>
+      </div>
+    </div>
+
+    <!-- Team Tab -->
+    <div id="saasTeam" class="demo-card" style="display: none;">
+      <h3 style="font-size: 1.05rem; font-weight: 800; margin-bottom: 12px;">Organization Members</h3>
+      <div class="member-row">
+        <div><b>Borey Kem (Owner)</b><br><small style="color: #94a3b8;">borey@acmart.store</small></div>
+        <span style="background: rgba(249,115,22,0.15); color: #f97316; padding: 4px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: bold;">Super Admin</span>
+      </div>
+      <div class="member-row">
+        <div><b>Dara Lead Developer</b><br><small style="color: #94a3b8;">dara.dev@acmart.store</small></div>
+        <span style="background: rgba(56,189,248,0.15); color: #38bdf8; padding: 4px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: bold;">Developer</span>
+      </div>
+    </div>
+
+    <!-- Billing Tab -->
+    <div id="saasBilling" class="demo-card" style="display: none;">
+      <h3 style="font-size: 1.05rem; font-weight: 800; margin-bottom: 12px;">Active Subscription Plan</h3>
+      <div style="background: #1e293b; padding: 16px; border-radius: 10px; display: flex; justify-content: space-between; align-items: center;">
+        <div>
+          <span style="color: #10b981; font-weight: bold;">PRO TIER PLAN ($29.00 / month)</span>
+          <p style="font-size: 0.8rem; color: #94a3b8;">Unlimited API requests, automated ABA KHQR webhooks, and 10 seats</p>
+        </div>
+        <button class="btn-act" onclick="alert('✓ Subscription verified & active!')">Manage Invoices</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function showSaas(t) {
+      document.getElementById('saasApi').style.display = (t === 'api' ? 'block' : 'none');
+      document.getElementById('saasTeam').style.display = (t === 'team' ? 'block' : 'none');
+      document.getElementById('saasBilling').style.display = (t === 'billing' ? 'block' : 'none');
+      document.querySelectorAll('.demo-tab-btn').forEach(b => b.classList.remove('active'));
+      document.getElementById('tab' + t.charAt(0).toUpperCase() + t.slice(1)).classList.add('active');
+    }
+    function genApiKey() {
+      const rand = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+      document.getElementById('apiKeyDisplay').textContent = 'ak_live_' + rand;
+      alert("New API Key generated successfully!");
+    }
+    function fireWebhook(ev) {
+      const log = document.getElementById('webhookLog');
+      log.style.display = 'block';
+      log.textContent = JSON.stringify({
+        event: ev,
+        timestamp: new Date().toISOString(),
+        status: "200_OK",
+        latency: "34ms",
+        data: { customer: "Bopha Chan", amount: 45.00, currency: "USD", provider: "ABA_KHQR" }
+      }, null, 2);
+    }
+  </script>
+</body>
+</html>`;
+}
+
+// 6. E-COMMERCE DEMO ENGINE
+function generateEcommerceDemoHtml(app) {
+  return `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>${app.name} - Storefront & Checkout</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    ${getDemoBaseCss()}
+    .ec-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 16px; }
+    .ec-card { background: #111827; border: 1px solid #1f2937; border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; }
+    .ec-img { height: 130px; background: #1e293b; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; }
+    .ec-body { padding: 12px; flex: 1; display: flex; flex-direction: column; }
+  </style>
+</head>
+<body>
+  <div class="demo-topbar">
+    <div class="demo-brand">
+      <span>🛍️</span>
+      <span>${app.name}</span>
+      <span class="demo-badge-cat">E-Commerce Storefront</span>
+    </div>
+    <div class="demo-status-pill">
+      <span class="status-dot"></span>
+      <span id="cartCountBadge">Cart: 0 items</span>
+    </div>
+  </div>
+
+  <div class="demo-body">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+      <h3 style="font-size: 1.15rem; font-weight: 800;">Modern Online Storefront</h3>
+      <button class="btn-act" onclick="checkoutStore()">🛒 Checkout with KHQR</button>
+    </div>
+
+    <div class="ec-grid">
+      <div class="ec-card">
+        <div class="ec-img">💻</div>
+        <div class="ec-body">
+          <b>Pro Developer Laptop Stand</b>
+          <div style="color: #10b981; font-weight: 800; margin: 8px 0;">$35.00</div>
+          <button class="btn-outline" onclick="addEc('Laptop Stand', 35)">+ Add to Cart</button>
+        </div>
+      </div>
+      <div class="ec-card">
+        <div class="ec-img">🎧</div>
+        <div class="ec-body">
+          <b>Wireless Studio ANC Headphones</b>
+          <div style="color: #10b981; font-weight: 800; margin: 8px 0;">$59.00</div>
+          <button class="btn-outline" onclick="addEc('Studio Headphones', 59)">+ Add to Cart</button>
+        </div>
+      </div>
+      <div class="ec-card">
+        <div class="ec-img">⌨️</div>
+        <div class="ec-body">
+          <b>Custom Mechanical RGB Keyboard</b>
+          <div style="color: #10b981; font-weight: 800; margin: 8px 0;">$75.00</div>
+          <button class="btn-outline" onclick="addEc('Mechanical Keyboard', 75)">+ Add to Cart</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let ecCart = 0;
+    let ecTotal = 0;
+    function addEc(name, price) {
+      ecCart += 1;
+      ecTotal += price;
+      document.getElementById('cartCountBadge').textContent = 'Cart: ' + ecCart + ' ($' + ecTotal.toFixed(2) + ')';
+      alert("✓ Added " + name + " to cart!");
+    }
+    function checkoutStore() {
+      if (ecCart === 0) { alert("Please add an item to cart first!"); return; }
+      alert("🇰🇭 Instant ABA KHQR Checkout: $" + ecTotal.toFixed(2) + "\\nPayment verified and order confirmed!");
+      ecCart = 0; ecTotal = 0;
+      document.getElementById('cartCountBadge').textContent = 'Cart: 0 items';
+    }
+  </script>
+</body>
+</html>`;
+}
+
+// 7. DYNAMIC GENERIC SOFTWARE DEMO ENGINE (FOR USER-ADDED APPS)
+function generateGenericAppDemoHtml(app) {
+  const feats = (app.features || ["Fast performance", "Cloud database", "Instant notifications"]).map(f => `
+    <div style="background: #1e293b; padding: 12px; border-radius: 8px; display: flex; justify-content: space-between; align-items: center;">
+      <div>
+        <b style="font-size: 0.88rem; color: #fff;">• ${f}</b>
+        <div style="font-size: 0.75rem; color: #94a3b8;">Production-ready module</div>
+      </div>
+      <button class="btn-act" style="font-size: 0.75rem; padding: 4px 10px;" onclick="testModule('${f}')">▶ Run Test</button>
+    </div>
+  `).join('');
+
+  return `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>${app.name} - Interactive Test-Drive</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    ${getDemoBaseCss()}
+    .term-box { background: #0f172a; border: 1px solid #1e293b; border-radius: 8px; padding: 14px; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: #10b981; min-height: 120px; max-height: 200px; overflow-y: auto; }
+  </style>
+</head>
+<body>
+  <div class="demo-topbar">
+    <div class="demo-brand">
+      <span>⚡</span>
+      <span>${app.name}</span>
+      <span class="demo-badge-cat">${app.category || 'Software'}</span>
+    </div>
+    <div class="demo-status-pill">
+      <span class="status-dot"></span>
+      <span>Interactive Playground</span>
+    </div>
+  </div>
+
+  <div class="demo-body">
+    <div class="demo-card">
+      <h3 style="font-size: 1.15rem; font-weight: 800; margin-bottom: 4px;">${app.name} Test-Drive Console</h3>
+      <p style="color: #94a3b8; font-size: 0.85rem; margin-bottom: 14px;">${app.desc || 'Explore interactive features and test backend workflows directly.'}</p>
       
-      countEl.textContent = cart.length;
-      if (cart.length === 0) {
-        list.innerHTML = '<div style="text-align: center; color: #94a3b8; padding: 40px 0;">Cart is empty. Add an item!</div>';
-        totalEl.textContent = '$0.00';
-        return;
-      }
+      <div style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px;">
+        ${feats}
+      </div>
 
-      let total = 0;
-      list.innerHTML = cart.map((item, idx) => {
-        total += item.price;
-        return '<div class="cart-item"><div><div style="font-weight:700;">' + item.name + '</div><div style="color:#10b981; font-weight:800;">$' + item.price.toFixed(2) + '</div></div><button onclick="removeFromCart(' + idx + ')" style="background:none; border:none; color:#ef4444; cursor:pointer; font-weight:bold;">&times;</button></div>';
-      }).join('');
-      totalEl.textContent = '$' + total.toFixed(2);
-    }
+      <h4 style="font-size: 0.85rem; font-weight: 800; margin-bottom: 6px;">Live System Execution Log</h4>
+      <div class="term-box" id="termLog">
+        > System initialized for ${app.name}...\\n> All microservices status: HEALTHY (200 OK)\\n> Ready for user interaction test.
+      </div>
+    </div>
+  </div>
 
-    function removeFromCart(idx) {
-      cart.splice(idx, 1);
-      renderCart();
-    }
-
-    function openSimKhqr() {
-      if (cart.length === 0) {
-        alert("Please add at least one product to cart first!");
-        return;
-      }
-      let total = cart.reduce((acc, c) => acc + c.price, 0);
-      document.getElementById('khqrAmount').textContent = '$' + total.toFixed(2);
-      document.getElementById('khqrModal').classList.add('active');
-    }
-
-    function closeSimKhqr() {
-      document.getElementById('khqrModal').classList.remove('active');
-    }
-
-    function simulateSuccessfulPayment() {
-      let total = cart.reduce((acc, c) => acc + c.price, 0);
-      totalSales += total;
-      orderCount += 1;
-      
-      document.getElementById('metricSales').textContent = '$' + totalSales.toFixed(2);
-      document.getElementById('metricOrders').textContent = orderCount;
-
-      const tb = document.getElementById('demoOrdersTable');
-      const tr = document.createElement('tr');
-      const ordId = '#ORD-' + Math.floor(1000 + Math.random() * 9000);
-      tr.innerHTML = '<td>' + ordId + '</td><td>You (Live Demo)</td><td>' + cart[0].name + (cart.length > 1 ? ' +' + (cart.length - 1) + ' more' : '') + '</td><td>$' + total.toFixed(2) + '</td><td style="color:#10b981; font-weight:700;">✓ Paid (KHQR)</td>';
-      tb.insertBefore(tr, tb.firstChild);
-
-      cart = [];
-      renderCart();
-      closeSimKhqr();
-      document.getElementById('cartDrawer').classList.remove('open');
-      document.getElementById('successBox').style.display = 'block';
-      document.getElementById('successBox').scrollIntoView({ behavior: 'smooth' });
+  <script>
+    function testModule(name) {
+      const log = document.getElementById('termLog');
+      log.innerHTML += '<br>> [EXEC] Running ' + name + '...<br>> [SUCCESS] Verification passed (0 errors, 42ms)';
+      log.scrollTop = log.scrollHeight;
     }
   </script>
 </body>
@@ -1924,8 +2669,14 @@ function setupEventListeners() {
   });
   btnChecklistTestStore.addEventListener('click', () => {
     switchView('marketplace');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-    showToast("🛒 Previewing customer storefront. Test adding an app to cart!");
+    const firstApp = (appsList && appsList[0]) || initialApps[0];
+    if (firstApp) {
+      openLiveDemo(firstApp.id);
+      showToast(`👁️ Launching category simulator for "${firstApp.name}"`);
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      showToast("👁️ Previewing customer app catalog!");
+    }
   });
 
   // Categories & Coupons Add Buttons
