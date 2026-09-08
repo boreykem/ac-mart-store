@@ -663,6 +663,7 @@ function applyCustomLogo(logoUrl) {
 }
 
 function renderAllSections() {
+  renderMarketplaceCategoryFilters();
   renderApps();
   renderOrdersTable();
   renderProductsManager();
@@ -671,6 +672,8 @@ function renderAllSections() {
   renderCustomersTable();
   renderCouponsTable();
   updateDashboardMetrics();
+  populateSettingsTab();
+  populateCategoryDropdown();
 }
 
 // --- THEME MANAGEMENT ---
@@ -909,22 +912,92 @@ window.deleteProduct = function(appId) {
   }
 };
 
+// --- DYNAMIC CATEGORY DROPDOWN & MARKETPLACE FILTERS ---
+function populateCategoryDropdown(selectedVal = '') {
+  const select = document.getElementById('formAppCategory');
+  if (!select) return;
+  select.innerHTML = categoriesList.map(cat => {
+    const isSelected = (cat.name === selectedVal || cat.id === selectedVal) ? 'selected' : '';
+    return `<option value="${cat.name}" ${isSelected}>${cat.icon || '📁'} ${cat.name}</option>`;
+  }).join('') + `<option value="__NEW_CATEGORY__">➕ + Add New Custom Category...</option>`;
+}
+
+function renderMarketplaceCategoryFilters() {
+  const container = document.getElementById('filterCategoriesList');
+  if (!container) return;
+  let html = `<button class="cat-btn ${activeFilter === 'all' ? 'active' : ''}" data-category="all" data-i18n="cat_all">All Categories</button>`;
+  categoriesList.forEach(cat => {
+    const isActive = activeFilter === cat.name ? 'active' : '';
+    html += `<button class="cat-btn ${isActive}" data-category="${cat.name}">${cat.icon || '📁'} ${cat.name}</button>`;
+  });
+  container.innerHTML = html;
+}
+
 // --- CATEGORIES GRID (Dashboard) ---
 function renderCategoriesGrid() {
   if (!categoriesCardsContainer) return;
-  categoriesCardsContainer.innerHTML = categoriesList.map(cat => `
-    <div class="category-card">
-      <div style="display: flex; align-items: center; gap: 14px;">
-        <span style="font-size: 1.8rem;">${cat.icon}</span>
-        <div>
-          <h4 style="font-weight: 700; font-size: 1.05rem; color: #fff;">${cat.name}</h4>
-          <span style="font-size: 0.82rem; color: #94a3b8;">${cat.count} Active Items</span>
+  categoriesCardsContainer.innerHTML = categoriesList.map((cat, index) => {
+    const count = appsList.filter(a => a.category === cat.name || a.category === cat.id).length;
+    return `
+      <div class="category-card" style="display: flex; align-items: center; justify-content: space-between; gap: 14px; padding: 18px 20px; background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: 14px;">
+        <div style="display: flex; align-items: center; gap: 14px;">
+          <span style="font-size: 2rem; background: var(--bg-card); padding: 8px 12px; border-radius: 10px; border: 1px solid var(--border-color); cursor: pointer;" onclick="changeCategoryIcon(${index})" title="Click to change Emoji Icon">${cat.icon || '📁'}</span>
+          <div>
+            <h4 style="font-weight: 700; font-size: 1.05rem; color: var(--text-primary); margin-bottom: 4px;">${cat.name}</h4>
+            <span style="font-size: 0.82rem; color: var(--text-muted);">${count} Active Products</span>
+          </div>
+        </div>
+        <div style="display: flex; gap: 8px;">
+          <button class="btn btn-secondary btn-sm" onclick="editCategoryName(${index})" style="padding: 6px 12px; font-size: 0.82rem;">✏️ Rename</button>
+          <button class="btn btn-danger btn-sm" onclick="deleteCategory(${index})" style="padding: 6px 12px; font-size: 0.82rem; background: rgba(239, 68, 68, 0.15); color: #ef4444; border: 1px solid rgba(239, 68, 68, 0.3);">🗑️ Delete</button>
         </div>
       </div>
-      <button class="btn btn-secondary btn-sm" onclick="showToast('Category is active.')" style="padding: 4px 10px;">Manage</button>
-    </div>
-  `).join('');
+    `;
+  }).join('');
 }
+
+// Global Category Action Handlers
+window.editCategoryName = function(index) {
+  const cat = categoriesList[index];
+  if (!cat) return;
+  const newName = prompt(`Rename category "${cat.name}" to:`, cat.name);
+  if (newName && newName.trim() && newName.trim() !== cat.name) {
+    const oldName = cat.name;
+    cat.name = newName.trim();
+    appsList.forEach(app => {
+      if (app.category === oldName || app.category === cat.id) {
+        app.category = cat.name;
+      }
+    });
+    localStorage.setItem('acmart_apps', JSON.stringify(appsList));
+    localStorage.setItem('acmart_categories', JSON.stringify(categoriesList));
+    renderAllSections();
+    showToast(`✓ Category renamed to "${cat.name}"`);
+  }
+};
+
+window.changeCategoryIcon = function(index) {
+  const cat = categoriesList[index];
+  if (!cat) return;
+  const newIcon = prompt(`Enter new Emoji or Icon for "${cat.name}":`, cat.icon || '📁');
+  if (newIcon && newIcon.trim()) {
+    cat.icon = newIcon.trim();
+    localStorage.setItem('acmart_categories', JSON.stringify(categoriesList));
+    renderAllSections();
+    showToast(`✓ Icon updated for "${cat.name}"`);
+  }
+};
+
+window.deleteCategory = function(index) {
+  const cat = categoriesList[index];
+  if (!cat) return;
+  if (confirm(`Are you sure you want to delete category "${cat.name}"?`)) {
+    categoriesList.splice(index, 1);
+    localStorage.setItem('acmart_categories', JSON.stringify(categoriesList));
+    renderAllSections();
+    showToast(`🗑️ Category "${cat.name}" deleted.`);
+  }
+};
 
 // --- FULL ORDERS TABLE (Dashboard Orders Tab) ---
 function renderFullOrdersTable(filteredOrders = null) {
@@ -1197,6 +1270,9 @@ function updateDashboardMetrics() {
 function openModal(modal) {
   modal.classList.add('active');
   document.body.style.overflow = 'hidden';
+  if (modal === appFormModal) {
+    populateCategoryDropdown();
+  }
 }
 
 function closeModal(modal) {
@@ -1382,12 +1458,34 @@ function setupEventListeners() {
   const btnAddNewCategory = document.getElementById('btnAddNewCategory');
   if (btnAddNewCategory) {
     btnAddNewCategory.addEventListener('click', () => {
-      const catName = prompt("Enter new category name:");
-      if (catName) {
-        categoriesList.push({ id: `cat-${Date.now()}`, name: catName, icon: "📁", count: 0 });
+      const catName = prompt("Enter new category name (e.g. Windows Apps, Mobile Apps, Themes):");
+      if (catName && catName.trim()) {
+        const icon = prompt("Enter an emoji/icon for this category:", "💻") || "💻";
+        categoriesList.push({ id: `cat-${Date.now()}`, name: catName.trim(), icon: icon.trim(), count: 0 });
         localStorage.setItem('acmart_categories', JSON.stringify(categoriesList));
-        renderCategoriesGrid();
-        showToast(`✓ Category "${catName}" created!`);
+        renderAllSections();
+        showToast(`✓ Category "${catName.trim()}" created!`);
+      }
+    });
+  }
+
+  // Handle + Add New Category option in product category dropdown
+  const formAppCategory = document.getElementById('formAppCategory');
+  if (formAppCategory) {
+    formAppCategory.addEventListener('change', (e) => {
+      if (e.target.value === '__NEW_CATEGORY__') {
+        const newName = prompt("Enter new category name:");
+        if (newName && newName.trim()) {
+          const icon = prompt("Enter an emoji/icon for this category:", "📁") || "📁";
+          const newCat = { id: `cat-${Date.now()}`, name: newName.trim(), icon: icon.trim(), count: 0 };
+          categoriesList.push(newCat);
+          localStorage.setItem('acmart_categories', JSON.stringify(categoriesList));
+          renderAllSections();
+          populateCategoryDropdown(newCat.name);
+          showToast(`✓ New category "${newCat.name}" created!`);
+        } else {
+          populateCategoryDropdown();
+        }
       }
     });
   }
