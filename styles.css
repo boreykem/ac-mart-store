@@ -519,8 +519,12 @@ input, select, textarea {
 /* ==========================================================================
    Search & Filter Bar
    ========================================================================== */
+#marketplaceCatalog {
+  padding-top: 15px;
+}
+
 .marketplace-controls {
-  margin: 30px 0 35px;
+  margin: 15px 0 35px;
   background: var(--bg-surface);
   border: 1px solid var(--border-color);
   padding: 16px;
