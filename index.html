@@ -1231,6 +1231,14 @@
                 📁 Upload Photo
               </button>
             </div>
+            <!-- Auto-Compression & Storage Optimizer Preview -->
+            <div id="formAppImgPreviewWrap" style="display: none; margin-top: 10px; align-items: center; gap: 12px; background: rgba(16, 185, 129, 0.08); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 8px; padding: 8px 12px;">
+              <img id="formAppImgPreview" style="width: 58px; height: 42px; object-fit: cover; border-radius: 6px; border: 1px solid var(--border-color);" alt="Thumbnail">
+              <div style="font-size: 0.82rem; line-height: 1.4;">
+                <div style="font-weight: 700; color: #10b981;" id="formAppImgSizeBadge">⚡ Auto-Compressed WebP Ready</div>
+                <div style="color: var(--text-muted); font-size: 0.75rem;">Optimized for fast loading & minimal Vercel space. High quality preserved.</div>
+              </div>
+            </div>
           </div>
         </form>
       </div>
