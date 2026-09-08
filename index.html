@@ -1059,6 +1059,19 @@
               <input type="number" id="formAppOrigPrice" class="form-control" placeholder="199">
             </div>
           </div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+            <div class="form-group">
+              <label class="form-label" data-i18n="label_app_sales_count">Units Sold / Quantity (ចំនួនលក់)</label>
+              <input type="number" id="formAppSalesCount" class="form-control" placeholder="0" min="0">
+            </div>
+            <div class="form-group">
+              <label class="form-label" data-i18n="label_app_status">Store Status (ស្ថានភាព)</label>
+              <select id="formAppStatus" class="form-control">
+                <option value="active" data-i18n="opt_status_active">● Active In Store</option>
+                <option value="draft" data-i18n="opt_status_draft">○ Draft / Hidden</option>
+              </select>
+            </div>
+          </div>
           <div class="form-group">
             <label class="form-label" data-i18n="label_app_desc">Short Description</label>
             <textarea id="formAppDesc" class="form-control" rows="2" placeholder="Brief pitch of what the app does..."></textarea>

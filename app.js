@@ -141,14 +141,20 @@ const translations = {
     btn_cancel: "Cancel",
     btn_simulate_paid: "Simulate KHQR Payment Success",
     modal_add_app_title: "Add New Web Application",
+    modal_edit_app_title: "Edit Product / Application",
     label_app_name: "Application Title",
     label_app_category: "Category",
     label_app_price: "Price (USD)",
     label_app_orig_price: "Original / Strikethrough Price",
+    label_app_sales_count: "Units Sold / Quantity",
+    label_app_status: "Store Status",
+    opt_status_active: "● Active In Store",
+    opt_status_draft: "○ Draft / Hidden",
     label_app_desc: "Short Description",
     label_app_tech: "Tech Stack (comma separated)",
     label_app_preview: "Preview Image URL / SVG Template",
     btn_save_app: "Save & Publish App",
+    btn_update_app: "Update & Save Changes",
     modal_settings_title: "Payment & Store Settings",
     label_store_name: "Store Display Name",
     btn_save_changes: "Save Changes",
@@ -373,14 +379,20 @@ const translations = {
     btn_cancel: "បោះបង់",
     btn_simulate_paid: "ក្លែងធ្វើការទូទាត់ KHQR ជោគជ័យ",
     modal_add_app_title: "បន្ថែមកម្មវិធីគេហទំព័រថ្មី",
+    modal_edit_app_title: "កែប្រែព័ត៌មានផលិតផល & កម្មវិធី",
     label_app_name: "ឈ្មោះកម្មវិធី",
     label_app_category: "ប្រភេទ",
     label_app_price: "តម្លៃ (USD)",
     label_app_orig_price: "តម្លៃដើម (បញ្ចុះតម្លៃ)",
+    label_app_sales_count: "ចំនួនលក់ / ចំនួនទំនិញ",
+    label_app_status: "ស្ថានភាពផលិតផល",
+    opt_status_active: "● កំពុងដាក់លក់",
+    opt_status_draft: "○ ផ្អាកដាក់លក់",
     label_app_desc: "ពិពណ៌នាសង្ខេប",
     label_app_tech: "បច្ចេកវិទ្យាប្រើប្រាស់ (Tech Stack)",
     label_app_preview: "តំណភ្ជាប់រូបភាព Preview",
     btn_save_app: "រក្សាទុក & បង្ហោះកម្មវិធី",
+    btn_update_app: "រក្សាទុកការកែប្រែ",
     modal_settings_title: "ការកំណត់ការទូទាត់ & ហាង",
     label_store_name: "ឈ្មោះហាង",
     btn_save_changes: "រក្សាទុកការផ្លាស់ប្តូរ",
@@ -1128,7 +1140,11 @@ function renderProductsManager() {
   const isKh = currentLang === 'kh';
   productsManagerTableBody.innerHTML = appsList.map(app => {
     const title = (isKh && app.khName) ? app.khName : app.name;
-    const statusText = isKh ? '● កំពុងដាក់លក់' : '● Active In Store';
+    const isDraft = app.status === 'draft';
+    const statusText = isKh 
+      ? (isDraft ? '○ ផ្អាកដាក់លក់' : '● កំពុងដាក់លក់') 
+      : (isDraft ? '○ Draft / Hidden' : '● Active In Store');
+    const statusClass = isDraft ? 'status-pending' : 'status-paid';
     const unitsText = isKh ? 'ចំនួន' : 'units';
     const editBtn = isKh ? 'កែប្រែ' : 'Edit';
     const deleteBtn = isKh ? 'លុប' : 'Delete';
@@ -1140,11 +1156,11 @@ function renderProductsManager() {
       </td>
       <td><span class="tech-tag">${app.category}</span></td>
       <td style="font-weight: 800; color: var(--brand-primary);">$${app.price}.00</td>
-      <td>${app.techStack.slice(0, 3).map(t => `<span class="tech-tag">${t}</span>`).join(' ')}</td>
+      <td>${(app.techStack || []).slice(0, 3).map(t => `<span class="tech-tag">${t}</span>`).join(' ')}</td>
       <td style="font-weight: 700;">${app.salesCount || 0} ${unitsText}</td>
-      <td><span class="status-badge status-paid">${statusText}</span></td>
+      <td><span class="status-badge ${statusClass}">${statusText}</span></td>
       <td>
-        <button class="btn btn-secondary btn-sm" onclick="editProductPrice('${app.id}')" style="padding: 4px 8px; font-size: 0.78rem;">${editBtn}</button>
+        <button class="btn btn-secondary btn-sm" onclick="openEditProductModal('${app.id}')" style="padding: 4px 8px; font-size: 0.78rem;">${editBtn}</button>
         <button class="btn btn-secondary btn-sm" onclick="deleteProduct('${app.id}')" style="padding: 4px 8px; font-size: 0.78rem; color: #f87171;">${deleteBtn}</button>
       </td>
     </tr>
@@ -1152,16 +1168,120 @@ function renderProductsManager() {
   }).join('');
 }
 
-window.editProductPrice = function(appId) {
+let editingAppId = null;
+
+window.openEditProductModal = function(appId) {
   const app = appsList.find(a => a.id === appId);
-  const newPrice = prompt(`Enter new price for "${app.name}" (USD):`, app.price);
-  if (newPrice && !isNaN(newPrice)) {
-    app.price = parseFloat(newPrice);
-    localStorage.setItem('acmart_apps', JSON.stringify(appsList));
-    renderAllSections();
-    showToast(`✓ Updated price of ${app.name} to $${newPrice}`);
+  if (!app) return;
+
+  editingAppId = appId;
+  const isKh = currentLang === 'kh';
+
+  // Update modal title and button text
+  const titleEl = document.getElementById('appFormTitle');
+  if (titleEl) {
+    titleEl.textContent = isKh ? 'កែប្រែព័ត៌មានផលិតផល & កម្មវិធី' : 'Edit Product / Application';
+    titleEl.removeAttribute('data-i18n');
   }
+
+  const saveBtn = document.getElementById('saveAppFormBtn');
+  if (saveBtn) {
+    saveBtn.textContent = isKh ? 'រក្សាទុកការកែប្រែ' : 'Update & Save Changes';
+    saveBtn.removeAttribute('data-i18n');
+  }
+
+  // Pre-fill form fields
+  const nameInput = document.getElementById('formAppName');
+  if (nameInput) nameInput.value = (isKh && app.khName) ? app.khName : (app.name || '');
+
+  populateCategoryDropdown(app.category || '');
+
+  const priceInput = document.getElementById('formAppPrice');
+  if (priceInput) priceInput.value = app.price ?? '';
+
+  const origPriceInput = document.getElementById('formAppOrigPrice');
+  if (origPriceInput) origPriceInput.value = app.originalPrice ?? '';
+
+  const salesCountInput = document.getElementById('formAppSalesCount');
+  if (salesCountInput) salesCountInput.value = app.salesCount ?? 0;
+
+  const statusInput = document.getElementById('formAppStatus');
+  if (statusInput) statusInput.value = app.status || 'active';
+
+  const descInput = document.getElementById('formAppDesc');
+  if (descInput) descInput.value = (isKh && app.khDesc) ? app.khDesc : (app.desc || '');
+
+  const techInput = document.getElementById('formAppTech');
+  if (techInput) techInput.value = Array.isArray(app.techStack) ? app.techStack.join(', ') : (app.techStack || '');
+
+  const demoUrlInput = document.getElementById('formAppDemoUrl');
+  if (demoUrlInput) demoUrlInput.value = app.demoUrl || '';
+
+  const imgInput = document.getElementById('formAppImg');
+  if (imgInput) imgInput.value = app.previewImage || '';
+
+  // Screenshots
+  if (Array.isArray(app.screenshots) && app.screenshots.length > 0) {
+    formUploadedScreenshots = [...app.screenshots];
+  } else if (app.previewImage) {
+    formUploadedScreenshots = [app.previewImage];
+  } else {
+    formUploadedScreenshots = [];
+  }
+  renderFormScreenshotsStrip();
+
+  // Preview Image Wrap
+  const previewWrap = document.getElementById('formAppImgPreviewWrap');
+  const previewImg = document.getElementById('formAppImgPreview');
+  if (previewWrap && previewImg && app.previewImage) {
+    previewImg.src = app.previewImage;
+    previewWrap.style.display = 'flex';
+  } else if (previewWrap) {
+    previewWrap.style.display = 'none';
+  }
+
+  openModal(appFormModal);
 };
+
+window.editProductPrice = function(appId) {
+  openEditProductModal(appId);
+};
+
+function resetAppForm() {
+  editingAppId = null;
+  const isKh = currentLang === 'kh';
+  const titleEl = document.getElementById('appFormTitle');
+  if (titleEl) {
+    titleEl.textContent = isKh ? 'បន្ថែមកម្មវិធីគេហទំព័រថ្មី' : 'Add New Web Application';
+    titleEl.setAttribute('data-i18n', 'modal_add_app_title');
+  }
+
+  const saveBtn = document.getElementById('saveAppFormBtn');
+  if (saveBtn) {
+    saveBtn.textContent = isKh ? 'រក្សាទុក & បង្ហោះកម្មវិធី' : 'Save & Publish App';
+    saveBtn.setAttribute('data-i18n', 'btn_save_app');
+  }
+
+  document.getElementById('formAppName').value = '';
+  populateCategoryDropdown();
+  document.getElementById('formAppPrice').value = '';
+  document.getElementById('formAppOrigPrice').value = '';
+  const salesCountInput = document.getElementById('formAppSalesCount');
+  if (salesCountInput) salesCountInput.value = '0';
+  const statusInput = document.getElementById('formAppStatus');
+  if (statusInput) statusInput.value = 'active';
+  document.getElementById('formAppDesc').value = '';
+  document.getElementById('formAppTech').value = '';
+  const demoUrlInput = document.getElementById('formAppDemoUrl');
+  if (demoUrlInput) demoUrlInput.value = '';
+  document.getElementById('formAppImg').value = '';
+
+  const previewWrap = document.getElementById('formAppImgPreviewWrap');
+  if (previewWrap) previewWrap.style.display = 'none';
+
+  formUploadedScreenshots = [];
+  renderFormScreenshotsStrip();
+}
 
 window.deleteProduct = function(appId) {
   if (confirm("Are you sure you want to remove this product from your store?")) {
@@ -3118,8 +3238,14 @@ function setupEventListeners() {
   });
 
   // Checklist Actions (Matching Screenshot 1)
-  btnChecklistAddProduct.addEventListener('click', () => openModal(appFormModal));
-  addNewAppTableBtn.addEventListener('click', () => openModal(appFormModal));
+  btnChecklistAddProduct.addEventListener('click', () => {
+    resetAppForm();
+    openModal(appFormModal);
+  });
+  addNewAppTableBtn.addEventListener('click', () => {
+    resetAppForm();
+    openModal(appFormModal);
+  });
   btnChecklistPayment.addEventListener('click', () => {
     populateSettingsModal();
     openModal(settingsModal);
@@ -3469,14 +3595,16 @@ function setupEventListeners() {
     showToast("✓ Store settings updated successfully!");
   });
 
-  // Add App Form Save
+  // Add / Edit App Form Save
   saveAppFormBtn.addEventListener('click', (e) => {
     e.preventDefault();
     const name = document.getElementById('formAppName').value.trim();
     const cat = document.getElementById('formAppCategory').value;
-    const price = parseFloat(document.getElementById('formAppPrice').value) || 79;
-    const origPrice = parseFloat(document.getElementById('formAppOrigPrice').value) || 149;
-    const desc = document.getElementById('formAppDesc').value.trim() || "Full-featured web application ready to deploy.";
+    const price = parseFloat(document.getElementById('formAppPrice').value) || 0;
+    const origPrice = parseFloat(document.getElementById('formAppOrigPrice').value) || (price > 0 ? price * 1.5 : 0);
+    const salesCount = parseInt(document.getElementById('formAppSalesCount')?.value) || 0;
+    const statusVal = document.getElementById('formAppStatus')?.value || 'active';
+    const desc = document.getElementById('formAppDesc').value.trim() || "Full-featured application ready for instant deployment.";
     const tech = document.getElementById('formAppTech').value.split(',').map(s => s.trim()).filter(Boolean);
     const demoUrl = document.getElementById('formAppDemoUrl')?.value.trim() || "";
     const rawImg = document.getElementById('formAppImg').value.trim();
@@ -3486,57 +3614,68 @@ function setupEventListeners() {
     const finalScreenshots = formUploadedScreenshots.length ? [...formUploadedScreenshots] : [finalCoverImg];
 
     if (!name) {
-      alert("Please enter an application title.");
+      alert(currentLang === 'kh' ? "សូមបញ្ចូលឈ្មោះផលិតផល ឬកម្មវិធី។" : "Please enter an application title.");
       return;
     }
 
-    const newApp = {
-      id: `app-${Date.now()}`,
-      name: name,
-      khName: name,
-      category: cat,
-      price: price,
-      originalPrice: origPrice,
-      rating: 5.0,
-      salesCount: 0,
-      techStack: tech.length ? tech : ["React", "Tailwind", "KHQR"],
-      desc: desc,
-      khDesc: desc,
-      features: [
-        "100% clean verified source code",
-        "Instant ABA KHQR checkout integration",
-        "Full commercial & distribution license",
-        "Lifetime bug fix updates"
-      ],
-      demoType: "saas",
-      demoUrl: demoUrl,
-      previewImage: finalCoverImg,
-      screenshots: finalScreenshots
-    };
+    if (editingAppId) {
+      // EDIT MODE - Update existing app
+      const app = appsList.find(a => a.id === editingAppId);
+      if (app) {
+        app.name = name;
+        app.khName = name;
+        app.category = cat;
+        app.price = price;
+        app.originalPrice = origPrice;
+        app.salesCount = salesCount;
+        app.status = statusVal;
+        app.desc = desc;
+        app.khDesc = desc;
+        app.techStack = tech.length ? tech : (app.techStack && app.techStack.length ? app.techStack : ["Web", "Node", "KHQR"]);
+        app.demoUrl = demoUrl;
+        app.previewImage = finalCoverImg;
+        app.screenshots = finalScreenshots;
+      }
+      showToast(currentLang === 'kh' ? `✓ បានកែប្រែទិន្នន័យ "${name}" ជោគជ័យ!` : `✓ Updated "${name}" successfully!`);
+    } else {
+      // ADD MODE - Create new app
+      const newApp = {
+        id: `app-${Date.now()}`,
+        name: name,
+        khName: name,
+        category: cat,
+        price: price,
+        originalPrice: origPrice,
+        rating: 5.0,
+        salesCount: salesCount,
+        status: statusVal,
+        techStack: tech.length ? tech : ["React", "Tailwind", "KHQR"],
+        desc: desc,
+        khDesc: desc,
+        features: [
+          "100% clean verified source code",
+          "Instant ABA KHQR checkout integration",
+          "Full commercial & distribution license",
+          "Lifetime bug fix updates"
+        ],
+        demoType: "saas",
+        demoUrl: demoUrl,
+        previewImage: finalCoverImg,
+        screenshots: finalScreenshots
+      };
 
-    appsList.unshift(newApp);
+      appsList.unshift(newApp);
+
+      const checkCircle1 = document.getElementById('checkCircle1');
+      if (checkCircle1) checkCircle1.classList.add('completed');
+
+      showToast(currentLang === 'kh' ? `✓ បានបន្ថែម "${name}" ទៅកាន់ហាងជោគជ័យ!` : `✓ "${name}" published with ${finalScreenshots.length} screenshots!`);
+    }
+
     localStorage.setItem('acmart_apps', JSON.stringify(appsList));
-
-    const checkCircle1 = document.getElementById('checkCircle1');
-    if (checkCircle1) checkCircle1.classList.add('completed');
-
-    const previewWrap = document.getElementById('formAppImgPreviewWrap');
-    if (previewWrap) previewWrap.style.display = 'none';
-    document.getElementById('formAppName').value = '';
-    document.getElementById('formAppPrice').value = '';
-    document.getElementById('formAppOrigPrice').value = '';
-    document.getElementById('formAppDesc').value = '';
-    document.getElementById('formAppTech').value = '';
-    const demoUrlField = document.getElementById('formAppDemoUrl');
-    if (demoUrlField) demoUrlField.value = '';
-    document.getElementById('formAppImg').value = '';
-
-    formUploadedScreenshots = [];
-    renderFormScreenshotsStrip();
-
+    resetAppForm();
     closeModal(appFormModal);
     renderAllSections();
-    showToast(`✓ "${name}" has been published with ${finalScreenshots.length} screenshots!`);
   });
 
   // --- Mobile Left-Side Drawer Controller ---
@@ -3697,10 +3836,6 @@ function setupEventListeners() {
   closeCheckoutModalBtn.addEventListener('click', () => closeModal(checkoutModal));
   cancelCheckoutBtn.addEventListener('click', () => closeModal(checkoutModal));
   confirmPaymentBtn.addEventListener('click', completePurchase);
-  const resetAppForm = () => {
-    const wrap = document.getElementById('formAppImgPreviewWrap');
-    if (wrap) wrap.style.display = 'none';
-  };
   closeAppFormModalBtn.addEventListener('click', () => {
     resetAppForm();
     closeModal(appFormModal);
