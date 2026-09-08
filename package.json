@@ -4,7 +4,6 @@
   "description": "AC MART Official Web Application & SaaS Store",
   "main": "app.js",
   "scripts": {
-    "build": "node build.js",
     "start": "node -e \"const http = require('http'), fs = require('fs'), path = require('path'); http.createServer((req, res) => { let p = path.join(__dirname, req.url === '/' ? 'index.html' : req.url); let ext = path.extname(p); let m = {'.html':'text/html','.css':'text/css','.js':'text/javascript'}[ext] || 'text/plain'; fs.readFile(p, (err, c) => { if(err) { res.writeHead(404); res.end('Not Found'); } else { res.writeHead(200, {'Content-Type': m}); res.end(c); } }); }).listen(3000, () => console.log('Server running on port 3000'));\""
   },
   "keywords": ["ac-mart", "ecommerce", "software-store", "khqr"],

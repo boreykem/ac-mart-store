@@ -1,10 +1,5 @@
-# Files to exclude from Vercel deployment
-main.py
 verify.js
 verify_tabs.js
 acmart-production.zip
-__pycache__
-*.pyc
-.git
-.vscode
-.idea
+main.py
+build.js
