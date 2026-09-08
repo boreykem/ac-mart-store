@@ -361,18 +361,101 @@
             </button>
           </div>
           <div class="interactive-preview-body">
+            <!-- Live Engine Status Bar -->
+            <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; margin-bottom: 20px; padding: 10px 16px; background: rgba(16, 185, 129, 0.08); border: 1px solid rgba(16, 185, 129, 0.25); border-radius: 8px;">
+              <div style="display: flex; align-items: center; gap: 8px; font-size: 0.85rem; font-weight: 700; color: #10b981;">
+                <span style="display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #10b981; box-shadow: 0 0 10px #10b981;"></span>
+                <span>3 Integrated Engines Running Live: Catalog, KHQR & Telegram Bot</span>
+              </div>
+              <div style="display: flex; gap: 8px;">
+                <button type="button" class="btn btn-secondary btn-sm" id="btnRunAllDemoEngines" style="font-size: 0.8rem; padding: 5px 12px; font-weight: 700; border-color: #10b981; color: #10b981;">
+                  ▶ Run 1-Click End-to-End Simulation
+                </button>
+              </div>
+            </div>
+
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; text-align: left;">
-              <div style="background: var(--bg-card); padding: 20px; border-radius: 12px; border: 1px solid var(--border-color);">
-                <div style="font-weight: 800; font-size: 1.1rem; color: var(--brand-primary); margin-bottom: 8px;">🛍️ Smart Product Catalog</div>
-                <p style="font-size: 0.88rem; color: var(--text-secondary);">High-resolution image galleries, product variants (colors, sizes), and live stock counters.</p>
+              <!-- Engine 1: Smart Product Catalog (Running Live) -->
+              <div style="background: var(--bg-card); padding: 20px; border-radius: 12px; border: 1px solid var(--border-color); display: flex; flex-direction: column; justify-content: space-between;">
+                <div>
+                  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <div style="font-weight: 800; font-size: 1.05rem; color: var(--brand-primary);">🛍️ Smart Product Catalog</div>
+                    <span style="font-size: 0.72rem; background: rgba(16, 185, 129, 0.2); color: #10b981; padding: 2px 6px; border-radius: 4px; font-weight: 700;">● RUNNING</span>
+                  </div>
+                  <p style="font-size: 0.84rem; color: var(--text-secondary); margin-bottom: 12px;">High-resolution image galleries, product variants (colors, sizes), and live stock counters.</p>
+                </div>
+                
+                <!-- Live Interactive Component -->
+                <div style="background: rgba(0,0,0,0.25); padding: 12px; border-radius: 8px; border: 1px solid var(--border-color);">
+                  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <span style="font-weight: 700; font-size: 0.85rem;">GoShope SaaS Store</span>
+                    <span id="demoLiveStockBadge" style="font-size: 0.72rem; background: rgba(16, 185, 129, 0.15); color: #10b981; padding: 2px 6px; border-radius: 4px; font-weight: 700;">● 14 In Stock</span>
+                  </div>
+                  <div style="display: flex; gap: 6px; margin-bottom: 10px;">
+                    <button type="button" class="btn-demo-tier" id="btnTierStandard" style="flex: 1; padding: 6px; font-size: 0.76rem; border-radius: 6px; background: var(--brand-primary); color: white; border: none; cursor: pointer; font-weight: 700;">Standard ($79)</button>
+                    <button type="button" class="btn-demo-tier" id="btnTierExtended" style="flex: 1; padding: 6px; font-size: 0.76rem; border-radius: 6px; background: var(--bg-surface); color: var(--text-secondary); border: 1px solid var(--border-color); cursor: pointer;">Source ($149)</button>
+                  </div>
+                  <button type="button" class="btn btn-primary btn-sm" id="btnDemoAddToCart" style="width: 100%; font-size: 0.82rem; padding: 8px;">
+                    <span>🛒 Add to Cart & Test (Cart: <strong id="demoCartCountDisplay">0</strong>)</span>
+                  </button>
+                </div>
               </div>
-              <div style="background: var(--bg-card); padding: 20px; border-radius: 12px; border: 1px solid var(--border-color);">
-                <div style="font-weight: 800; font-size: 1.1rem; color: #dc2626; margin-bottom: 8px;">🇰🇭 ABA KHQR QR-Generator</div>
-                <p style="font-size: 0.88rem; color: var(--text-secondary);">Generates instant dynamic KHQR codes for exact cart totals with zero manual calculation errors.</p>
+
+              <!-- Engine 2: ABA KHQR QR-Generator (Running Live) -->
+              <div style="background: var(--bg-card); padding: 20px; border-radius: 12px; border: 1px solid var(--border-color); display: flex; flex-direction: column; justify-content: space-between;">
+                <div>
+                  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <div style="font-weight: 800; font-size: 1.05rem; color: #dc2626;">🇰🇭 ABA KHQR QR-Generator</div>
+                    <span style="font-size: 0.72rem; background: rgba(16, 185, 129, 0.2); color: #10b981; padding: 2px 6px; border-radius: 4px; font-weight: 700;">● RUNNING</span>
+                  </div>
+                  <p style="font-size: 0.84rem; color: var(--text-secondary); margin-bottom: 12px;">Generates instant dynamic KHQR codes for exact cart totals with zero manual calculation errors.</p>
+                </div>
+                
+                <!-- Live Interactive Component -->
+                <div style="background: rgba(0,0,0,0.25); padding: 12px; border-radius: 8px; border: 1px solid var(--border-color); text-align: center;">
+                  <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px;">
+                    <span style="font-size: 0.78rem; font-weight: 700; color: #dc2626;">🇰🇭 NBC Dynamic QR</span>
+                    <span id="demoKhqrStatusTag" style="font-size: 0.7rem; padding: 2px 6px; border-radius: 4px; background: rgba(234, 179, 8, 0.2); color: #eab308; font-weight: 700;">● Ready to Scan</span>
+                  </div>
+                  <div id="demoQrBox" style="background: #ffffff; width: 90px; height: 90px; margin: 6px auto; border-radius: 8px; padding: 6px; display: flex; align-items: center; justify-content: center; position: relative;">
+                    <svg width="76" height="76" viewBox="0 0 100 100" fill="#000">
+                      <path d="M0 0h30v30H0zM10 10h10v10H10zM70 0h30v30H70zM80 10h10v10H80zM0 70h30v30H0zM10 80h10v10H10zM40 10h10v10H40zM50 20h10v10H50zM10 40h10v10H10zM20 50h10v10H20zM40 40h20v20H40zM70 40h10v10H70zM80 50h20v10H80zM40 70h10v20H40zM60 70h20v10H60zM70 80h10v20H70zM90 70h10v30H90z"/>
+                    </svg>
+                  </div>
+                  <div style="font-size: 1rem; font-weight: 800; color: #dc2626;" id="demoKhqrAmountDisplay">$79.00 USD</div>
+                  <div style="font-size: 0.72rem; color: var(--text-muted);" id="demoKhqrMerchantNameDisplay">000138112 (BOREY KEM)</div>
+                  <button type="button" class="btn btn-primary btn-sm" id="btnDemoSimulateKhqrPay" style="width: 100%; margin-top: 8px; font-size: 0.82rem; background: #dc2626; border-color: #dc2626;">
+                    <span>📱 Test Scan / Simulate Payment</span>
+                  </button>
+                </div>
               </div>
-              <div style="background: var(--bg-card); padding: 20px; border-radius: 12px; border: 1px solid var(--border-color);">
-                <div style="font-weight: 800; font-size: 1.1rem; color: #38bdf8; margin-bottom: 8px;">🤖 Instant Telegram Dispatch</div>
-                <p style="font-size: 0.88rem; color: var(--text-secondary);">Sends buyer address, contact number, and paid receipt directly to your Telegram chat instantly.</p>
+
+              <!-- Engine 3: Instant Telegram Dispatch (Running Live) -->
+              <div style="background: var(--bg-card); padding: 20px; border-radius: 12px; border: 1px solid var(--border-color); display: flex; flex-direction: column; justify-content: space-between;">
+                <div>
+                  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <div style="font-weight: 800; font-size: 1.05rem; color: #38bdf8;">🤖 Instant Telegram Dispatch</div>
+                    <span style="font-size: 0.72rem; background: rgba(16, 185, 129, 0.2); color: #10b981; padding: 2px 6px; border-radius: 4px; font-weight: 700;">● RUNNING</span>
+                  </div>
+                  <p style="font-size: 0.84rem; color: var(--text-secondary); margin-bottom: 12px;">Sends buyer address, contact number, and paid receipt directly to your Telegram chat instantly.</p>
+                </div>
+                
+                <!-- Live Interactive Component -->
+                <div style="background: rgba(0,0,0,0.25); padding: 12px; border-radius: 8px; border: 1px solid var(--border-color);">
+                  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                    <span style="font-size: 0.78rem; font-weight: 700; color: #38bdf8;">🤖 AC STORE Bot</span>
+                    <span style="font-size: 0.7rem; color: var(--text-muted);" id="demoTelegramTimestamp">Just now</span>
+                  </div>
+                  <div id="demoTelegramBubble" style="background: #1e293b; border-radius: 8px; padding: 8px 10px; font-size: 0.74rem; line-height: 1.35; border-left: 3px solid #38bdf8; color: #e2e8f0; transition: all 0.3s ease;">
+                    <div style="font-weight: 700; color: #38bdf8; margin-bottom: 2px;">⚡ NEW PAID ORDER #ORD-9482</div>
+                    <div>📦 Item: GoShope SaaS Store</div>
+                    <div>💰 Amount: <span id="demoTelegramAmountDisplay">$79.00 (ABA KHQR)</span></div>
+                    <div style="color: #10b981; font-weight: 600;">✓ License Dispatched to @Acmart6666</div>
+                  </div>
+                  <button type="button" class="btn btn-secondary btn-sm" id="btnDemoSendTelegramAlert" style="width: 100%; margin-top: 8px; font-size: 0.82rem; border-color: #38bdf8; color: #38bdf8;">
+                    <span>🔔 Trigger Test Telegram Alert</span>
+                  </button>
+                </div>
               </div>
             </div>
           </div>

@@ -2381,4 +2381,181 @@ function setupEventListeners() {
       });
     }
   });
+
+  // Wire up the 3 live running engines in section 5
+  setupInteractiveDemoEngines();
+}
+
+/**
+ * Connects the 3 interactive demo engines (Smart Catalog, ABA KHQR, and Telegram Dispatch)
+ * making them fully running, reactive, and testable live directly on the page.
+ */
+function setupInteractiveDemoEngines() {
+  const btnTierStandard = document.getElementById('btnTierStandard');
+  const btnTierExtended = document.getElementById('btnTierExtended');
+  const btnDemoAddToCart = document.getElementById('btnDemoAddToCart');
+  const demoCartCountDisplay = document.getElementById('demoCartCountDisplay');
+  const demoLiveStockBadge = document.getElementById('demoLiveStockBadge');
+
+  const demoKhqrAmountDisplay = document.getElementById('demoKhqrAmountDisplay');
+  const demoKhqrMerchantNameDisplay = document.getElementById('demoKhqrMerchantNameDisplay');
+  const demoKhqrStatusTag = document.getElementById('demoKhqrStatusTag');
+  const btnDemoSimulateKhqrPay = document.getElementById('btnDemoSimulateKhqrPay');
+  const demoQrBox = document.getElementById('demoQrBox');
+
+  const demoTelegramBubble = document.getElementById('demoTelegramBubble');
+  const demoTelegramAmountDisplay = document.getElementById('demoTelegramAmountDisplay');
+  const demoTelegramTimestamp = document.getElementById('demoTelegramTimestamp');
+  const btnDemoSendTelegramAlert = document.getElementById('btnDemoSendTelegramAlert');
+  const btnRunAllDemoEngines = document.getElementById('btnRunAllDemoEngines');
+
+  if (!btnDemoAddToCart) return;
+
+  let currentPrice = 79;
+  let cartCount = 0;
+  let stockCount = 14;
+
+  if (demoKhqrMerchantNameDisplay) {
+    demoKhqrMerchantNameDisplay.textContent = storeSettings.merchantId || DEFAULT_STORE_SETTINGS.merchantId;
+  }
+
+  // Audio tone helper
+  const playChime = () => {
+    try {
+      const ctx = new (window.AudioContext || window.webkitAudioContext)();
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(587.33, ctx.currentTime);
+      osc.frequency.setValueAtTime(880, ctx.currentTime + 0.08);
+      gain.gain.setValueAtTime(0.12, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.35);
+      osc.start();
+      osc.stop(ctx.currentTime + 0.35);
+    } catch (e) {}
+  };
+
+  function resetKhqrStatus() {
+    if (demoKhqrStatusTag) {
+      demoKhqrStatusTag.textContent = '● Ready to Scan';
+      demoKhqrStatusTag.style.background = 'rgba(234, 179, 8, 0.2)';
+      demoKhqrStatusTag.style.color = '#eab308';
+    }
+    if (demoQrBox) {
+      demoQrBox.style.boxShadow = '';
+    }
+  }
+
+  // Tier switches
+  if (btnTierStandard && btnTierExtended) {
+    btnTierStandard.addEventListener('click', () => {
+      currentPrice = 79;
+      btnTierStandard.style.background = 'var(--brand-primary)';
+      btnTierStandard.style.color = '#ffffff';
+      btnTierStandard.style.fontWeight = '700';
+      btnTierExtended.style.background = 'var(--bg-surface)';
+      btnTierExtended.style.color = 'var(--text-secondary)';
+      btnTierExtended.style.fontWeight = 'normal';
+      if (demoKhqrAmountDisplay) demoKhqrAmountDisplay.textContent = `$${currentPrice}.00 USD`;
+      if (demoTelegramAmountDisplay) demoTelegramAmountDisplay.textContent = `$${currentPrice}.00 (ABA KHQR)`;
+      resetKhqrStatus();
+    });
+
+    btnTierExtended.addEventListener('click', () => {
+      currentPrice = 149;
+      btnTierExtended.style.background = 'var(--brand-primary)';
+      btnTierExtended.style.color = '#ffffff';
+      btnTierExtended.style.fontWeight = '700';
+      btnTierStandard.style.background = 'var(--bg-surface)';
+      btnTierStandard.style.color = 'var(--text-secondary)';
+      btnTierStandard.style.fontWeight = 'normal';
+      if (demoKhqrAmountDisplay) demoKhqrAmountDisplay.textContent = `$${currentPrice}.00 USD`;
+      if (demoTelegramAmountDisplay) demoTelegramAmountDisplay.textContent = `$${currentPrice}.00 (ABA KHQR)`;
+      resetKhqrStatus();
+    });
+  }
+
+  // Engine 1 Add to Cart
+  btnDemoAddToCart.addEventListener('click', () => {
+    cartCount++;
+    if (stockCount > 1) stockCount--;
+    if (demoCartCountDisplay) demoCartCountDisplay.textContent = cartCount;
+    if (demoLiveStockBadge) demoLiveStockBadge.textContent = `● ${stockCount} In Stock`;
+
+    btnDemoAddToCart.style.transform = 'scale(0.96)';
+    setTimeout(() => btnDemoAddToCart.style.transform = '', 150);
+
+    resetKhqrStatus();
+    showToast(`✓ Smart Catalog: Added to cart! Total: $${currentPrice}.00. Ready for KHQR scan.`);
+  });
+
+  // Engine 3 Trigger Telegram Dispatch
+  const triggerTelegramDispatch = () => {
+    if (demoTelegramBubble) {
+      demoTelegramBubble.style.transform = 'scale(1.03)';
+      demoTelegramBubble.style.borderColor = '#10b981';
+      demoTelegramBubble.style.boxShadow = '0 0 20px rgba(56, 189, 248, 0.4)';
+      setTimeout(() => {
+        demoTelegramBubble.style.transform = '';
+        demoTelegramBubble.style.borderColor = '#38bdf8';
+        demoTelegramBubble.style.boxShadow = '';
+      }, 500);
+    }
+    if (demoTelegramTimestamp) {
+      demoTelegramTimestamp.textContent = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+    }
+    playChime();
+    showToast(`🤖 Telegram Dispatch: Order alert & invoice dispatched to @Acmart6666!`);
+  };
+
+  // Engine 2 Simulate KHQR Payment
+  const triggerKhqrPaymentSimulation = () => {
+    if (demoKhqrStatusTag) {
+      demoKhqrStatusTag.textContent = '⏳ Processing ABA Scan...';
+      demoKhqrStatusTag.style.background = 'rgba(56, 189, 248, 0.2)';
+      demoKhqrStatusTag.style.color = '#38bdf8';
+    }
+    if (demoQrBox) {
+      demoQrBox.style.boxShadow = '0 0 15px rgba(220, 38, 38, 0.8)';
+    }
+
+    setTimeout(() => {
+      if (demoKhqrStatusTag) {
+        demoKhqrStatusTag.textContent = '✓ PAID & VERIFIED';
+        demoKhqrStatusTag.style.background = 'rgba(16, 185, 129, 0.2)';
+        demoKhqrStatusTag.style.color = '#10b981';
+      }
+      if (demoQrBox) {
+        demoQrBox.style.boxShadow = '0 0 15px rgba(16, 185, 129, 0.8)';
+      }
+      playChime();
+      showToast(`🎉 Payment Success! $${currentPrice}.00 verified via ABA Bakong Gateway!`);
+
+      // Automatically trigger Telegram alert dispatch
+      setTimeout(triggerTelegramDispatch, 600);
+    }, 700);
+  };
+
+  if (btnDemoSimulateKhqrPay) {
+    btnDemoSimulateKhqrPay.addEventListener('click', triggerKhqrPaymentSimulation);
+  }
+
+  if (btnDemoSendTelegramAlert) {
+    btnDemoSendTelegramAlert.addEventListener('click', triggerTelegramDispatch);
+  }
+
+  // 1-Click End-to-End Simulation of All 3 Engines
+  if (btnRunAllDemoEngines) {
+    btnRunAllDemoEngines.addEventListener('click', () => {
+      // Step 1: Catalog Add
+      btnDemoAddToCart.click();
+
+      // Step 2: KHQR Pay after 800ms
+      setTimeout(() => {
+        triggerKhqrPaymentSimulation();
+      }, 800);
+    });
+  }
 }
