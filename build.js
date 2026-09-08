@@ -10,6 +10,7 @@ const filesToCopy = [
   'index.html',
   'styles.css',
   'app.js',
+  'preah_vihear_nav.webp',
   '_redirects',
   'netlify.toml',
   'vercel.json'

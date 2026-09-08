@@ -303,6 +303,108 @@ input, select, textarea {
   color: var(--brand-primary);
 }
 
+/* ==========================================================================
+   Header Preah Vihear Temple Cultural Showcase & Animation
+   ========================================================================== */
+.preah-vihear-nav-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.preah-vihear-card {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  border-radius: 12px;
+  position: relative;
+  padding: 2.5px;
+  background: linear-gradient(135deg, rgba(234, 179, 8, 0.45), rgba(249, 87, 22, 0.35), rgba(59, 130, 246, 0.25));
+  box-shadow: 0 0 14px rgba(234, 179, 8, 0.22);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: preahVihearGlow 4s ease-in-out infinite alternate;
+}
+
+.preah-vihear-img-box {
+  width: 140px;
+  height: 44px;
+  border-radius: 9.5px;
+  overflow: hidden;
+  position: relative;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.preah-vihear-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 36%;
+  display: block;
+  transition: transform 0.4s ease;
+  filter: saturate(1.18) contrast(1.06);
+}
+
+/* Shimmer Light Sweep (ចលនាពន្លឺរលោងស្អាតឆ្លុះកាត់) */
+.preah-vihear-shimmer {
+  position: absolute;
+  top: 0;
+  left: -150%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.1) 20%,
+    rgba(255, 215, 0, 0.48) 50%,
+    rgba(255, 255, 255, 0.3) 60%,
+    transparent 100%
+  );
+  transform: skewX(-25deg);
+  animation: shimmerPass 4.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  pointer-events: none;
+}
+
+@keyframes shimmerPass {
+  0% {
+    left: -150%;
+  }
+  30%, 100% {
+    left: 170%;
+  }
+}
+
+@keyframes preahVihearGlow {
+  0% {
+    box-shadow: 0 0 10px rgba(234, 179, 8, 0.18), 0 2px 8px rgba(0, 0, 0, 0.4);
+  }
+  100% {
+    box-shadow: 0 0 20px rgba(234, 179, 8, 0.45), 0 4px 14px rgba(249, 87, 22, 0.25);
+  }
+}
+
+.preah-vihear-card:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 0 24px rgba(234, 179, 8, 0.6), 0 6px 18px rgba(0, 0, 0, 0.6);
+}
+
+.preah-vihear-card:hover .preah-vihear-img {
+  transform: scale(1.12);
+}
+
+.preah-vihear-card:hover .preah-vihear-shimmer {
+  animation-duration: 2.2s;
+}
+
+@media (max-width: 900px) {
+  .preah-vihear-img-box {
+    width: 110px;
+    height: 38px;
+  }
+}
+
 .nav-actions {
   display: flex;
   align-items: center;
