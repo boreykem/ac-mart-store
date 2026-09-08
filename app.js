@@ -3047,6 +3047,44 @@ function setupEventListeners() {
     });
   }
 
+  // Hero Service Action Pills (Interactive navigation)
+  const heroServiceSaleBtn = document.getElementById('heroServiceSaleBtn');
+  const heroServiceRentBtn = document.getElementById('heroServiceRentBtn');
+  
+  if (heroServiceSaleBtn) {
+    heroServiceSaleBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      activeFilter = 'all';
+      document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+      const allBtn = document.querySelector('.cat-btn[data-category="all"]');
+      if (allBtn) allBtn.classList.add('active');
+      renderApps();
+
+      const catalogEl = document.getElementById('marketplaceCatalog');
+      if (catalogEl) {
+        const offsetPosition = catalogEl.getBoundingClientRect().top + window.pageYOffset - 76;
+        window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+      }
+    });
+  }
+
+  if (heroServiceRentBtn) {
+    heroServiceRentBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      activeFilter = 'SaaS';
+      document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+      const saasBtn = document.querySelector('.cat-btn[data-category="SaaS"]');
+      if (saasBtn) saasBtn.classList.add('active');
+      renderApps();
+
+      const catalogEl = document.getElementById('marketplaceCatalog');
+      if (catalogEl) {
+        const offsetPosition = catalogEl.getBoundingClientRect().top + window.pageYOffset - 76;
+        window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+      }
+    });
+  }
+
   // Search & Filter with Enter key support
   appSearchInput.addEventListener('input', renderApps);
   appSearchInput.addEventListener('keydown', (e) => {

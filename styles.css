@@ -567,8 +567,105 @@ input, select, textarea {
   font-size: 1.15rem;
   color: var(--text-secondary);
   max-width: 680px;
-  margin: 0 auto 36px;
+  margin: 0 auto 32px;
   line-height: 1.6;
+}
+
+/* ==========================================================================
+   Hero Service Interactive Action Buttons
+   ========================================================================== */
+.hero-service-pills {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin: 0 auto 10px;
+  max-width: 920px;
+}
+
+.service-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 18px;
+  border-radius: 99px;
+  font-size: 0.92rem;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  user-select: none;
+}
+
+.service-pill .pill-arrow {
+  transition: transform 0.25s ease, stroke 0.25s ease;
+  opacity: 0.8;
+  flex-shrink: 0;
+}
+
+/* 1. Sale (Orange) */
+.service-pill-sale {
+  background: rgba(249, 87, 22, 0.12);
+  border: 1.5px solid rgba(249, 87, 22, 0.38);
+  color: var(--brand-primary);
+}
+.service-pill-sale:hover {
+  background: var(--brand-primary);
+  border-color: var(--brand-primary);
+  color: #ffffff !important;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(249, 87, 22, 0.35);
+}
+.service-pill-sale:hover .pill-arrow {
+  transform: translateY(2px);
+  stroke: #ffffff;
+}
+
+/* 2. Rent (Blue) */
+.service-pill-rent {
+  background: rgba(59, 130, 246, 0.12);
+  border: 1.5px solid rgba(59, 130, 246, 0.38);
+  color: #0284c7;
+}
+[data-theme="dark"] .service-pill-rent {
+  color: #38bdf8;
+}
+.service-pill-rent:hover {
+  background: #0284c7;
+  border-color: #0284c7;
+  color: #ffffff !important;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(2, 132, 199, 0.35);
+}
+.service-pill-rent:hover .pill-arrow {
+  transform: translateY(2px);
+  stroke: #ffffff;
+}
+
+/* 3. Custom Development (Green) */
+.service-pill-custom {
+  background: rgba(16, 185, 129, 0.12);
+  border: 1.5px solid rgba(16, 185, 129, 0.38);
+  color: #059669;
+}
+[data-theme="dark"] .service-pill-custom {
+  color: #10b981;
+}
+.service-pill-custom:hover {
+  background: #059669;
+  border-color: #059669;
+  color: #ffffff !important;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(16, 185, 129, 0.35);
+}
+.service-pill-custom:hover .pill-arrow {
+  transform: translate(2px, -2px);
+  stroke: #ffffff;
+}
+
+.service-pill:active {
+  transform: translateY(-1px) scale(0.98);
 }
 
 .hero-actions {
