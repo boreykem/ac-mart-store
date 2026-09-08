@@ -144,7 +144,90 @@ const translations = {
     label_store_name: "Store Display Name",
     btn_save_changes: "Save Changes",
     btn_live_demo: "View Details & Screens",
-    btn_buy_now: "Buy Now (ABA KHQR)"
+    btn_buy_now: "Buy Now (ABA KHQR)",
+    nav_telegram_support: "💬 Telegram Support",
+    nav_telegram: "Telegram",
+    nav_owner_pin: "Owner",
+    mob_nav_menu: "Navigation Menu",
+    mob_store_mgmt: "Store Management",
+    floating_telegram: "Chat Telegram",
+    chat_telegram: "Chat on Telegram",
+    footer_desc: "Official web applications and SaaS software store by AC MART. Tested production apps with instant ABA KHQR checkout and direct Telegram developer support.",
+    footer_marketplace: "Marketplace",
+    footer_browse_all: "Browse All Applications",
+    footer_direct_payment: "Direct Payment",
+    footer_aba_acc: "ABA Account: 000 138 112",
+    footer_aba_name: "Account Name: BOREY KEM",
+    footer_bakong: "NBC Bakong Supported",
+    footer_store_admin: "Store Administration",
+    footer_owner_portal: "Store Owner Portal (PIN)",
+    footer_all_rights: "All rights reserved.",
+    footer_made_in_kh: "🇰🇭 Proudly Made for Cambodia",
+    footer_instant_delivery: "⚡ Instant Digital Delivery",
+    dash_products_title: "Products & Applications Catalog",
+    dash_products_sub: "Manage, edit prices, update inventory and publish new items to your storefront",
+    btn_add_product: "+ Add New Product",
+    th_product: "Product",
+    th_category: "Category",
+    th_price: "Price",
+    th_tech_stack: "Tech Stack",
+    th_sales: "Sales",
+    dash_categories_title: "Store Categories",
+    dash_categories_sub: "Organize your store into easy-to-browse product collections",
+    btn_create_category: "+ Create Category",
+    dash_orders_title: "Customer Orders Management",
+    dash_orders_sub: "Track all customer orders, filter by status, and print receipts",
+    filter_all_orders: "All Orders",
+    filter_paid: "Paid",
+    filter_pending: "Pending",
+    th_date_time: "Date & Time",
+    th_item_purchased: "Item Purchased",
+    th_total: "Total",
+    th_payment_method: "Payment Method",
+    dash_customers_title: "Customer Directory",
+    dash_customers_sub: "View customer purchase history, total lifetime spent, and contact details",
+    th_cust_name: "Customer Name",
+    th_cust_contact: "Email / Phone",
+    th_cust_orders: "Total Orders",
+    th_cust_spent: "Lifetime Spent",
+    th_cust_latest: "Latest Purchase",
+    th_cust_status: "Status",
+    dash_settings_title: "Store & Payment Settings",
+    dash_settings_sub: "Configure your store branding, ABA KHQR account, and delivery options",
+    btn_save_all_settings: "Save Settings",
+    settings_logo_title: "🖼️ Store Brand Logo",
+    settings_logo_sub: "Upload your custom store logo image (.PNG, .JPG, .SVG, .WEBP). It will replace the text and appear in your website navbar, mobile drawer, and receipts.",
+    btn_upload_logo: "Upload Logo Image",
+    btn_reset_logo: "Reset to Default (AC MART)",
+    settings_logo_hint: "Recommended: Transparent PNG or SVG (height approx. 40px–80px). Saved in browser.",
+    settings_profile_title: "🏪 Store Profile",
+    label_store_url: "Live Store Website URL",
+    btn_copy: "📋 Copy",
+    label_contact_phone: "Contact Phone & Telegram",
+    label_pin_hint: "Required to unlock owner panel",
+    btn_change_pw: "Change Password",
+    settings_payment_title: "🇰🇭 Payment & Notification Settings",
+    label_aba_account: "ABA / Bank Account or Phone Number",
+    label_bakong_id: "Bakong Account ID",
+    label_optional: "(Optional - Can leave empty)",
+    label_telegram_token: "Telegram Order Alert Bot Token",
+    settings_delivery_title: "⚡ Automated Digital Delivery & License Dispatch",
+    deliv_gh_title: "✓ Instant GitHub Repo Invitation",
+    deliv_gh_desc: "Automated collaborator access",
+    deliv_zip_title: "✓ Source Code .ZIP Direct Download",
+    deliv_zip_desc: "Instant download link on checkout",
+    deliv_key_title: "✓ Automated License Key Delivery",
+    deliv_key_desc: "Unique cryptographic license key",
+    deliv_tax_title: "✓ Digital PDF Tax Receipt to Email",
+    deliv_tax_desc: "Official customer receipt sent",
+    deliv_aba_verif: "✓ ABA KHQR & Bakong Instant Verification",
+    deliv_key_pdf: "✓ Automated License Key & PDF Tax Receipt Delivery",
+    admin_auth_title: "Store Owner Access Only",
+    admin_auth_desc: "This dashboard is restricted exclusively to the store owner to publish apps, manage prices, and track ABA KHQR revenue.",
+    label_admin_pin: "Owner Secret PIN / Password",
+    admin_pin_error: "❌ Incorrect PIN. Access denied!",
+    btn_unlock_panel: "Unlock Owner Panel",
+    btn_lock_panel: "Lock / Exit"
   },
   kh: {
     badge_apps: "AC MART",
@@ -284,7 +367,90 @@ const translations = {
     label_store_name: "ឈ្មោះហាង",
     btn_save_changes: "រក្សាទុកការផ្លាស់ប្តូរ",
     btn_live_demo: "មើលព័ត៌មាន & រូប Demo",
-    btn_buy_now: "ទិញឥឡូវនេះ (ABA KHQR)"
+    btn_buy_now: "ទិញឥឡូវនេះ (ABA KHQR)",
+    nav_telegram_support: "💬 ជំនួយ Telegram",
+    nav_telegram: "Telegram",
+    nav_owner_pin: "ម្ចាស់ហាង",
+    mob_nav_menu: "ម៉ឺនុយរុករក",
+    mob_store_mgmt: "ការគ្រប់គ្រងហាង",
+    floating_telegram: "ឆាត Telegram",
+    chat_telegram: "ឆាតលើ Telegram",
+    footer_desc: "ហាងលក់កម្មវិធីគេហទំព័រ និងប្រព័ន្ធ SaaS ផ្លូវការរបស់ AC MART។ កម្មវិធីស្តង់ដារគុណភាពខ្ពស់ ជាមួយការទូទាត់រហ័សតាម ABA KHQR និងជំនួយផ្ទាល់លើ Telegram។",
+    footer_marketplace: "ទីផ្សារកម្មវិធី",
+    footer_browse_all: "កាតាឡុកកម្មវិធីទាំងអស់",
+    footer_direct_payment: "ការទូទាត់ផ្ទាល់",
+    footer_aba_acc: "គណនី ABA៖ 000 138 112",
+    footer_aba_name: "ឈ្មោះគណនី៖ BOREY KEM",
+    footer_bakong: "គាំទ្រប្រព័ន្ធបាគង (NBC Bakong)",
+    footer_store_admin: "ការគ្រប់គ្រងហាង",
+    footer_owner_portal: "ផ្ទាំងម្ចាស់ហាង (PIN)",
+    footer_all_rights: "រក្សាសិទ្ធិគ្រប់យ៉ាង។",
+    footer_made_in_kh: "🇰🇭 បង្កើតឡើងយ៉ាងសម្រិតសម្រាំងសម្រាប់កម្ពុជា",
+    footer_instant_delivery: "⚡ ផ្ញើជូនកូដឌីជីថលភ្លាមៗ",
+    dash_products_title: "កាតាឡុកផលិតផល & កម្មវិធី",
+    dash_products_sub: "គ្រប់គ្រង កែប្រែតម្លៃ ពិនិត្យស្តុក និងបង្ហោះផលិតផលថ្មីៗទៅកាន់ហាងរបស់អ្នក",
+    btn_add_product: "+ បន្ថែមផលិតផលថ្មី",
+    th_product: "ផលិតផល",
+    th_category: "ប្រភេទ",
+    th_price: "តម្លៃ",
+    th_tech_stack: "បច្ចេកវិទ្យា",
+    th_sales: "ការលក់",
+    dash_categories_title: "ប្រភេទមុខទំនិញក្នុងហាង",
+    dash_categories_sub: "រៀបចំប្រភេទទំនិញឱ្យមានរបៀបរៀបរយងាយស្រួលរក",
+    btn_create_category: "+ បង្កើតប្រភេទថ្មី",
+    dash_orders_title: "គ្រប់គ្រងការបញ្ជាទិញរបស់អតិថិជន",
+    dash_orders_sub: "តាមដានរាល់ការបញ្ជាទិញ ត្រួតពិនិត្យ និងបោះពុម្ពបង្កាន់ដៃ",
+    filter_all_orders: "ការបញ្ជាទិញទាំងអស់",
+    filter_paid: "បានបង់ប្រាក់",
+    filter_pending: "រង់ចាំការទូទាត់",
+    th_date_time: "កាលបរិច្ឆេទ & ម៉ោង",
+    th_item_purchased: "ទំនិញដែលបានទិញ",
+    th_total: "សរុប",
+    th_payment_method: "វិធីសាស្ត្រទូទាត់",
+    dash_customers_title: "បញ្ជីឈ្មោះអតិថិជន",
+    dash_customers_sub: "មើលប្រវត្តិទិញទំនិញ ចំណូលដែលបានចំណាយ និងទំនាក់ទំនង",
+    th_cust_name: "ឈ្មោះអតិថិជន",
+    th_cust_contact: "អ៊ីមែល / លេខទូរស័ព្ទ",
+    th_cust_orders: "ចំនួនកុម្ម៉ង់",
+    th_cust_spent: "ចំណាយសរុប",
+    th_cust_latest: "ទិញចុងក្រោយ",
+    th_cust_status: "ស្ថានភាព",
+    dash_settings_title: "ការកំណត់ហាង & ប្រព័ន្ធទូទាត់",
+    dash_settings_sub: "រៀបចំម៉ាកយីហោ គណនី ABA KHQR និងជម្រើសដឹកជញ្ជូន",
+    btn_save_all_settings: "រក្សាទុកការកំណត់",
+    settings_logo_title: "🖼️ ឡូហ្គោម៉ាកយីហោហាង",
+    settings_logo_sub: "បង្ហោះរូបភាពឡូហ្គោហាងរបស់អ្នក (.PNG, .JPG, .SVG, .WEBP)។ វានឹងបង្ហាញនៅលើ Navbar ទូរស័ព្ទ និងវិក្កយបត្រ។",
+    btn_upload_logo: "បង្ហោះរូបភាពឡូហ្គោ",
+    btn_reset_logo: "កំណត់ដូចដើម (AC MART)",
+    settings_logo_hint: "ណែនាំ៖ រូបភាព PNG ឬ SVG គ្មានផ្ទៃខាងក្រោយ។ រក្សាទុកក្នុង Browser។",
+    settings_profile_title: "🏪 ព័ត៌មានហាង",
+    label_store_url: "តំណភ្ជាប់គេហទំព័រហាងផ្ទាល់",
+    btn_copy: "📋 ចម្លង",
+    label_contact_phone: "លេខទូរស័ព្ទ & Telegram ទំនាក់ទំនង",
+    label_pin_hint: "ចាំបាច់សម្រាប់ដោះសោផ្ទាំងគ្រប់គ្រង",
+    btn_change_pw: "ប្តូរលេខសម្ងាត់",
+    settings_payment_title: "🇰🇭 ការកំណត់ការទូទាត់ & ការជូនដំណឹង",
+    label_aba_account: "លេខគណនីធនាគារ ABA ឬលេខទូរស័ព្ទ",
+    label_bakong_id: "គណនីបាគង (Bakong ID)",
+    label_optional: "(ស្រេចចិត្ត - អាចទុកនៅទំនេរបាន)",
+    label_telegram_token: "Telegram Bot Token ជូនដំណឹង",
+    settings_delivery_title: "⚡ ការផ្ញើកូដឌីជីថល & អាជ្ញាប័ណ្ណស្វ័យប្រវត្តិ",
+    deliv_gh_title: "✓ ការអញ្ជើញចូល GitHub Repo ភ្លាមៗ",
+    deliv_gh_desc: "ផ្តល់សិទ្ធិចូលកូដកម្មវិធីស្វ័យប្រវត្តិ",
+    deliv_zip_title: "✓ ទាញយក Source Code .ZIP ផ្ទាល់",
+    deliv_zip_desc: "តំណទាញយកភ្លាមៗក្រោយទូទាត់",
+    deliv_key_title: "✓ ផ្ញើកូនសោអាជ្ញាប័ណ្ណស្វ័យប្រវត្តិ",
+    deliv_key_desc: "លេខកូដអាជ្ញាប័ណ្ណជាក់លាក់សម្រាប់អ្នក",
+    deliv_tax_title: "✓ ផ្ញើវិក្កយបត្រពន្ធ PDF ទៅអ៊ីមែល",
+    deliv_tax_desc: "បង្កាន់ដៃទូទាត់ផ្លូវការផ្ញើជូនអតិថិជន",
+    deliv_aba_verif: "✓ ផ្ទៀងផ្ទាត់ការទូទាត់ ABA KHQR & Bakong ភ្លាមៗ",
+    deliv_key_pdf: "✓ ផ្ញើកូនសោអាជ្ញាប័ណ្ណ & វិក្កយបត្រ PDF ស្វ័យប្រវត្តិ",
+    admin_auth_title: "សម្រាប់តែម្ចាស់ហាងប៉ុណ្ណោះ",
+    admin_auth_desc: "ផ្ទាំងគ្រប់គ្រងនេះសម្រាប់តែម្ចាស់ហាងក្នុងការបង្ហោះកម្មវិធី កែប្រែតម្លៃ និងតាមដានចំណូល ABA KHQR។",
+    label_admin_pin: "លេខកូដសម្ងាត់ PIN របស់ម្ចាស់ហាង",
+    admin_pin_error: "❌ លេខកូដ PIN មិនត្រឹមត្រូវទេ។ មិនអាចចូលបានទេ!",
+    btn_unlock_panel: "ដោះសោផ្ទាំងម្ចាស់ហាង",
+    btn_lock_panel: "ចាកចេញ / ចាក់សោ"
   }
 };
 
@@ -743,21 +909,30 @@ function applyTheme(theme) {
 function applyLanguage(lang) {
   currentLang = lang;
   localStorage.setItem('acmart_lang', lang);
+  document.documentElement.setAttribute('lang', lang);
+
   if (lang === 'en') {
-    langEN.classList.add('active');
-    langKH.classList.remove('active');
+    if (langEN) langEN.classList.add('active');
+    if (langKH) langKH.classList.remove('active');
   } else {
-    langKH.classList.add('active');
-    langEN.classList.remove('active');
+    if (langKH) langKH.classList.add('active');
+    if (langEN) langEN.classList.remove('active');
   }
 
-  const dict = translations[lang];
+  const dict = translations[lang] || translations.en;
   document.querySelectorAll('[data-i18n]').forEach(el => {
     const key = el.getAttribute('data-i18n');
     if (dict[key]) {
       el.textContent = dict[key];
     }
   });
+
+  const searchInput = document.getElementById('appSearchInput');
+  if (searchInput) {
+    searchInput.placeholder = (lang === 'kh')
+      ? 'ស្វែងរកកម្មវិធីតាមឈ្មោះ បច្ចេកវិទ្យា (ឧ. React, Node, Tailwind, POS)...'
+      : 'Search apps by name, tech stack (e.g. React, Node, Tailwind, Vue, POS)...';
+  }
 
   renderAllSections();
 }
@@ -932,23 +1107,31 @@ window.clearSearchFilter = function() {
 // --- PRODUCTS MANAGER TABLE (Dashboard) ---
 function renderProductsManager() {
   if (!productsManagerTableBody) return;
-  productsManagerTableBody.innerHTML = appsList.map(app => `
+  const isKh = currentLang === 'kh';
+  productsManagerTableBody.innerHTML = appsList.map(app => {
+    const title = (isKh && app.khName) ? app.khName : app.name;
+    const statusText = isKh ? '● កំពុងដាក់លក់' : '● Active In Store';
+    const unitsText = isKh ? 'ចំនួន' : 'units';
+    const editBtn = isKh ? 'កែប្រែ' : 'Edit';
+    const deleteBtn = isKh ? 'លុប' : 'Delete';
+    return `
     <tr>
       <td>
-        <div style="font-weight: 700; color: #fff;">${app.name}</div>
+        <div style="font-weight: 700; color: #fff;">${title}</div>
         <div style="font-size: 0.78rem; color: #94a3b8;">${app.id}</div>
       </td>
       <td><span class="tech-tag">${app.category}</span></td>
       <td style="font-weight: 800; color: var(--brand-primary);">$${app.price}.00</td>
       <td>${app.techStack.slice(0, 3).map(t => `<span class="tech-tag">${t}</span>`).join(' ')}</td>
-      <td style="font-weight: 700;">${app.salesCount || 0} units</td>
-      <td><span class="status-badge status-paid">● Active In Store</span></td>
+      <td style="font-weight: 700;">${app.salesCount || 0} ${unitsText}</td>
+      <td><span class="status-badge status-paid">${statusText}</span></td>
       <td>
-        <button class="btn btn-secondary btn-sm" onclick="editProductPrice('${app.id}')" style="padding: 4px 8px; font-size: 0.78rem;">Edit</button>
-        <button class="btn btn-secondary btn-sm" onclick="deleteProduct('${app.id}')" style="padding: 4px 8px; font-size: 0.78rem; color: #f87171;">Delete</button>
+        <button class="btn btn-secondary btn-sm" onclick="editProductPrice('${app.id}')" style="padding: 4px 8px; font-size: 0.78rem;">${editBtn}</button>
+        <button class="btn btn-secondary btn-sm" onclick="deleteProduct('${app.id}')" style="padding: 4px 8px; font-size: 0.78rem; color: #f87171;">${deleteBtn}</button>
       </td>
     </tr>
-  `).join('');
+    `;
+  }).join('');
 }
 
 window.editProductPrice = function(appId) {
@@ -984,7 +1167,9 @@ function populateCategoryDropdown(selectedVal = '') {
 function renderMarketplaceCategoryFilters() {
   const container = document.getElementById('filterCategoriesList');
   if (!container) return;
-  let html = `<button class="cat-btn ${activeFilter === 'all' ? 'active' : ''}" data-category="all" data-i18n="cat_all">All Categories</button>`;
+  const isKh = currentLang === 'kh';
+  const allText = isKh ? 'កម្មវិធីទាំងអស់' : 'All Applications';
+  let html = `<button class="cat-btn ${activeFilter === 'all' ? 'active' : ''}" data-category="all" data-i18n="cat_all">${allText}</button>`;
   categoriesList.forEach(cat => {
     const isActive = activeFilter === cat.name ? 'active' : '';
     html += `<button class="cat-btn ${isActive}" data-category="${cat.name}">${cat.icon || '📁'} ${cat.name}</button>`;
@@ -995,6 +1180,10 @@ function renderMarketplaceCategoryFilters() {
 // --- CATEGORIES GRID (Dashboard) ---
 function renderCategoriesGrid() {
   if (!categoriesCardsContainer) return;
+  const isKh = currentLang === 'kh';
+  const activeLabel = isKh ? 'ផលិតផលសកម្ម' : 'Active Products';
+  const renameBtn = isKh ? '✏️ ប្តូរឈ្មោះ' : '✏️ Rename';
+  const deleteBtn = isKh ? '🗑️ លុប' : '🗑️ Delete';
   categoriesCardsContainer.innerHTML = categoriesList.map((cat, index) => {
     const count = appsList.filter(a => a.category === cat.name || a.category === cat.id).length;
     return `
@@ -1003,12 +1192,12 @@ function renderCategoriesGrid() {
           <span style="font-size: 2rem; background: var(--bg-card); padding: 8px 12px; border-radius: 10px; border: 1px solid var(--border-color); cursor: pointer;" onclick="changeCategoryIcon(${index})" title="Click to change Emoji Icon">${cat.icon || '📁'}</span>
           <div>
             <h4 style="font-weight: 700; font-size: 1.05rem; color: var(--text-primary); margin-bottom: 4px;">${cat.name}</h4>
-            <span style="font-size: 0.82rem; color: var(--text-muted);">${count} Active Products</span>
+            <span style="font-size: 0.82rem; color: var(--text-muted);">${count} ${activeLabel}</span>
           </div>
         </div>
         <div style="display: flex; gap: 8px;">
-          <button class="btn btn-secondary btn-sm" onclick="editCategoryName(${index})" style="padding: 6px 12px; font-size: 0.82rem;">✏️ Rename</button>
-          <button class="btn btn-danger btn-sm" onclick="deleteCategory(${index})" style="padding: 6px 12px; font-size: 0.82rem; background: rgba(239, 68, 68, 0.15); color: #ef4444; border: 1px solid rgba(239, 68, 68, 0.3);">🗑️ Delete</button>
+          <button class="btn btn-secondary btn-sm" onclick="editCategoryName(${index})" style="padding: 6px 12px; font-size: 0.82rem;">${renameBtn}</button>
+          <button class="btn btn-danger btn-sm" onclick="deleteCategory(${index})" style="padding: 6px 12px; font-size: 0.82rem; background: rgba(239, 68, 68, 0.15); color: #ef4444; border: 1px solid rgba(239, 68, 68, 0.3);">${deleteBtn}</button>
         </div>
       </div>
     `;
@@ -1061,8 +1250,12 @@ window.deleteCategory = function(index) {
 // --- FULL ORDERS TABLE (Dashboard Orders Tab) ---
 function renderFullOrdersTable(filteredOrders = null) {
   if (!fullOrdersTableBody) return;
+  const isKh = currentLang === 'kh';
   const list = filteredOrders || ordersList;
-  fullOrdersTableBody.innerHTML = list.map(order => `
+  const receiptBtnText = isKh ? 'វិក្កយបត្រ & កូដ' : 'Receipt & Key';
+  fullOrdersTableBody.innerHTML = list.map(order => {
+    const statusText = isKh ? (order.status === 'Paid' ? '● បានបង់ប្រាក់' : `● ${order.status}`) : `● ${order.status}`;
+    return `
     <tr>
       <td style="font-weight: 700; color: #38bdf8;">${order.id}</td>
       <td style="font-size: 0.85rem; color: #94a3b8;">${order.date}</td>
@@ -1073,14 +1266,15 @@ function renderFullOrdersTable(filteredOrders = null) {
       <td style="font-weight: 600;">${order.appName}</td>
       <td style="font-weight: 800; color: var(--brand-primary);">${order.amount}</td>
       <td><span class="status-badge" style="background: rgba(220, 38, 38, 0.15); color: #f87171;">🇰🇭 ${order.paymentMethod}</span></td>
-      <td><span class="status-badge status-paid">● ${order.status}</span></td>
+      <td><span class="status-badge status-paid">${statusText}</span></td>
       <td>
         <button class="btn btn-secondary btn-sm" onclick="viewLicenseKey('${order.id}')" style="padding: 4px 10px; font-size: 0.78rem;">
-          Receipt & Key
+          ${receiptBtnText}
         </button>
       </td>
     </tr>
-  `).join('');
+    `;
+  }).join('');
 }
 
 window.filterOrdersByStatus = function(status) {
@@ -1095,30 +1289,38 @@ window.filterOrdersByStatus = function(status) {
 // --- CUSTOMERS DIRECTORY (Dashboard) ---
 function renderCustomersTable() {
   if (!customersTableBody) return;
-  customersTableBody.innerHTML = customersList.map(c => `
+  const isKh = currentLang === 'kh';
+  const ordersLabel = isKh ? 'កុម្ម៉ង់' : 'orders';
+  customersTableBody.innerHTML = customersList.map(c => {
+    const statusText = isKh ? (c.status === 'Active Buyer' ? '● អតិថិជនសកម្ម' : `● ${c.status}`) : `● ${c.status}`;
+    return `
     <tr>
       <td style="font-weight: 700; color: #fff;">${c.name}</td>
       <td style="color: #94a3b8;">${c.contact}</td>
-      <td style="font-weight: 700;">${c.orders} orders</td>
+      <td style="font-weight: 700;">${c.orders} ${ordersLabel}</td>
       <td style="font-weight: 800; color: var(--brand-primary);">${c.spent}</td>
       <td><span class="tech-tag">${c.latest}</span></td>
-      <td><span class="status-badge status-paid">● ${c.status}</span></td>
+      <td><span class="status-badge status-paid">${statusText}</span></td>
     </tr>
-  `).join('');
+    `;
+  }).join('');
 }
 
 // --- DISCOUNT COUPONS (Dashboard) ---
 function renderCouponsTable() {
   if (!couponsTableBody) return;
+  const isKh = currentLang === 'kh';
+  const usesLabel = isKh ? 'ដង' : 'times';
+  const copyBtnText = isKh ? 'ចម្លងកូដ' : 'Copy Code';
   couponsTableBody.innerHTML = couponsList.map(cp => `
     <tr>
       <td style="font-weight: 800; color: #38bdf8; font-family: monospace; font-size: 1rem;">${cp.code}</td>
       <td style="font-weight: 700; color: #10b981;">${cp.discount}</td>
-      <td>${cp.uses} times</td>
+      <td>${cp.uses} ${usesLabel}</td>
       <td style="color: #94a3b8;">${cp.expires}</td>
       <td><span class="status-badge status-paid">● ${cp.status}</span></td>
       <td>
-        <button class="btn btn-secondary btn-sm" onclick="copyCoupon('${cp.code}')" style="padding: 4px 8px; font-size: 0.78rem;">Copy Code</button>
+        <button class="btn btn-secondary btn-sm" onclick="copyCoupon('${cp.code}')" style="padding: 4px 8px; font-size: 0.78rem;">${copyBtnText}</button>
       </td>
     </tr>
   `).join('');
@@ -2462,7 +2664,11 @@ function completePurchase() {
 // --- RECENT ORDERS TABLE (Dashboard Overview) ---
 function renderOrdersTable() {
   if (!dashOrdersTableBody) return;
-  dashOrdersTableBody.innerHTML = ordersList.slice(0, 4).map(order => `
+  const isKh = currentLang === 'kh';
+  const keyBtnText = isKh ? 'កូនសោអាជ្ញាប័ណ្ណ' : 'License Key';
+  dashOrdersTableBody.innerHTML = ordersList.slice(0, 4).map(order => {
+    const statusText = isKh ? (order.status === 'Paid' ? '● បានបង់ប្រាក់' : `● ${order.status}`) : `● ${order.status}`;
+    return `
     <tr>
       <td style="font-weight: 700; color: #38bdf8;">${order.id}</td>
       <td>
@@ -2473,14 +2679,15 @@ function renderOrdersTable() {
       <td><span class="tech-tag">${order.tier}</span></td>
       <td style="font-weight: 800; color: var(--brand-primary);">${order.amount}</td>
       <td><span class="status-badge" style="background: rgba(220, 38, 38, 0.15); color: #f87171;">🇰🇭 ${order.paymentMethod}</span></td>
-      <td><span class="status-badge status-paid">● ${order.status}</span></td>
+      <td><span class="status-badge status-paid">${statusText}</span></td>
       <td>
         <button class="btn btn-secondary btn-sm" onclick="viewLicenseKey('${order.id}')" style="padding: 4px 10px; font-size: 0.78rem;">
-          License Key
+          ${keyBtnText}
         </button>
       </td>
     </tr>
-  `).join('');
+    `;
+  }).join('');
 }
 
 window.viewLicenseKey = function(orderId) {

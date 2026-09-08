@@ -5,9 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AC MART | Premier Web & SaaS Applications Marketplace</title>
   <meta name="description" content="Discover, test live demos, and purchase premium web apps, e-commerce platforms, SaaS templates, and mobile app source codes with instant ABA KHQR checkout.">
-  <link rel="stylesheet" href="styles.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Kantumruy+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <!-- Header / Navigation Bar -->
@@ -37,7 +38,7 @@
         <li><a class="nav-link active" href="#marketplaceCatalog" id="navMarketplace" data-i18n="nav_marketplace">Browse Applications</a></li>
         <li>
           <a class="nav-link" href="https://t.me/Acmart6666" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 6px;">
-            <span>💬 Telegram Support</span>
+            <span data-i18n="nav_telegram_support">💬 Telegram Support</span>
           </a>
         </li>
       </ul>
@@ -72,7 +73,7 @@
           <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
             <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/>
           </svg>
-          <span>Telegram</span>
+          <span data-i18n="nav_telegram">Telegram</span>
         </a>
 
         <!-- Store Owner Access (PIN-Protected) -->
@@ -107,7 +108,7 @@
     </div>
 
     <div class="mobile-drawer-body">
-      <div class="mobile-drawer-section-title">Navigation Menu</div>
+      <div class="mobile-drawer-section-title" data-i18n="mob_nav_menu">Navigation Menu</div>
       <ul class="mobile-nav-list">
         <li>
           <a class="mobile-nav-link active" href="#marketplaceCatalog" id="mobNavMarketplace">
@@ -123,7 +124,7 @@
         </li>
       </ul>
 
-      <div class="mobile-drawer-section-title" style="margin-top: 24px;">Store Management</div>
+      <div class="mobile-drawer-section-title" style="margin-top: 24px;" data-i18n="mob_store_mgmt">Store Management</div>
       <ul class="mobile-nav-list">
         <li>
           <button class="mobile-nav-link" id="mobNavDashboardBtn">
@@ -138,7 +139,7 @@
           <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
             <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/>
           </svg>
-          <span>Chat on Telegram</span>
+          <span data-i18n="floating_telegram">Chat on Telegram</span>
         </a>
         <button class="btn btn-secondary btn-block" id="mobDrawerSignInBtn" style="margin-top: 10px;" data-i18n="nav_sign_in">Store Owner Login</button>
         <button id="mobDrawerCtaBtn" style="display: none;"></button>
@@ -252,28 +253,28 @@
             </div>
             <span class="logo-brand-name">AC <span class="highlight">MART</span></span>
           </div>
-          <p style="font-size: 0.88rem; color: var(--text-secondary); max-width: 340px; line-height: 1.6;">
+          <p style="font-size: 0.88rem; color: var(--text-secondary); max-width: 340px; line-height: 1.6;" data-i18n="footer_desc">
             Official web applications and SaaS software store by AC MART. Tested production apps with instant ABA KHQR checkout and direct Telegram developer support.
           </p>
         </div>
         <div class="footer-col">
-          <h4 class="footer-title">Marketplace</h4>
+          <h4 class="footer-title" data-i18n="footer_marketplace">Marketplace</h4>
           <ul class="footer-links">
-            <li><a href="#marketplaceCatalog">Browse All Applications</a></li>
+            <li><a href="#marketplaceCatalog" data-i18n="footer_browse_all">Browse All Applications</a></li>
             <li><a href="https://t.me/Acmart6666" target="_blank" rel="noopener noreferrer">Telegram: @Acmart6666</a></li>
             <li><a href="tel:+85516905354">Phone: +855 16 905 354</a></li>
           </ul>
         </div>
         <div class="footer-col">
-          <h4 class="footer-title">Direct Payment</h4>
+          <h4 class="footer-title" data-i18n="footer_direct_payment">Direct Payment</h4>
           <ul class="footer-links">
-            <li><span>ABA Account: 000 138 112</span></li>
-            <li><span>Account Name: BOREY KEM</span></li>
-            <li><span>NBC Bakong Supported</span></li>
+            <li><span data-i18n="footer_aba_acc">ABA Account: 000 138 112</span></li>
+            <li><span data-i18n="footer_aba_name">Account Name: BOREY KEM</span></li>
+            <li><span data-i18n="footer_bakong">NBC Bakong Supported</span></li>
           </ul>
         </div>
         <div class="footer-col">
-          <h4 class="footer-title">Store Administration</h4>
+          <h4 class="footer-title" data-i18n="footer_store_admin">Store Administration</h4>
           <ul class="footer-links">
             <li>
               <button id="footerOwnerLoginBtn" class="btn btn-secondary btn-sm" style="margin-top: 4px; display: inline-flex; align-items: center; gap: 6px;">
@@ -281,17 +282,17 @@
                   <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
                   <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
                 </svg>
-                <span>Store Owner Portal (PIN)</span>
+                <span data-i18n="footer_owner_portal">Store Owner Portal (PIN)</span>
               </button>
             </li>
           </ul>
         </div>
       </div>
       <div class="container footer-bottom">
-        <div>© <span id="footerYear">2026</span> AC MART. All rights reserved.</div>
+        <div>© <span id="footerYear">2026</span> AC MART. <span data-i18n="footer_all_rights">All rights reserved.</span></div>
         <div style="display: flex; gap: 16px;">
-          <span>🇰🇭 Proudly Made for Cambodia</span>
-          <span>⚡ Instant Digital Delivery</span>
+          <span data-i18n="footer_made_in_kh">🇰🇭 Proudly Made for Cambodia</span>
+          <span data-i18n="footer_instant_delivery">⚡ Instant Digital Delivery</span>
         </div>
       </div>
     </footer>
@@ -301,7 +302,7 @@
       <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
         <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/>
       </svg>
-      <span id="floatingTelegramLabel">Chat Telegram</span>
+      <span id="floatingTelegramLabel" data-i18n="floating_telegram">Chat Telegram</span>
     </a>
   </main>
 
@@ -576,10 +577,10 @@
       <div class="dashboard-tab-content" id="tabContent_products" style="display: none;">
         <div class="table-header-flex" style="margin-bottom: 24px;">
           <div>
-            <h2 class="dash-title">Products & Applications Catalog</h2>
-            <p class="dash-subtitle">Manage, edit prices, update inventory and publish new items to your storefront</p>
+            <h2 class="dash-title" data-i18n="dash_products_title">Products & Applications Catalog</h2>
+            <p class="dash-subtitle" data-i18n="dash_products_sub">Manage, edit prices, update inventory and publish new items to your storefront</p>
           </div>
-          <button class="btn btn-primary btn-sm" onclick="openModal(appFormModal)">+ Add New Product</button>
+          <button class="btn btn-primary btn-sm" onclick="openModal(appFormModal)" data-i18n="btn_add_product">+ Add New Product</button>
         </div>
 
         <div class="data-table-card">
@@ -587,13 +588,13 @@
             <table class="custom-table">
               <thead>
                 <tr>
-                  <th>Product</th>
-                  <th>Category</th>
-                  <th>Price</th>
-                  <th>Tech Stack</th>
-                  <th>Sales</th>
-                  <th>Status</th>
-                  <th>Actions</th>
+                  <th data-i18n="th_product">Product</th>
+                  <th data-i18n="th_category">Category</th>
+                  <th data-i18n="th_price">Price</th>
+                  <th data-i18n="th_tech_stack">Tech Stack</th>
+                  <th data-i18n="th_sales">Sales</th>
+                  <th data-i18n="th_status">Status</th>
+                  <th data-i18n="th_action">Actions</th>
                 </tr>
               </thead>
               <tbody id="productsManagerTableBody">
@@ -608,10 +609,10 @@
       <div class="dashboard-tab-content" id="tabContent_categories" style="display: none;">
         <div class="table-header-flex" style="margin-bottom: 24px;">
           <div>
-            <h2 class="dash-title">Store Categories</h2>
-            <p class="dash-subtitle">Organize your store into easy-to-browse product collections</p>
+            <h2 class="dash-title" data-i18n="dash_categories_title">Store Categories</h2>
+            <p class="dash-subtitle" data-i18n="dash_categories_sub">Organize your store into easy-to-browse product collections</p>
           </div>
-          <button class="btn btn-primary btn-sm" id="btnAddNewCategory">+ Create Category</button>
+          <button class="btn btn-primary btn-sm" id="btnAddNewCategory" data-i18n="btn_create_category">+ Create Category</button>
         </div>
 
         <div class="categories-grid" id="categoriesCardsContainer">
@@ -623,13 +624,13 @@
       <div class="dashboard-tab-content" id="tabContent_orders" style="display: none;">
         <div class="table-header-flex" style="margin-bottom: 24px;">
           <div>
-            <h2 class="dash-title">Customer Orders Management</h2>
-            <p class="dash-subtitle">Track all customer orders, filter by status, and print receipts</p>
+            <h2 class="dash-title" data-i18n="dash_orders_title">Customer Orders Management</h2>
+            <p class="dash-subtitle" data-i18n="dash_orders_sub">Track all customer orders, filter by status, and print receipts</p>
           </div>
           <div style="display: flex; gap: 8px;">
-            <button class="cat-btn active" onclick="filterOrdersByStatus('all')">All Orders</button>
-            <button class="cat-btn" onclick="filterOrdersByStatus('Paid')">Paid</button>
-            <button class="cat-btn" onclick="filterOrdersByStatus('Pending')">Pending</button>
+            <button class="cat-btn active" onclick="filterOrdersByStatus('all')" data-i18n="filter_all_orders">All Orders</button>
+            <button class="cat-btn" onclick="filterOrdersByStatus('Paid')" data-i18n="filter_paid">Paid</button>
+            <button class="cat-btn" onclick="filterOrdersByStatus('Pending')" data-i18n="filter_pending">Pending</button>
           </div>
         </div>
 
@@ -638,14 +639,14 @@
             <table class="custom-table">
               <thead>
                 <tr>
-                  <th>Order ID</th>
-                  <th>Date & Time</th>
-                  <th>Customer</th>
-                  <th>Item Purchased</th>
-                  <th>Total</th>
-                  <th>Payment Method</th>
-                  <th>Status</th>
-                  <th>Actions</th>
+                  <th data-i18n="th_order_id">Order ID</th>
+                  <th data-i18n="th_date_time">Date & Time</th>
+                  <th data-i18n="th_customer">Customer</th>
+                  <th data-i18n="th_item_purchased">Item Purchased</th>
+                  <th data-i18n="th_total">Total</th>
+                  <th data-i18n="th_payment_method">Payment Method</th>
+                  <th data-i18n="th_status">Status</th>
+                  <th data-i18n="th_action">Actions</th>
                 </tr>
               </thead>
               <tbody id="fullOrdersTableBody">
@@ -660,8 +661,8 @@
       <div class="dashboard-tab-content" id="tabContent_customers" style="display: none;">
         <div class="table-header-flex" style="margin-bottom: 24px;">
           <div>
-            <h2 class="dash-title">Customer Directory</h2>
-            <p class="dash-subtitle">View customer purchase history, total lifetime spent, and contact details</p>
+            <h2 class="dash-title" data-i18n="dash_customers_title">Customer Directory</h2>
+            <p class="dash-subtitle" data-i18n="dash_customers_sub">View customer purchase history, total lifetime spent, and contact details</p>
           </div>
         </div>
 
@@ -670,12 +671,12 @@
             <table class="custom-table">
               <thead>
                 <tr>
-                  <th>Customer Name</th>
-                  <th>Email / Phone</th>
-                  <th>Total Orders</th>
-                  <th>Lifetime Spent</th>
-                  <th>Latest Purchase</th>
-                  <th>Status</th>
+                  <th data-i18n="th_cust_name">Customer Name</th>
+                  <th data-i18n="th_cust_contact">Email / Phone</th>
+                  <th data-i18n="th_cust_orders">Total Orders</th>
+                  <th data-i18n="th_cust_spent">Lifetime Spent</th>
+                  <th data-i18n="th_cust_latest">Latest Purchase</th>
+                  <th data-i18n="th_cust_status">Status</th>
                 </tr>
               </thead>
               <tbody id="customersTableBody">
@@ -690,17 +691,17 @@
       <div class="dashboard-tab-content" id="tabContent_settings" style="display: none;">
         <div class="table-header-flex" style="margin-bottom: 24px;">
           <div>
-            <h2 class="dash-title">Store & Payment Settings</h2>
-            <p class="dash-subtitle">Configure your store branding, ABA KHQR account, and delivery options</p>
+            <h2 class="dash-title" data-i18n="dash_settings_title">Store & Payment Settings</h2>
+            <p class="dash-subtitle" data-i18n="dash_settings_sub">Configure your store branding, ABA KHQR account, and delivery options</p>
           </div>
-          <button class="btn btn-primary btn-sm" id="btnSaveAllSettings">Save Settings</button>
+          <button class="btn btn-primary btn-sm" id="btnSaveAllSettings" data-i18n="btn_save_all_settings">Save Settings</button>
         </div>
 
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 24px;">
           <!-- Store Logo Upload Card -->
           <div class="data-table-card" style="grid-column: 1 / -1; border-left: 4px solid var(--brand-primary);">
-            <h3 style="font-size: 1.15rem; font-weight: 800; margin-bottom: 8px;">🖼️ Store Brand Logo</h3>
-            <p style="font-size: 0.88rem; color: var(--text-secondary); margin-bottom: 20px;">
+            <h3 style="font-size: 1.15rem; font-weight: 800; margin-bottom: 8px;" data-i18n="settings_logo_title">🖼️ Store Brand Logo</h3>
+            <p style="font-size: 0.88rem; color: var(--text-secondary); margin-bottom: 20px;" data-i18n="settings_logo_sub">
               Upload your custom store logo image (.PNG, .JPG, .SVG, .WEBP). It will replace the text and appear in your website navbar, mobile drawer, and receipts.
             </p>
             <div style="display: flex; align-items: center; gap: 24px; flex-wrap: wrap;">
@@ -713,41 +714,41 @@
                 <div style="display: flex; gap: 10px; flex-wrap: wrap;">
                   <button type="button" class="btn btn-primary btn-sm" id="btnTriggerLogoUpload">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
-                    <span>Upload Logo Image</span>
+                    <span data-i18n="btn_upload_logo">Upload Logo Image</span>
                   </button>
                   <button type="button" class="btn btn-secondary btn-sm" id="btnRemoveCustomLogo">
-                    <span>Reset to Default (AC MART)</span>
+                    <span data-i18n="btn_reset_logo">Reset to Default (AC MART)</span>
                   </button>
                 </div>
-                <div style="font-size: 0.8rem; color: var(--text-muted);">Recommended: Transparent PNG or SVG (height approx. 40px–80px). Saved in browser.</div>
+                <div style="font-size: 0.8rem; color: var(--text-muted);" data-i18n="settings_logo_hint">Recommended: Transparent PNG or SVG (height approx. 40px–80px). Saved in browser.</div>
               </div>
             </div>
           </div>
 
           <!-- Store Profile Card -->
           <div class="data-table-card">
-            <h3 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 16px;">🏪 Store Profile</h3>
+            <h3 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 16px;" data-i18n="settings_profile_title">🏪 Store Profile</h3>
             <div class="form-group">
-              <label class="form-label">Store Display Name</label>
+              <label class="form-label" data-i18n="label_store_name">Store Display Name</label>
               <input type="text" id="settingStoreNameTab" class="form-control" value="AC STORE" placeholder="Your Store Name">
             </div>
             <div class="form-group">
-              <label class="form-label">Live Store Website URL</label>
+              <label class="form-label" data-i18n="label_store_url">Live Store Website URL</label>
               <div style="display: flex; gap: 8px;">
                 <input type="text" id="settingStoreUrl" class="form-control" value="https://ac-mart-offical.vercel.app" readonly style="color: var(--brand-primary); font-weight: 600;">
-                <button type="button" class="btn btn-secondary" id="btnCopyStoreUrl" title="Copy Live Store Link" style="white-space: nowrap;">
+                <button type="button" class="btn btn-secondary" id="btnCopyStoreUrl" title="Copy Live Store Link" style="white-space: nowrap;" data-i18n="btn_copy">
                   📋 Copy
                 </button>
               </div>
             </div>
             <div class="form-group">
-              <label class="form-label">Contact Phone & Telegram</label>
+              <label class="form-label" data-i18n="label_contact_phone">Contact Phone & Telegram</label>
               <input type="text" id="settingContactPhone" class="form-control" value="+855 16905354 (@Acmart6666)" placeholder="e.g. +855 16905354 (@Acmart6666)">
             </div>
             <div class="form-group">
               <label class="form-label" style="color: var(--brand-primary); font-weight: 700; display: flex; align-items: center; justify-content: space-between;">
-                <span>🔐 Owner Secret PIN / Password</span>
-                <span style="font-size: 0.78rem; font-weight: normal; color: var(--text-muted);">Required to unlock owner panel</span>
+                <span data-i18n="label_admin_pin">🔐 Owner Secret PIN / Password</span>
+                <span style="font-size: 0.78rem; font-weight: normal; color: var(--text-muted);" data-i18n="label_pin_hint">Required to unlock owner panel</span>
               </label>
               <div style="display: flex; gap: 8px;">
                 <div style="position: relative; flex: 1;">
@@ -758,7 +759,7 @@
                 </div>
                 <button type="button" class="btn btn-primary" id="btnUpdatePinOnly" style="white-space: nowrap;">
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                  <span>Change Password</span>
+                  <span data-i18n="btn_change_pw">Change Password</span>
                 </button>
               </div>
             </div>
@@ -766,22 +767,22 @@
 
           <!-- ABA KHQR Payment Card -->
           <div class="data-table-card">
-            <h3 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 16px; color: #dc2626;">🇰🇭 Payment & Notification Settings</h3>
+            <h3 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 16px; color: #dc2626;" data-i18n="settings_payment_title">🇰🇭 Payment & Notification Settings</h3>
             <div class="form-group">
-              <label class="form-label">ABA / Bank Account or Phone Number</label>
+              <label class="form-label" data-i18n="label_aba_account">ABA / Bank Account or Phone Number</label>
               <input type="text" id="settingAbaAccount" class="form-control" value="000138112 (BOREY KEM)" placeholder="e.g. 000138112 (BOREY KEM)">
             </div>
             <div class="form-group">
               <label class="form-label" style="display: flex; justify-content: space-between; align-items: center;">
-                <span>Bakong Account ID</span>
-                <span style="font-size: 0.76rem; color: #10b981; font-weight: 600;">(Optional - Can leave empty)</span>
+                <span data-i18n="label_bakong_id">Bakong Account ID</span>
+                <span style="font-size: 0.76rem; color: #10b981; font-weight: 600;" data-i18n="label_optional">(Optional - Can leave empty)</span>
               </label>
               <input type="text" id="settingBakongId" class="form-control" placeholder="Optional (Leave blank if you do not have one)">
             </div>
             <div class="form-group">
               <label class="form-label" style="display: flex; justify-content: space-between; align-items: center;">
-                <span>Telegram Order Alert Bot Token</span>
-                <span style="font-size: 0.76rem; color: #10b981; font-weight: 600;">(Optional - Can leave empty)</span>
+                <span data-i18n="label_telegram_token">Telegram Order Alert Bot Token</span>
+                <span style="font-size: 0.76rem; color: #10b981; font-weight: 600;" data-i18n="label_optional">(Optional - Can leave empty)</span>
               </label>
               <input type="text" id="settingTelegramToken" class="form-control" value="8884699311:AAFuShbd_PRcGrPZWH9Ntc-zFA34" placeholder="Optional (Leave blank if you do not have one)">
             </div>
@@ -789,34 +790,34 @@
 
           <!-- Digital Delivery & License Dispatch Card -->
           <div class="data-table-card" style="grid-column: 1 / -1;">
-            <h3 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 16px; color: var(--brand-primary);">⚡ Automated Digital Delivery & License Dispatch</h3>
+            <h3 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 16px; color: var(--brand-primary);" data-i18n="settings_delivery_title">⚡ Automated Digital Delivery & License Dispatch</h3>
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; font-size: 0.9rem;">
               <label style="background: #181b22; padding: 14px; border-radius: 10px; border: 1px solid #282f3c; display: flex; gap: 10px; align-items: center;">
                 <input type="checkbox" checked disabled>
                 <div>
-                  <div style="font-weight: 700; color: #10b981;">✓ Instant GitHub Repo Invitation</div>
-                  <div style="font-size: 0.8rem; color: #94a3b8;">Automated collaborator access</div>
+                  <div style="font-weight: 700; color: #10b981;" data-i18n="deliv_gh_title">✓ Instant GitHub Repo Invitation</div>
+                  <div style="font-size: 0.8rem; color: #94a3b8;" data-i18n="deliv_gh_desc">Automated collaborator access</div>
                 </div>
               </label>
               <label style="background: #181b22; padding: 14px; border-radius: 10px; border: 1px solid #282f3c; display: flex; gap: 10px; align-items: center;">
                 <input type="checkbox" checked disabled>
                 <div>
-                  <div style="font-weight: 700; color: #10b981;">✓ Source Code .ZIP Direct Download</div>
-                  <div style="font-size: 0.8rem; color: #94a3b8;">Instant download link on checkout</div>
+                  <div style="font-weight: 700; color: #10b981;" data-i18n="deliv_zip_title">✓ Source Code .ZIP Direct Download</div>
+                  <div style="font-size: 0.8rem; color: #94a3b8;" data-i18n="deliv_zip_desc">Instant download link on checkout</div>
                 </div>
               </label>
               <label style="background: #181b22; padding: 14px; border-radius: 10px; border: 1px solid #282f3c; display: flex; gap: 10px; align-items: center;">
                 <input type="checkbox" checked disabled>
                 <div>
-                  <div style="font-weight: 700; color: #10b981;">✓ Automated License Key Delivery</div>
-                  <div style="font-size: 0.8rem; color: #94a3b8;">Unique cryptographic license key</div>
+                  <div style="font-weight: 700; color: #10b981;" data-i18n="deliv_key_title">✓ Automated License Key Delivery</div>
+                  <div style="font-size: 0.8rem; color: #94a3b8;" data-i18n="deliv_key_desc">Unique cryptographic license key</div>
                 </div>
               </label>
               <label style="background: #181b22; padding: 14px; border-radius: 10px; border: 1px solid #282f3c; display: flex; gap: 10px; align-items: center;">
                 <input type="checkbox" checked disabled>
                 <div>
-                  <div style="font-weight: 700; color: #10b981;">✓ Digital PDF Tax Receipt to Email</div>
-                  <div style="font-size: 0.8rem; color: #94a3b8;">Official customer receipt sent</div>
+                  <div style="font-weight: 700; color: #10b981;" data-i18n="deliv_tax_title">✓ Digital PDF Tax Receipt to Email</div>
+                  <div style="font-size: 0.8rem; color: #94a3b8;" data-i18n="deliv_tax_desc">Official customer receipt sent</div>
                 </div>
               </label>
             </div>
@@ -1127,19 +1128,19 @@
           <input type="text" id="settingStoreName" class="form-control" value="AC STORE">
         </div>
         <div class="form-group">
-          <label class="form-label">ABA KHQR Merchant ID / Account Number</label>
+          <label class="form-label" data-i18n="label_aba_account">ABA KHQR Merchant ID / Account Number</label>
           <input type="text" id="settingMerchantId" class="form-control" value="000138112 (BOREY KEM)">
         </div>
         <div class="form-group">
-          <label class="form-label">Telegram Order Notification Bot Token</label>
+          <label class="form-label" data-i18n="label_telegram_token">Telegram Order Notification Bot Token</label>
           <input type="text" id="settingTelegramModalToken" class="form-control" value="8884699311:AAFuShbd_PRcGrPZWH9Ntc-zFA34">
         </div>
         <div class="form-group">
-          <label class="form-label" style="color: var(--brand-primary); font-weight: 700;">⚡ Digital Delivery & License Key Dispatch</label>
+          <label class="form-label" style="color: var(--brand-primary); font-weight: 700;" data-i18n="settings_delivery_title">⚡ Digital Delivery & License Key Dispatch</label>
           <div style="display: flex; flex-direction: column; gap: 8px; font-size: 0.9rem;">
-            <label><input type="checkbox" checked disabled> ✓ Instant GitHub Repository Access & Source Zip</label>
-            <label><input type="checkbox" checked disabled> ✓ ABA KHQR & Bakong Instant Verification</label>
-            <label><input type="checkbox" checked disabled> ✓ Automated License Key & PDF Tax Receipt Delivery</label>
+            <label><input type="checkbox" checked disabled> <span data-i18n="deliv_gh_title">✓ Instant GitHub Repository Access & Source Zip</span></label>
+            <label><input type="checkbox" checked disabled> <span data-i18n="deliv_aba_verif">✓ ABA KHQR & Bakong Instant Verification</span></label>
+            <label><input type="checkbox" checked disabled> <span data-i18n="deliv_key_pdf">✓ Automated License Key & PDF Tax Receipt Delivery</span></label>
           </div>
         </div>
       </div>
@@ -1170,7 +1171,7 @@
             <label class="form-label" data-i18n="label_admin_pin">Owner Secret PIN / Password</label>
             <input type="password" id="adminPinInput" class="form-control text-center" placeholder="Enter PIN (Default: 1234)" style="letter-spacing: 4px; font-size: 1.25rem; text-align: center;" autocomplete="current-password" required>
           </div>
-          <div id="adminPinError" style="color: #ef4444; font-size: 0.85rem; font-weight: 600; margin-bottom: 14px; display: none;">❌ Incorrect PIN. Access denied!</div>
+          <div id="adminPinError" style="color: #ef4444; font-size: 0.85rem; font-weight: 600; margin-bottom: 14px; display: none;" data-i18n="admin_pin_error">❌ Incorrect PIN. Access denied!</div>
           <button type="submit" class="btn btn-primary btn-block btn-lg" id="btnSubmitAdminPin">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
               <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path>

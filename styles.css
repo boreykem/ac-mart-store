@@ -111,6 +111,29 @@ body {
   transition: background-color var(--transition-normal), color var(--transition-normal);
 }
 
+html[lang="kh"], 
+html[lang="kh"] body, 
+html[lang="kh"] button, 
+html[lang="kh"] input, 
+html[lang="kh"] select, 
+html[lang="kh"] textarea, 
+html[lang="kh"] table, 
+html[lang="kh"] th, 
+html[lang="kh"] td, 
+html[lang="kh"] h1, 
+html[lang="kh"] h2, 
+html[lang="kh"] h3, 
+html[lang="kh"] h4, 
+html[lang="kh"] h5, 
+html[lang="kh"] h6, 
+html[lang="kh"] p, 
+html[lang="kh"] span, 
+html[lang="kh"] a,
+html[lang="kh"] li,
+html[lang="kh"] label {
+  font-family: 'Kantumruy Pro', 'Plus Jakarta Sans', sans-serif !important;
+}
+
 a {
   color: inherit;
   text-decoration: none;
