@@ -312,7 +312,12 @@ const initialApps = [
       "Mobile responsive storefront + Admin Panel"
     ],
     demoType: "ecommerce",
-    previewImage: "https://images.unsplash.com/photo-1556742049-0a67c5574f73?w=640&auto=format&fit=crop&q=80&fm=webp"
+    previewImage: "https://images.unsplash.com/photo-1556742049-0a67c5574f73?w=640&auto=format&fit=crop&q=80&fm=webp",
+    screenshots: [
+      "https://images.unsplash.com/photo-1556742049-0a67c5574f73?w=1080&auto=format&fit=crop&q=80&fm=webp",
+      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1080&auto=format&fit=crop&q=80&fm=webp",
+      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1080&auto=format&fit=crop&q=80&fm=webp"
+    ]
   },
   {
     id: "app-2",
@@ -333,7 +338,12 @@ const initialApps = [
       "Stock alerts and supplier purchase orders"
     ],
     demoType: "pos",
-    previewImage: "https://images.unsplash.com/photo-1556740738-b6a63e27c4df?w=640&auto=format&fit=crop&q=80&fm=webp"
+    previewImage: "https://images.unsplash.com/photo-1556740738-b6a63e27c4df?w=640&auto=format&fit=crop&q=80&fm=webp",
+    screenshots: [
+      "https://images.unsplash.com/photo-1556740738-b6a63e27c4df?w=1080&auto=format&fit=crop&q=80&fm=webp",
+      "https://images.unsplash.com/photo-1556742502-ec7c0e9f34b1?w=1080&auto=format&fit=crop&q=80&fm=webp",
+      "https://images.unsplash.com/photo-1507925921958-8a62f3d1a50d?w=1080&auto=format&fit=crop&q=80&fm=webp"
+    ]
   },
   {
     id: "app-3",
@@ -354,7 +364,12 @@ const initialApps = [
       "Laboratory results and imaging uploads"
     ],
     demoType: "clinic",
-    previewImage: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=640&auto=format&fit=crop&q=80&fm=webp"
+    previewImage: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=640&auto=format&fit=crop&q=80&fm=webp",
+    screenshots: [
+      "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=1080&auto=format&fit=crop&q=80&fm=webp",
+      "https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?w=1080&auto=format&fit=crop&q=80&fm=webp",
+      "https://images.unsplash.com/photo-1516549655169-df83a0774514?w=1080&auto=format&fit=crop&q=80&fm=webp"
+    ]
   },
   {
     id: "app-4",
@@ -375,7 +390,12 @@ const initialApps = [
       "ABA KHQR & Cash on Delivery checkout"
     ],
     demoType: "delivery",
-    previewImage: "https://images.unsplash.com/photo-1526367790999-0150786686a2?w=640&auto=format&fit=crop&q=80&fm=webp"
+    previewImage: "https://images.unsplash.com/photo-1526367790999-0150786686a2?w=640&auto=format&fit=crop&q=80&fm=webp",
+    screenshots: [
+      "https://images.unsplash.com/photo-1526367790999-0150786686a2?w=1080&auto=format&fit=crop&q=80&fm=webp",
+      "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=1080&auto=format&fit=crop&q=80&fm=webp",
+      "https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=1080&auto=format&fit=crop&q=80&fm=webp"
+    ]
   },
   {
     id: "app-5",
@@ -396,7 +416,12 @@ const initialApps = [
       "High-res gallery and floor plan viewer"
     ],
     demoType: "realestate",
-    previewImage: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=640&auto=format&fit=crop&q=80&fm=webp"
+    previewImage: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=640&auto=format&fit=crop&q=80&fm=webp",
+    screenshots: [
+      "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1080&auto=format&fit=crop&q=80&fm=webp",
+      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1080&auto=format&fit=crop&q=80&fm=webp",
+      "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1080&auto=format&fit=crop&q=80&fm=webp"
+    ]
   },
   {
     id: "app-6",
@@ -417,7 +442,12 @@ const initialApps = [
       "Dark & light theme support out of the box"
     ],
     demoType: "saas",
-    previewImage: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=640&auto=format&fit=crop&q=80&fm=webp"
+    previewImage: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=640&auto=format&fit=crop&q=80&fm=webp",
+    screenshots: [
+      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1080&auto=format&fit=crop&q=80&fm=webp",
+      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1080&auto=format&fit=crop&q=80&fm=webp",
+      "https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?w=1080&auto=format&fit=crop&q=80&fm=webp"
+    ]
   }
 ];
 
@@ -1099,14 +1129,32 @@ window.copyCoupon = function(code) {
   showToast(`📋 Copied coupon code "${code}" to clipboard!`);
 };
 
-// --- LIVE DEMO SIMULATOR ---
-// --- LIVE DEMO SIMULATOR ---
+// --- LIVE DEMO SHOWCASE (Screenshots Gallery & Simulator) ---
+let currentDemoApp = null;
+let currentGalleryIndex = 0;
+let currentDemoScreenshots = [];
+
 window.openLiveDemo = function(appId) {
   const app = (appsList && appsList.find(a => a.id === appId)) || (appsList && appsList[0]) || initialApps[0];
   if (!app) return;
+  currentDemoApp = app;
+
   if (demoModalAppTitle) demoModalAppTitle.textContent = app.name;
   if (demoModalCategory) demoModalCategory.textContent = app.category;
-  
+
+  // Extract screenshots for image demo
+  if (Array.isArray(app.screenshots) && app.screenshots.length > 0) {
+    currentDemoScreenshots = app.screenshots;
+  } else if (app.previewImage) {
+    currentDemoScreenshots = [app.previewImage];
+  } else {
+    currentDemoScreenshots = ["https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1080&auto=format&fit=crop&q=80&fm=webp"];
+  }
+
+  currentGalleryIndex = 0;
+  switchDemoMode('gallery');
+  renderGalleryView();
+
   const extBtn = document.getElementById('demoExternalLinkBtn');
   if (demoSandboxIframe) {
     if (app.demoUrl && (app.demoUrl.startsWith('http://') || app.demoUrl.startsWith('https://'))) {
@@ -1124,14 +1172,74 @@ window.openLiveDemo = function(appId) {
       }
     }
   }
+
   if (demoModalBuyBtn) {
     demoModalBuyBtn.onclick = () => {
       closeModal(demoSandboxModal);
       openCheckout(app.id);
     };
   }
-  
+
   openModal(demoSandboxModal);
+};
+
+window.switchDemoMode = function(mode) {
+  const galleryView = document.getElementById('demoGalleryView');
+  const simWrapper = document.getElementById('demoSimulatorWrapper');
+  const btnGallery = document.getElementById('btnDemoModeGallery');
+  const btnSim = document.getElementById('btnDemoModeSimulator');
+  const deviceBtns = document.getElementById('demoDeviceViewportBtns');
+
+  if (mode === 'gallery') {
+    if (galleryView) galleryView.style.display = 'flex';
+    if (simWrapper) simWrapper.style.display = 'none';
+    if (btnGallery) btnGallery.classList.add('active');
+    if (btnSim) btnSim.classList.remove('active');
+    if (deviceBtns) deviceBtns.style.display = 'none';
+  } else {
+    if (galleryView) galleryView.style.display = 'none';
+    if (simWrapper) simWrapper.style.display = 'flex';
+    if (btnGallery) btnGallery.classList.remove('active');
+    if (btnSim) btnSim.classList.add('active');
+    if (deviceBtns) deviceBtns.style.display = 'flex';
+  }
+};
+
+window.renderGalleryView = function() {
+  const mainImg = document.getElementById('demoGalleryMainImg');
+  const counter = document.getElementById('demoGalleryCounter');
+  const caption = document.getElementById('demoGalleryCaption');
+  const thumbsContainer = document.getElementById('demoGalleryThumbnails');
+
+  if (!currentDemoScreenshots || currentDemoScreenshots.length === 0) return;
+
+  const currentUrl = currentDemoScreenshots[currentGalleryIndex];
+  if (mainImg) {
+    mainImg.style.opacity = '0.3';
+    mainImg.src = currentUrl;
+    setTimeout(() => { mainImg.style.opacity = '1'; }, 80);
+  }
+
+  if (counter) {
+    counter.textContent = `📸 Screenshot ${currentGalleryIndex + 1} of ${currentDemoScreenshots.length}`;
+  }
+
+  if (caption && currentDemoApp) {
+    caption.textContent = `${currentDemoApp.name} • Screen View #${currentGalleryIndex + 1}`;
+  }
+
+  if (thumbsContainer) {
+    thumbsContainer.innerHTML = currentDemoScreenshots.map((url, idx) => `
+      <img src="${url}" class="demo-gallery-thumb ${idx === currentGalleryIndex ? 'active' : ''}" onclick="setGalleryImage(${idx})" alt="Thumb ${idx + 1}">
+    `).join('');
+  }
+};
+
+window.setGalleryImage = function(idx) {
+  if (idx >= 0 && idx < currentDemoScreenshots.length) {
+    currentGalleryIndex = idx;
+    renderGalleryView();
+  }
 };
 
 
@@ -2881,6 +2989,103 @@ function setupEventListeners() {
     });
   }
 
+  // --- Multiple App Screenshots Uploader with Auto-Compression ---
+  let formUploadedScreenshots = [];
+  const btnUploadMultipleScreenshots = document.getElementById('btnUploadMultipleScreenshots');
+  const formAppMultiScreenshots = document.getElementById('formAppMultiScreenshots');
+  const btnAddScreenshotUrl = document.getElementById('btnAddScreenshotUrl');
+  const formScreenshotsStrip = document.getElementById('formScreenshotsStrip');
+
+  function renderFormScreenshotsStrip() {
+    if (!formScreenshotsStrip) return;
+    if (formUploadedScreenshots.length === 0) {
+      formScreenshotsStrip.innerHTML = '<span id="formScreenshotsEmptyText" style="color: var(--text-muted); font-size: 0.78rem;">No screenshots added yet. Click "Upload Multiple Photos" to add screenshots.</span>';
+      return;
+    }
+    formScreenshotsStrip.innerHTML = formUploadedScreenshots.map((url, idx) => `
+      <div class="form-screenshot-chip">
+        <img src="${url}" alt="Screenshot ${idx + 1}">
+        <button type="button" class="form-screenshot-del-btn" onclick="removeFormScreenshot(${idx})" title="Remove picture">&times;</button>
+      </div>
+    `).join('');
+  }
+
+  window.removeFormScreenshot = function(idx) {
+    formUploadedScreenshots.splice(idx, 1);
+    renderFormScreenshotsStrip();
+  };
+
+  if (btnUploadMultipleScreenshots && formAppMultiScreenshots) {
+    btnUploadMultipleScreenshots.addEventListener('click', () => formAppMultiScreenshots.click());
+    formAppMultiScreenshots.addEventListener('change', async (e) => {
+      const files = Array.from(e.target.files || []);
+      if (files.length === 0) return;
+      showToast(`⏳ Compressing ${files.length} screenshots to HD WebP format...`);
+      for (const file of files) {
+        try {
+          const result = await compressImageFile(file, { maxWidth: 1200, maxHeight: 800, quality: 0.82, format: 'image/webp' });
+          formUploadedScreenshots.push(result.dataUrl);
+        } catch (err) {
+          console.error("Multi-image compression error:", err);
+        }
+      }
+      renderFormScreenshotsStrip();
+      showToast(`✓ Added ${files.length} screenshots! Optimized for zero Vercel storage cost.`);
+      formAppMultiScreenshots.value = '';
+    });
+  }
+
+  if (btnAddScreenshotUrl) {
+    btnAddScreenshotUrl.addEventListener('click', () => {
+      const url = prompt("Enter online screenshot image URL (e.g. https://...):");
+      if (url && url.trim()) {
+        formUploadedScreenshots.push(url.trim());
+        renderFormScreenshotsStrip();
+        showToast("✓ Screenshot link added!");
+      }
+    });
+  }
+
+  // Gallery Navigation Controls
+  const btnGalleryPrev = document.getElementById('btnGalleryPrev');
+  const btnGalleryNext = document.getElementById('btnGalleryNext');
+  const btnDemoModeGallery = document.getElementById('btnDemoModeGallery');
+  const btnDemoModeSimulator = document.getElementById('btnDemoModeSimulator');
+
+  if (btnGalleryPrev) {
+    btnGalleryPrev.addEventListener('click', () => {
+      if (!currentDemoScreenshots || currentDemoScreenshots.length === 0) return;
+      currentGalleryIndex = (currentGalleryIndex - 1 + currentDemoScreenshots.length) % currentDemoScreenshots.length;
+      renderGalleryView();
+    });
+  }
+
+  if (btnGalleryNext) {
+    btnGalleryNext.addEventListener('click', () => {
+      if (!currentDemoScreenshots || currentDemoScreenshots.length === 0) return;
+      currentGalleryIndex = (currentGalleryIndex + 1) % currentDemoScreenshots.length;
+      renderGalleryView();
+    });
+  }
+
+  if (btnDemoModeGallery) {
+    btnDemoModeGallery.addEventListener('click', () => switchDemoMode('gallery'));
+  }
+
+  if (btnDemoModeSimulator) {
+    btnDemoModeSimulator.addEventListener('click', () => switchDemoMode('simulator'));
+  }
+
+  window.addEventListener('keydown', (e) => {
+    if (demoSandboxModal && demoSandboxModal.classList.contains('active')) {
+      if (e.key === 'ArrowLeft' && btnGalleryPrev) {
+        btnGalleryPrev.click();
+      } else if (e.key === 'ArrowRight' && btnGalleryNext) {
+        btnGalleryNext.click();
+      }
+    }
+  });
+
   if (btnRemoveCustomLogo) {
     btnRemoveCustomLogo.addEventListener('click', () => {
       localStorage.removeItem('acmart_custom_logo');
@@ -2921,7 +3126,11 @@ function setupEventListeners() {
     const desc = document.getElementById('formAppDesc').value.trim() || "Full-featured web application ready to deploy.";
     const tech = document.getElementById('formAppTech').value.split(',').map(s => s.trim()).filter(Boolean);
     const demoUrl = document.getElementById('formAppDemoUrl')?.value.trim() || "";
-    const img = document.getElementById('formAppImg').value.trim() || "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=640&auto=format&fit=crop&q=80&fm=webp";
+    const rawImg = document.getElementById('formAppImg').value.trim();
+    const defaultImg = "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=640&auto=format&fit=crop&q=80&fm=webp";
+    
+    const finalCoverImg = rawImg || (formUploadedScreenshots.length ? formUploadedScreenshots[0] : defaultImg);
+    const finalScreenshots = formUploadedScreenshots.length ? [...formUploadedScreenshots] : [finalCoverImg];
 
     if (!name) {
       alert("Please enter an application title.");
@@ -2948,7 +3157,8 @@ function setupEventListeners() {
       ],
       demoType: "saas",
       demoUrl: demoUrl,
-      previewImage: img
+      previewImage: finalCoverImg,
+      screenshots: finalScreenshots
     };
 
     appsList.unshift(newApp);
@@ -2968,9 +3178,12 @@ function setupEventListeners() {
     if (demoUrlField) demoUrlField.value = '';
     document.getElementById('formAppImg').value = '';
 
+    formUploadedScreenshots = [];
+    renderFormScreenshotsStrip();
+
     closeModal(appFormModal);
     renderAllSections();
-    showToast(`✓ "${name}" has been published to AC MART Marketplace!`);
+    showToast(`✓ "${name}" has been published with ${finalScreenshots.length} screenshots!`);
   });
 
   // --- Mobile Left-Side Drawer Controller ---

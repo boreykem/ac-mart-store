@@ -1151,22 +1151,26 @@
        MODALS
        ========================================================================= -->
 
-  <!-- Interactive Live Demo Sandbox Modal -->
+  <!-- Interactive Live Demo & Screenshot Showcase Modal -->
   <div class="modal-overlay" id="demoSandboxModal">
     <div class="modal-container demo-modal-container">
       <div class="modal-header">
         <div style="display: flex; align-items: center; gap: 12px;">
-          <h3 class="modal-title" id="demoModalAppTitle">App Live Interactive Sandbox</h3>
+          <h3 class="modal-title" id="demoModalAppTitle">App Live Screenshot Showcase</h3>
           <span class="tech-tag" id="demoModalCategory">E-Commerce SaaS</span>
         </div>
         <button class="modal-close-btn" id="closeDemoModalBtn">&times;</button>
       </div>
 
       <div class="demo-viewport-bar">
-        <div class="viewport-btns">
-          <button class="viewport-btn active" data-viewport="desktop">🖥️ Desktop</button>
-          <button class="viewport-btn" data-viewport="tablet">📱 Tablet</button>
-          <button class="viewport-btn" data-viewport="mobile">📱 Mobile</button>
+        <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
+          <button class="viewport-btn active" id="btnDemoModeGallery">📸 Screenshots Demo</button>
+          <button class="viewport-btn" id="btnDemoModeSimulator">⚡ Live Simulator</button>
+          <div class="viewport-btns" id="demoDeviceViewportBtns" style="display: none; margin-left: 8px;">
+            <button class="viewport-btn active" data-viewport="desktop">🖥️ Desktop</button>
+            <button class="viewport-btn" data-viewport="tablet">📱 Tablet</button>
+            <button class="viewport-btn" data-viewport="mobile">📱 Mobile</button>
+          </div>
         </div>
         <div style="display: flex; gap: 8px; align-items: center;">
           <a id="demoExternalLinkBtn" href="#" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm" style="display: none; text-decoration: none; align-items: center; gap: 4px;">
@@ -1177,7 +1181,26 @@
       </div>
 
       <div class="modal-body">
-        <div class="demo-sandbox-frame-wrapper">
+        <!-- MODE 1: SCREENSHOT GALLERY SHOWCASE (FASTEST & ZERO VERCEL BANDWIDTH) -->
+        <div class="demo-gallery-view" id="demoGalleryView">
+          <div class="demo-gallery-main-wrapper">
+            <button class="demo-gallery-nav-btn prev" id="btnGalleryPrev" title="Previous Image">&#10094;</button>
+            <img id="demoGalleryMainImg" class="demo-gallery-main-img" src="" alt="App Preview Screenshot">
+            <button class="demo-gallery-nav-btn next" id="btnGalleryNext" title="Next Image">&#10095;</button>
+          </div>
+
+          <div class="demo-gallery-caption-bar">
+            <span id="demoGalleryCounter" style="font-weight: 700; color: #f97316;">📸 Screenshot 1 of 3</span>
+            <span id="demoGalleryCaption" style="color: #94a3b8; font-size: 0.8rem;">High-Definition App Screen Preview</span>
+          </div>
+
+          <div class="demo-gallery-thumbnails-strip" id="demoGalleryThumbnails">
+            <!-- Thumbnails rendered dynamically -->
+          </div>
+        </div>
+
+        <!-- MODE 2: CODE SIMULATOR -->
+        <div class="demo-sandbox-frame-wrapper" id="demoSimulatorWrapper" style="display: none;">
           <div class="demo-device-frame" id="demoDeviceFrame">
             <iframe id="demoSandboxIframe" class="demo-iframe-content" src="about:blank"></iframe>
           </div>
@@ -1331,6 +1354,27 @@
                 <div style="font-weight: 700; color: #10b981;" id="formAppImgSizeBadge">⚡ Auto-Compressed WebP Ready</div>
                 <div style="color: var(--text-muted); font-size: 0.75rem;">Optimized for fast loading & minimal Vercel space. High quality preserved.</div>
               </div>
+            </div>
+          </div>
+
+          <!-- Multiple Screenshots / Image Demo Section -->
+          <div class="form-group">
+            <label class="form-label" style="display: flex; justify-content: space-between; align-items: center;">
+              <span>📸 App Demo Screenshots (Add Many Pictures)</span>
+              <span style="font-size: 0.76rem; color: #10b981; font-weight: 600;">⚡ Compressed WebP - Saves Vercel Space</span>
+            </label>
+            <div style="display: flex; gap: 8px; margin-bottom: 8px; flex-wrap: wrap;">
+              <input type="file" id="formAppMultiScreenshots" multiple accept="image/*" style="display: none;">
+              <button type="button" class="btn btn-primary btn-sm" id="btnUploadMultipleScreenshots" style="display: flex; align-items: center; gap: 6px;">
+                <span>📷 Upload Multiple Photos</span>
+              </button>
+              <button type="button" class="btn btn-secondary btn-sm" id="btnAddScreenshotUrl" style="display: flex; align-items: center; gap: 4px;">
+                <span>+ Add Picture Link</span>
+              </button>
+            </div>
+            <!-- Live Thumbnails Strip for Multiple Pictures -->
+            <div id="formScreenshotsStrip" style="display: flex; flex-wrap: wrap; gap: 8px; min-height: 52px; background: rgba(0,0,0,0.25); border: 1px dashed var(--border-color); border-radius: 8px; padding: 10px; align-items: center;">
+              <span id="formScreenshotsEmptyText" style="color: var(--text-muted); font-size: 0.78rem;">No screenshots added yet. Click "Upload Multiple Photos" to add screenshots.</span>
             </div>
           </div>
         </form>
