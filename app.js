@@ -504,11 +504,16 @@ let couponsList = JSON.parse(localStorage.getItem('acmart_coupons')) || initialC
 let customersList = JSON.parse(localStorage.getItem('acmart_customers')) || initialCustomers;
 let ordersList = JSON.parse(localStorage.getItem('acmart_orders')) || initialOrders;
 let storeSettings = JSON.parse(localStorage.getItem('acmart_store_settings')) || {
-  name: "បូវ Store",
-  merchantId: "001 889 231 (SOVANN TECH)",
+  name: "AC MART",
+  merchantId: "088 6666 584",
+  contactPhone: "+855 88 6666 584 (@kemborey)",
+  bakongId: "",
+  telegramToken: "",
   adminPin: "1234"
 };
 if (!storeSettings.adminPin) storeSettings.adminPin = "1234";
+if (!storeSettings.contactPhone) storeSettings.contactPhone = "+855 88 6666 584 (@kemborey)";
+if (!storeSettings.merchantId) storeSettings.merchantId = "088 6666 584";
 
 let isAdminAuthenticated = sessionStorage.getItem('acmart_admin_auth') === 'true';
 let currentView = 'marketplace';
@@ -721,6 +726,29 @@ function switchView(view) {
 }
 
 // --- DASHBOARD TAB SWITCHING ---
+function populateSettingsTab() {
+  const nameInput = document.getElementById('settingStoreNameTab');
+  const urlInput = document.getElementById('settingStoreUrl');
+  const phoneInput = document.getElementById('settingContactPhone');
+  const abaInput = document.getElementById('settingAbaAccount');
+  const bakongInput = document.getElementById('settingBakongId');
+  const telegramInput = document.getElementById('settingTelegramToken');
+  const pinInput = document.getElementById('settingAdminPin');
+
+  if (nameInput) nameInput.value = storeSettings.name || 'AC MART';
+  if (urlInput) {
+    const origin = window.location.origin;
+    urlInput.value = (origin && !origin.includes('file://') && !origin.includes('localhost')) 
+      ? origin 
+      : 'https://ac-mart-offical.vercel.app';
+  }
+  if (phoneInput) phoneInput.value = storeSettings.contactPhone || '+855 88 6666 584 (@kemborey)';
+  if (abaInput) abaInput.value = storeSettings.merchantId || '088 6666 584';
+  if (bakongInput) bakongInput.value = storeSettings.bakongId || '';
+  if (telegramInput) telegramInput.value = storeSettings.telegramToken || '';
+  if (pinInput) pinInput.value = storeSettings.adminPin || '1234';
+}
+
 function switchDashboardTab(tabName) {
   activeDashboardTab = tabName;
   document.querySelectorAll('.sidebar-item').forEach(item => {
@@ -736,6 +764,10 @@ function switchDashboardTab(tabName) {
   if (activeContent) {
     activeContent.style.display = 'block';
     activeContent.classList.add('active');
+  }
+
+  if (tabName === 'settings') {
+    populateSettingsTab();
   }
 }
 
@@ -1376,18 +1408,38 @@ function setupEventListeners() {
   const btnSaveAllSettings = document.getElementById('btnSaveAllSettings');
   if (btnSaveAllSettings) {
     btnSaveAllSettings.addEventListener('click', () => {
-      const name = document.getElementById('settingStoreNameTab').value;
+      const name = document.getElementById('settingStoreNameTab')?.value.trim();
+      const phone = document.getElementById('settingContactPhone')?.value.trim();
+      const aba = document.getElementById('settingAbaAccount')?.value.trim();
+      const bakong = document.getElementById('settingBakongId')?.value.trim();
+      const telegram = document.getElementById('settingTelegramToken')?.value.trim();
       const pinEl = document.getElementById('settingAdminPin');
+
       if (name) {
         storeSettings.name = name;
-        sidebarStoreName.textContent = name;
-        dashStoreSubtitle.textContent = `Overview metrics for ${name}`;
+        if (sidebarStoreName) sidebarStoreName.textContent = name;
+        if (dashStoreSubtitle) dashStoreSubtitle.textContent = `Overview metrics for ${name}`;
       }
+      if (phone) storeSettings.contactPhone = phone;
+      if (aba) storeSettings.merchantId = aba;
+      storeSettings.bakongId = bakong || '';
+      storeSettings.telegramToken = telegram || '';
       if (pinEl && pinEl.value.trim()) {
         storeSettings.adminPin = pinEl.value.trim();
       }
       localStorage.setItem('acmart_store_settings', JSON.stringify(storeSettings));
-      showToast("✓ All store settings & secret PIN updated successfully!");
+      showToast("✓ All store settings & contact information saved!");
+    });
+  }
+
+  const btnCopyStoreUrl = document.getElementById('btnCopyStoreUrl');
+  if (btnCopyStoreUrl) {
+    btnCopyStoreUrl.addEventListener('click', () => {
+      const urlEl = document.getElementById('settingStoreUrl');
+      if (urlEl) {
+        navigator.clipboard.writeText(urlEl.value);
+        showToast("📋 Live store website URL copied to clipboard!");
+      }
     });
   }
 

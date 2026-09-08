@@ -353,7 +353,7 @@
           <div class="interactive-preview-header">
             <div class="interactive-preview-dots">
               <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
-              <span style="font-size: 0.82rem; font-weight: 700; margin-left: 8px; color: var(--text-secondary);">https://goshope.me/demo-store</span>
+              <span style="font-size: 0.82rem; font-weight: 700; margin-left: 8px; color: var(--text-secondary);">https://ac-mart-offical.vercel.app</span>
             </div>
             <button class="btn btn-primary btn-sm" onclick="openLiveDemo('app-1')">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3-7 10-7 10 7-3 7-10 7-10-7-10-7Z"></path><circle cx="12" cy="12" r="3"></circle></svg>
@@ -969,15 +969,20 @@
             <h3 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 16px;">🏪 Store Profile</h3>
             <div class="form-group">
               <label class="form-label">Store Display Name</label>
-              <input type="text" id="settingStoreNameTab" class="form-control" value="បូវ Store">
+              <input type="text" id="settingStoreNameTab" class="form-control" value="AC MART" placeholder="Your Store Name">
             </div>
             <div class="form-group">
-              <label class="form-label">Store Subdomain</label>
-              <input type="text" class="form-control" value="https://goshope.me/bov-store" readonly>
+              <label class="form-label">Live Store Website URL</label>
+              <div style="display: flex; gap: 8px;">
+                <input type="text" id="settingStoreUrl" class="form-control" value="https://ac-mart-offical.vercel.app" readonly style="color: var(--brand-primary); font-weight: 600;">
+                <button type="button" class="btn btn-secondary" id="btnCopyStoreUrl" title="Copy Live Store Link" style="white-space: nowrap;">
+                  📋 Copy
+                </button>
+              </div>
             </div>
             <div class="form-group">
               <label class="form-label">Contact Phone & Telegram</label>
-              <input type="text" class="form-control" value="+855 12 889 231 (@bov_official)">
+              <input type="text" id="settingContactPhone" class="form-control" value="+855 88 6666 584 (@kemborey)" placeholder="e.g. +855 88 6666 584 (@kemborey)">
             </div>
             <div class="form-group">
               <label class="form-label" style="color: var(--brand-primary); font-weight: 700; display: flex; align-items: center; justify-content: space-between;">
@@ -1001,18 +1006,24 @@
 
           <!-- ABA KHQR Payment Card -->
           <div class="data-table-card">
-            <h3 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 16px; color: #dc2626;">🇰🇭 ABA KHQR Integration</h3>
+            <h3 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 16px; color: #dc2626;">🇰🇭 Payment & Notification Settings</h3>
             <div class="form-group">
-              <label class="form-label">ABA Merchant Account Number</label>
-              <input type="text" class="form-control" value="001 889 231 (SOVANN TECH)">
+              <label class="form-label">ABA / Bank Account or Phone Number</label>
+              <input type="text" id="settingAbaAccount" class="form-control" value="088 6666 584" placeholder="e.g. 088 6666 584 or 001 889 231">
             </div>
             <div class="form-group">
-              <label class="form-label">Bakong Account ID</label>
-              <input type="text" class="form-control" value="sovann_tech@aba">
+              <label class="form-label" style="display: flex; justify-content: space-between; align-items: center;">
+                <span>Bakong Account ID</span>
+                <span style="font-size: 0.76rem; color: #10b981; font-weight: 600;">(Optional - Can leave empty)</span>
+              </label>
+              <input type="text" id="settingBakongId" class="form-control" placeholder="Optional (Leave blank if you do not have one)">
             </div>
             <div class="form-group">
-              <label class="form-label">Telegram Order Alert Bot Token</label>
-              <input type="text" class="form-control" value="bot691823910:AAHq_mock_token_connected">
+              <label class="form-label" style="display: flex; justify-content: space-between; align-items: center;">
+                <span>Telegram Order Alert Bot Token</span>
+                <span style="font-size: 0.76rem; color: #10b981; font-weight: 600;">(Optional - Can leave empty)</span>
+              </label>
+              <input type="text" id="settingTelegramToken" class="form-control" placeholder="Optional (Leave blank if you do not have one)">
             </div>
           </div>
 
