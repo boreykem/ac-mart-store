@@ -1865,6 +1865,33 @@ function setupEventListeners() {
     });
   }
 
+  // --- Product Preview Image File Upload Handler ---
+  const btnUploadProductImg = document.getElementById('btnUploadProductImg');
+  const formAppImgFile = document.getElementById('formAppImgFile');
+  const formAppImg = document.getElementById('formAppImg');
+
+  if (btnUploadProductImg && formAppImgFile) {
+    btnUploadProductImg.addEventListener('click', () => formAppImgFile.click());
+  }
+
+  if (formAppImgFile && formAppImg) {
+    formAppImgFile.addEventListener('change', (e) => {
+      const file = e.target.files && e.target.files[0];
+      if (file) {
+        if (file.size > 3 * 1024 * 1024) {
+          alert("Please select an image smaller than 3MB.");
+          return;
+        }
+        const reader = new FileReader();
+        reader.onload = (loadEvt) => {
+          formAppImg.value = loadEvt.target.result;
+          showToast("✓ Product image loaded successfully!");
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+  }
+
   if (btnRemoveCustomLogo) {
     btnRemoveCustomLogo.addEventListener('click', () => {
       localStorage.removeItem('acmart_custom_logo');

@@ -1225,8 +1225,14 @@
             <input type="text" id="formAppTech" class="form-control" placeholder="React, Node.js, Tailwind, SQLite, KHQR">
           </div>
           <div class="form-group">
-            <label class="form-label" data-i18n="label_app_preview">Preview Image URL / SVG Template</label>
-            <input type="text" id="formAppImg" class="form-control" placeholder="https://images.unsplash.com/... or gradient placeholder">
+            <label class="form-label" data-i18n="label_app_preview">Preview Image (URL or Upload from Computer)</label>
+            <div style="display: flex; gap: 8px;">
+              <input type="text" id="formAppImg" class="form-control" placeholder="Paste image link, or click Upload Photo ->">
+              <input type="file" id="formAppImgFile" accept="image/*" style="display: none;">
+              <button type="button" class="btn btn-secondary" id="btnUploadProductImg" style="white-space: nowrap;">
+                📁 Upload Photo
+              </button>
+            </div>
           </div>
         </form>
       </div>
