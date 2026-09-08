@@ -32,14 +32,14 @@
         </div>
       </div>
 
-      <!-- Desktop Nav Links (Hidden on Mobile, Moved to Left Drawer) -->
+      <!-- Desktop Nav Links -->
       <ul class="nav-links desktop-nav" id="navLinksList">
-        <li><a class="nav-link active" href="#marketplace" id="navMarketplace" data-i18n="nav_marketplace">Marketplace</a></li>
-        <li><a class="nav-link" href="#features" id="navFeatures" data-i18n="nav_features">Features</a></li>
-        <li><a class="nav-link" href="#howItWorks" id="navHowItWorks" data-i18n="nav_how_it_works">How It Works</a></li>
-        <li><a class="nav-link" href="#interactiveDemo" id="navDemo" data-i18n="nav_demo">Interactive Demo</a></li>
-        <li><a class="nav-link" href="#pricing" id="navPricing" data-i18n="nav_pricing">Pricing Plans</a></li>
-        <li><a class="nav-link" href="#tutorial" id="navTutorial" data-i18n="nav_tutorial">Tutorial</a></li>
+        <li><a class="nav-link active" href="#marketplaceCatalog" id="navMarketplace" data-i18n="nav_marketplace">Browse Applications</a></li>
+        <li>
+          <a class="nav-link" href="https://t.me/Acmart6666" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 6px;">
+            <span>💬 Telegram Support</span>
+          </a>
+        </li>
       </ul>
 
       <div class="nav-actions">
@@ -67,14 +67,24 @@
           </svg>
         </button>
 
-        <!-- Switch View Action (Sign In / Store Owner Panel) -->
-        <button class="btn btn-secondary btn-sm desktop-only-btn" id="headerSignInBtn" data-i18n="nav_sign_in">Sign In</button>
-        <button class="btn btn-primary btn-sm desktop-only-btn" id="headerCtaBtn">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-            <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"></path>
-            <path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"></path>
+        <!-- Direct Telegram Contact Button -->
+        <a href="https://t.me/Acmart6666" target="_blank" rel="noopener noreferrer" class="btn btn-telegram btn-sm desktop-only-btn" id="headerTelegramBtn" title="Contact via Telegram">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/>
           </svg>
-          <span id="headerCtaText" data-i18n="cta_owner_panel">Get Started for Free</span>
+          <span>Telegram</span>
+        </a>
+
+        <!-- Store Owner Access (PIN-Protected) -->
+        <button class="btn btn-secondary btn-sm desktop-only-btn" id="headerSignInBtn" title="Store Owner Panel" style="display: inline-flex; align-items: center; gap: 5px;">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+            <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+          </svg>
+          <span data-i18n="nav_sign_in">Owner</span>
+        </button>
+        <button class="btn btn-primary btn-sm desktop-only-btn" id="headerCtaBtn" style="display: none;">
+          <span id="headerCtaText">Browse Apps</span>
         </button>
       </div>
     </div>
@@ -100,39 +110,15 @@
       <div class="mobile-drawer-section-title">Navigation Menu</div>
       <ul class="mobile-nav-list">
         <li>
-          <a class="mobile-nav-link active" href="#marketplace" id="mobNavMarketplace">
+          <a class="mobile-nav-link active" href="#marketplaceCatalog" id="mobNavMarketplace">
             <span class="nav-icon">🏪</span>
-            <span data-i18n="nav_marketplace">Marketplace</span>
+            <span data-i18n="nav_marketplace">Browse Applications</span>
           </a>
         </li>
         <li>
-          <a class="mobile-nav-link" href="#features" id="mobNavFeatures">
-            <span class="nav-icon">✨</span>
-            <span data-i18n="nav_features">Features</span>
-          </a>
-        </li>
-        <li>
-          <a class="mobile-nav-link" href="#howItWorks" id="mobNavHowItWorks">
-            <span class="nav-icon">⚡</span>
-            <span data-i18n="nav_how_it_works">How It Works</span>
-          </a>
-        </li>
-        <li>
-          <a class="mobile-nav-link" href="#interactiveDemo" id="mobNavDemo">
-            <span class="nav-icon">📱</span>
-            <span data-i18n="nav_demo">Interactive Demo</span>
-          </a>
-        </li>
-        <li>
-          <a class="mobile-nav-link" href="#pricing" id="mobNavPricing">
-            <span class="nav-icon">💳</span>
-            <span data-i18n="nav_pricing">Pricing Plans</span>
-          </a>
-        </li>
-        <li>
-          <a class="mobile-nav-link" href="#tutorial" id="mobNavTutorial">
-            <span class="nav-icon">🎥</span>
-            <span data-i18n="nav_tutorial">Tutorial</span>
+          <a class="mobile-nav-link" href="https://t.me/Acmart6666" target="_blank" rel="noopener noreferrer">
+            <span class="nav-icon">💬</span>
+            <span>Telegram (@Acmart6666)</span>
           </a>
         </li>
       </ul>
@@ -141,15 +127,21 @@
       <ul class="mobile-nav-list">
         <li>
           <button class="mobile-nav-link" id="mobNavDashboardBtn">
-            <span class="nav-icon">📊</span>
-            <span data-i18n="sidebar_dashboard">Store Owner Panel</span>
+            <span class="nav-icon">🔒</span>
+            <span data-i18n="sidebar_dashboard">Store Owner Panel (PIN)</span>
           </button>
         </li>
       </ul>
 
       <div class="mobile-drawer-footer">
-        <button class="btn btn-secondary btn-block" id="mobDrawerSignInBtn" data-i18n="nav_sign_in">Sign In</button>
-        <button class="btn btn-primary btn-block" id="mobDrawerCtaBtn" style="margin-top: 10px;" data-i18n="cta_owner_panel">Get Started for Free</button>
+        <a href="https://t.me/Acmart6666" target="_blank" rel="noopener noreferrer" class="btn btn-telegram btn-block" style="display: flex; align-items: center; justify-content: center; gap: 8px; text-decoration: none;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/>
+          </svg>
+          <span>Chat on Telegram</span>
+        </a>
+        <button class="btn btn-secondary btn-block" id="mobDrawerSignInBtn" style="margin-top: 10px;" data-i18n="nav_sign_in">Store Owner Login</button>
+        <button id="mobDrawerCtaBtn" style="display: none;"></button>
       </div>
     </div>
   </aside>
@@ -174,7 +166,7 @@
         </h1>
 
         <p class="hero-subtitle" data-i18n="hero_subtitle">
-          Developed and sold directly by AC MART. Explore live interactive demos, test all features, and get clean commercial source code with instant ABA KHQR payment.
+          Developed and sold directly by AC MART. Explore high-resolution app screenshots, review features, and purchase full clean commercial source code with instant ABA KHQR payment.
         </p>
 
         <div class="hero-actions">
@@ -187,13 +179,12 @@
             <span data-i18n="btn_get_started_free">Browse App Catalog</span>
           </a>
 
-          <button class="btn btn-secondary btn-lg" id="openFeaturedDemoBtn">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"></path>
-              <circle cx="12" cy="12" r="3"></circle>
+          <a href="https://t.me/Acmart6666" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-lg" id="heroTelegramBtn" style="display: inline-flex; align-items: center; gap: 8px;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/>
             </svg>
-            <span data-i18n="btn_explore_demo">View Screenshots</span>
-          </button>
+            <span>Telegram @Acmart6666</span>
+          </a>
         </div>
 
         <div class="trust-badges">
@@ -207,7 +198,7 @@
           </div>
           <div class="trust-item">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            <span data-i18n="trust_setup">1-Click Interactive Test</span>
+            <span data-i18n="trust_setup">Direct Telegram Support</span>
           </div>
           <div class="trust-item">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
@@ -250,330 +241,7 @@
       </div>
     </section>
 
-    <!-- 3. PLATFORM FEATURES SECTION -->
-    <section class="section-spacing bg-surface-alt" id="features">
-      <div class="container">
-        <div class="section-heading-center">
-          <span class="badge-pill" data-i18n="badge_why_goshope">Why Choose GoShope & AC MART</span>
-          <h2 class="section-title" data-i18n="title_features">Everything You Need to Sell & Scale Online</h2>
-          <p class="section-subtitle" data-i18n="subtitle_features">Built specifically for modern business owners, creators, and developers with seamless local integrations.</p>
-        </div>
-
-        <div class="features-grid">
-          <div class="feature-card">
-            <div class="feature-icon" style="background: rgba(220, 38, 38, 0.12); color: #dc2626;">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
-            </div>
-            <h3 class="feature-title" data-i18n="feat1_title">Instant ABA KHQR & Bakong</h3>
-            <p class="feature-desc" data-i18n="feat1_desc">Customers can scan to pay with any Cambodian banking app (ABA, Wing, ACLEDA, Bakong) with instant real-time settlement.</p>
-          </div>
-
-          <div class="feature-card">
-            <div class="feature-icon" style="background: rgba(56, 189, 248, 0.12); color: #38bdf8;">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m22 2-7 20-4-9-9-4Z"></path><path d="M22 2 11 13"></path></svg>
-            </div>
-            <h3 class="feature-title" data-i18n="feat2_title">Telegram Order Alerts</h3>
-            <p class="feature-desc" data-i18n="feat2_desc">Receive instant sound notifications on your Telegram phone app whenever a customer places an order or completes payment.</p>
-          </div>
-
-          <div class="feature-card">
-            <div class="feature-icon" style="background: rgba(16, 185, 129, 0.12); color: #10b981;">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
-            </div>
-            <h3 class="feature-title" data-i18n="feat3_title">Delivery & Logistics Ready</h3>
-            <p class="feature-desc" data-i18n="feat3_desc">Built-in support for J&T Express, Virak Buntham (VET), Grab Express, and local in-store pickup options.</p>
-          </div>
-
-          <div class="feature-card">
-            <div class="feature-icon" style="background: rgba(249, 87, 22, 0.12); color: #f95716;">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 14 14"></polyline></svg>
-            </div>
-            <h3 class="feature-title" data-i18n="feat4_title">1-Minute Store Launch</h3>
-            <p class="feature-desc" data-i18n="feat4_desc">Follow our simple 4-step checklist to upload products, connect payment, and launch your storefront immediately.</p>
-          </div>
-
-          <div class="feature-card">
-            <div class="feature-icon" style="background: rgba(139, 92, 246, 0.12); color: #8b5cf6;">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
-            </div>
-            <h3 class="feature-title" data-i18n="feat5_title">Automated PDF Receipts</h3>
-            <p class="feature-desc" data-i18n="feat5_desc">Professional branded tax invoices and digital receipts automatically generated and sent to your customer's email.</p>
-          </div>
-
-          <div class="feature-card">
-            <div class="feature-icon" style="background: rgba(245, 158, 11, 0.12); color: #f59e0b;">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
-            </div>
-            <h3 class="feature-title" data-i18n="feat6_title">Live Sales Analytics</h3>
-            <p class="feature-desc" data-i18n="feat6_desc">Monitor daily store traffic, best-selling items, revenue growth, and conversion rates directly from your Store Owner Panel.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 4. HOW IT WORKS SECTION -->
-    <section class="container section-spacing" id="howItWorks">
-      <div class="section-heading-center">
-        <span class="badge-pill" data-i18n="badge_how_it_works">Simple 3-Step Process</span>
-        <h2 class="section-title" data-i18n="title_how_it_works">How to Launch Your Store in 3 Steps</h2>
-        <p class="section-subtitle" data-i18n="subtitle_how_it_works">No coding or complicated servers required. Follow these steps to start accepting customer orders today.</p>
-      </div>
-
-      <div class="steps-container">
-        <div class="step-card">
-          <div class="step-number">01</div>
-          <h3 class="step-title" data-i18n="step1_guide_title">Create Your Store or Choose an App</h3>
-          <p class="step-desc" data-i18n="step1_guide_desc">Sign up for a free store account or pick a ready-made web app template that fits your business category.</p>
-        </div>
-
-        <div class="step-card">
-          <div class="step-number">02</div>
-          <h3 class="step-title" data-i18n="step2_guide_title">Add Products & Connect ABA KHQR</h3>
-          <p class="step-desc" data-i18n="step2_guide_desc">Upload your items, prices, and configure your ABA account number to receive direct bank payments.</p>
-        </div>
-
-        <div class="step-card">
-          <div class="step-number">03</div>
-          <h3 class="step-title" data-i18n="step3_guide_title">Share Your Link & Receive Orders</h3>
-          <p class="step-desc" data-i18n="step3_guide_desc">Share your store link on Facebook, TikTok, or Telegram and receive instant sound alerts for every paid sale.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- 5. INTERACTIVE LIVE DEMO SECTION -->
-    <section class="section-spacing bg-surface-alt" id="interactiveDemo">
-      <div class="container">
-        <div class="section-heading-center">
-          <span class="badge-pill" data-i18n="badge_live_sandbox">Live Simulator</span>
-          <h2 class="section-title" data-i18n="title_live_demo">Test Drive an Interactive Storefront</h2>
-          <p class="section-subtitle" data-i18n="subtitle_live_demo">Experience how your buyers browse, add items to cart, and checkout with ABA KHQR in real-time.</p>
-        </div>
-
-        <div class="interactive-preview-card">
-          <div class="interactive-preview-header">
-            <div class="interactive-preview-dots">
-              <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
-              <span style="font-size: 0.82rem; font-weight: 700; margin-left: 8px; color: var(--text-secondary);">https://ac-mart-offical.vercel.app</span>
-            </div>
-            <button class="btn btn-primary btn-sm" onclick="openLiveDemo('app-1')">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3-7 10-7 10 7-3 7-10 7-10-7-10-7Z"></path><circle cx="12" cy="12" r="3"></circle></svg>
-              <span>Launch Fullscreen Sandbox</span>
-            </button>
-          </div>
-          <div class="interactive-preview-body">
-            <!-- Live Engine Status Bar -->
-            <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; margin-bottom: 20px; padding: 10px 16px; background: rgba(16, 185, 129, 0.08); border: 1px solid rgba(16, 185, 129, 0.25); border-radius: 8px;">
-              <div style="display: flex; align-items: center; gap: 8px; font-size: 0.85rem; font-weight: 700; color: #10b981;">
-                <span style="display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #10b981; box-shadow: 0 0 10px #10b981;"></span>
-                <span>3 Integrated Engines Running Live: Catalog, KHQR & Telegram Bot</span>
-              </div>
-              <div style="display: flex; gap: 8px;">
-                <button type="button" class="btn btn-secondary btn-sm" id="btnRunAllDemoEngines" style="font-size: 0.8rem; padding: 5px 12px; font-weight: 700; border-color: #10b981; color: #10b981;">
-                  ▶ Run 1-Click End-to-End Simulation
-                </button>
-              </div>
-            </div>
-
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; text-align: left;">
-              <!-- Engine 1: Smart Product Catalog (Running Live) -->
-              <div style="background: var(--bg-card); padding: 20px; border-radius: 12px; border: 1px solid var(--border-color); display: flex; flex-direction: column; justify-content: space-between;">
-                <div>
-                  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-                    <div style="font-weight: 800; font-size: 1.05rem; color: var(--brand-primary);">🛍️ Smart Product Catalog</div>
-                    <span style="font-size: 0.72rem; background: rgba(16, 185, 129, 0.2); color: #10b981; padding: 2px 6px; border-radius: 4px; font-weight: 700;">● RUNNING</span>
-                  </div>
-                  <p style="font-size: 0.84rem; color: var(--text-secondary); margin-bottom: 12px;">High-resolution image galleries, product variants (colors, sizes), and live stock counters.</p>
-                </div>
-                
-                <!-- Live Interactive Component -->
-                <div style="background: rgba(0,0,0,0.25); padding: 12px; border-radius: 8px; border: 1px solid var(--border-color);">
-                  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-                    <span style="font-weight: 700; font-size: 0.85rem;">GoShope SaaS Store</span>
-                    <span id="demoLiveStockBadge" style="font-size: 0.72rem; background: rgba(16, 185, 129, 0.15); color: #10b981; padding: 2px 6px; border-radius: 4px; font-weight: 700;">● 14 In Stock</span>
-                  </div>
-                  <div style="display: flex; gap: 6px; margin-bottom: 10px;">
-                    <button type="button" class="btn-demo-tier" id="btnTierStandard" style="flex: 1; padding: 6px; font-size: 0.76rem; border-radius: 6px; background: var(--brand-primary); color: white; border: none; cursor: pointer; font-weight: 700;">Standard ($79)</button>
-                    <button type="button" class="btn-demo-tier" id="btnTierExtended" style="flex: 1; padding: 6px; font-size: 0.76rem; border-radius: 6px; background: var(--bg-surface); color: var(--text-secondary); border: 1px solid var(--border-color); cursor: pointer;">Source ($149)</button>
-                  </div>
-                  <button type="button" class="btn btn-primary btn-sm" id="btnDemoAddToCart" style="width: 100%; font-size: 0.82rem; padding: 8px;">
-                    <span>🛒 Add to Cart & Test (Cart: <strong id="demoCartCountDisplay">0</strong>)</span>
-                  </button>
-                </div>
-              </div>
-
-              <!-- Engine 2: ABA KHQR QR-Generator (Running Live) -->
-              <div style="background: var(--bg-card); padding: 20px; border-radius: 12px; border: 1px solid var(--border-color); display: flex; flex-direction: column; justify-content: space-between;">
-                <div>
-                  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-                    <div style="font-weight: 800; font-size: 1.05rem; color: #dc2626;">🇰🇭 ABA KHQR QR-Generator</div>
-                    <span style="font-size: 0.72rem; background: rgba(16, 185, 129, 0.2); color: #10b981; padding: 2px 6px; border-radius: 4px; font-weight: 700;">● RUNNING</span>
-                  </div>
-                  <p style="font-size: 0.84rem; color: var(--text-secondary); margin-bottom: 12px;">Generates instant dynamic KHQR codes for exact cart totals with zero manual calculation errors.</p>
-                </div>
-                
-                <!-- Live Interactive Component -->
-                <div style="background: rgba(0,0,0,0.25); padding: 12px; border-radius: 8px; border: 1px solid var(--border-color); text-align: center;">
-                  <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px;">
-                    <span style="font-size: 0.78rem; font-weight: 700; color: #dc2626;">🇰🇭 NBC Dynamic QR</span>
-                    <span id="demoKhqrStatusTag" style="font-size: 0.7rem; padding: 2px 6px; border-radius: 4px; background: rgba(234, 179, 8, 0.2); color: #eab308; font-weight: 700;">● Ready to Scan</span>
-                  </div>
-                  <div id="demoQrBox" style="background: #ffffff; width: 90px; height: 90px; margin: 6px auto; border-radius: 8px; padding: 6px; display: flex; align-items: center; justify-content: center; position: relative;">
-                    <svg width="76" height="76" viewBox="0 0 100 100" fill="#000">
-                      <path d="M0 0h30v30H0zM10 10h10v10H10zM70 0h30v30H70zM80 10h10v10H80zM0 70h30v30H0zM10 80h10v10H10zM40 10h10v10H40zM50 20h10v10H50zM10 40h10v10H10zM20 50h10v10H20zM40 40h20v20H40zM70 40h10v10H70zM80 50h20v10H80zM40 70h10v20H40zM60 70h20v10H60zM70 80h10v20H70zM90 70h10v30H90z"/>
-                    </svg>
-                  </div>
-                  <div style="font-size: 1rem; font-weight: 800; color: #dc2626;" id="demoKhqrAmountDisplay">$79.00 USD</div>
-                  <div style="font-size: 0.72rem; color: var(--text-muted);" id="demoKhqrMerchantNameDisplay">000138112 (BOREY KEM)</div>
-                  <button type="button" class="btn btn-primary btn-sm" id="btnDemoSimulateKhqrPay" style="width: 100%; margin-top: 8px; font-size: 0.82rem; background: #dc2626; border-color: #dc2626;">
-                    <span>📱 Test Scan / Simulate Payment</span>
-                  </button>
-                </div>
-              </div>
-
-              <!-- Engine 3: Instant Telegram Dispatch (Running Live) -->
-              <div style="background: var(--bg-card); padding: 20px; border-radius: 12px; border: 1px solid var(--border-color); display: flex; flex-direction: column; justify-content: space-between;">
-                <div>
-                  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-                    <div style="font-weight: 800; font-size: 1.05rem; color: #38bdf8;">🤖 Instant Telegram Dispatch</div>
-                    <span style="font-size: 0.72rem; background: rgba(16, 185, 129, 0.2); color: #10b981; padding: 2px 6px; border-radius: 4px; font-weight: 700;">● RUNNING</span>
-                  </div>
-                  <p style="font-size: 0.84rem; color: var(--text-secondary); margin-bottom: 12px;">Sends buyer address, contact number, and paid receipt directly to your Telegram chat instantly.</p>
-                </div>
-                
-                <!-- Live Interactive Component -->
-                <div style="background: rgba(0,0,0,0.25); padding: 12px; border-radius: 8px; border: 1px solid var(--border-color);">
-                  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
-                    <span style="font-size: 0.78rem; font-weight: 700; color: #38bdf8;">🤖 AC STORE Bot</span>
-                    <span style="font-size: 0.7rem; color: var(--text-muted);" id="demoTelegramTimestamp">Just now</span>
-                  </div>
-                  <div id="demoTelegramBubble" style="background: #1e293b; border-radius: 8px; padding: 8px 10px; font-size: 0.74rem; line-height: 1.35; border-left: 3px solid #38bdf8; color: #e2e8f0; transition: all 0.3s ease;">
-                    <div style="font-weight: 700; color: #38bdf8; margin-bottom: 2px;">⚡ NEW PAID ORDER #ORD-9482</div>
-                    <div>📦 Item: GoShope SaaS Store</div>
-                    <div>💰 Amount: <span id="demoTelegramAmountDisplay">$79.00 (ABA KHQR)</span></div>
-                    <div style="color: #10b981; font-weight: 600;">✓ License Dispatched to @Acmart6666</div>
-                  </div>
-                  <button type="button" class="btn btn-secondary btn-sm" id="btnDemoSendTelegramAlert" style="width: 100%; margin-top: 8px; font-size: 0.82rem; border-color: #38bdf8; color: #38bdf8;">
-                    <span>🔔 Trigger Test Telegram Alert</span>
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 6. PRICING & APP LICENSES SECTION -->
-    <section class="container section-spacing" id="pricing">
-      <div class="section-heading-center">
-        <span class="badge-pill" data-i18n="badge_pricing">Simple Transparent Pricing</span>
-        <h2 class="section-title" data-i18n="title_pricing">Choose Your Application License</h2>
-        <p class="section-subtitle" data-i18n="subtitle_pricing">Get full verified software ready to deploy with instant ABA KHQR checkout and lifetime updates.</p>
-      </div>
-
-      <div class="pricing-grid">
-        <!-- Single App Standard License -->
-        <div class="pricing-card">
-          <div class="pricing-badge" data-i18n="plan_free_badge">STANDARD LICENSE</div>
-          <h3 class="plan-name" data-i18n="plan_free_name">Single App License</h3>
-          <p class="plan-desc" data-i18n="plan_free_desc">Full ready-to-deploy web application for your personal or business store.</p>
-          <div class="plan-price">
-            <span class="currency">$</span><span class="amount">79</span><span class="period">one-time</span>
-          </div>
-          <ul class="plan-features">
-            <li>✓ Complete Production-Ready Web App</li>
-            <li>✓ Connected to your ABA KHQR Account</li>
-            <li>✓ Telegram Instant Sound Notification Bot</li>
-            <li>✓ Automated Digital PDF Receipts</li>
-            <li>✓ Free Lifetime Bug Fixes & Updates</li>
-          </ul>
-          <button class="btn btn-secondary btn-block" onclick="openCheckout('app-1')">Buy App License</button>
-        </div>
-
-        <!-- Commercial License (Featured) -->
-        <div class="pricing-card featured">
-          <div class="featured-ribbon" data-i18n="ribbon_popular">MOST POPULAR</div>
-          <div class="pricing-badge" style="background: var(--brand-primary); color: #fff;">COMMERCIAL USE</div>
-          <h3 class="plan-name" data-i18n="plan_pro_name">Commercial License</h3>
-          <p class="plan-desc" data-i18n="plan_pro_desc">Ideal for agency developers deploying stores for their retail clients.</p>
-          <div class="plan-price">
-            <span class="currency">$</span><span class="amount">129</span><span class="period">one-time</span>
-          </div>
-          <ul class="plan-features">
-            <li>✓ <strong>Multi-Client</strong> Deployment Rights</li>
-            <li>✓ 100% Whitelabel (Remove AC MART Branding)</li>
-            <li>✓ Full Custom Domain Configuration</li>
-            <li>✓ J&T Express & Virak Buntham Logistics</li>
-            <li>✓ Priority Direct Telegram Technical Support</li>
-          </ul>
-          <button class="btn btn-primary btn-block" onclick="openCheckout('app-1')">Get Commercial License</button>
-        </div>
-
-        <!-- Enterprise / Full Source Code License -->
-        <div class="pricing-card">
-          <div class="pricing-badge">DEVELOPER ACCESS</div>
-          <h3 class="plan-name" data-i18n="plan_source_name">Full Clean Source Code</h3>
-          <p class="plan-desc" data-i18n="plan_source_desc">Full unminified codebase with GitHub repository access & resell rights.</p>
-          <div class="plan-price">
-            <span class="currency">$</span><span class="amount">199</span><span class="period">one-time</span>
-          </div>
-          <ul class="plan-features">
-            <li>✓ 100% Clean React / Next.js Source Code</li>
-            <li>✓ Full Commercial & Resale Distribution Rights</li>
-            <li>✓ Complete Backend API & Database Schemas</li>
-            <li>✓ Instant GitHub Private Repo Invitation</li>
-            <li>✓ Direct 1-on-1 Developer Setup Assistance</li>
-          </ul>
-          <button class="btn btn-secondary btn-block" onclick="openCheckout('app-1')">Buy Full Source Code</button>
-        </div>
-      </div>
-    </section>
-
-    <!-- 7. TUTORIAL & GUIDES SECTION -->
-    <section class="section-spacing bg-surface-alt" id="tutorial">
-      <div class="container">
-        <div class="section-heading-center">
-          <span class="badge-pill" data-i18n="badge_tutorial">Video & Guide</span>
-          <h2 class="section-title" data-i18n="title_tutorial">Learn How to Connect ABA KHQR & Launch</h2>
-          <p class="section-subtitle" data-i18n="subtitle_tutorial">Watch our quick step-by-step tutorial to connect your payment method and configure delivery.</p>
-        </div>
-
-        <div class="tutorial-card">
-          <div class="tutorial-video-mockup">
-            <div class="play-btn-circle" onclick="openLiveDemo('app-1')">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
-            </div>
-            <div style="font-weight: 700; font-size: 1.1rem; color: #fff; margin-top: 16px;">Quick Video: Setting Up Store in 3 Minutes</div>
-            <p style="font-size: 0.85rem; color: #94a3b8;">Click to launch interactive walkthrough</p>
-          </div>
-          <div class="tutorial-guide-steps">
-            <div class="guide-item">
-              <div class="guide-num">1</div>
-              <div>
-                <h4 style="font-weight: 700; margin-bottom: 2px;">Step 1: Go to Store Settings</h4>
-                <p style="font-size: 0.85rem; color: var(--text-secondary);">Open your Store Owner Panel and enter your ABA account number.</p>
-              </div>
-            </div>
-            <div class="guide-item">
-              <div class="guide-num">2</div>
-              <div>
-                <h4 style="font-weight: 700; margin-bottom: 2px;">Step 2: Connect Telegram Bot</h4>
-                <p style="font-size: 0.85rem; color: var(--text-secondary);">Paste your Telegram Chat ID to receive instant order notifications with sound.</p>
-              </div>
-            </div>
-            <div class="guide-item">
-              <div class="guide-num">3</div>
-              <div>
-                <h4 style="font-weight: 700; margin-bottom: 2px;">Step 3: Publish First Product</h4>
-                <p style="font-size: 0.85rem; color: var(--text-secondary);">Add images, prices, and stock quantity, then share your store link with customers.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 8. FOOTER -->
+    <!-- FOOTER -->
     <footer class="site-footer">
       <div class="container footer-inner">
         <div class="footer-col">
@@ -584,35 +252,38 @@
             </div>
             <span class="logo-brand-name">AC <span class="highlight">MART</span></span>
           </div>
-          <p style="font-size: 0.88rem; color: var(--text-secondary); max-width: 320px; line-height: 1.6;">
-            Official web applications and SaaS software store by AC MART. Direct ABA KHQR payments and instant digital delivery.
+          <p style="font-size: 0.88rem; color: var(--text-secondary); max-width: 340px; line-height: 1.6;">
+            Official web applications and SaaS software store by AC MART. Tested production apps with instant ABA KHQR checkout and direct Telegram developer support.
           </p>
         </div>
         <div class="footer-col">
-          <h4 class="footer-title">Platform</h4>
+          <h4 class="footer-title">Marketplace</h4>
           <ul class="footer-links">
-            <li><a href="#marketplace">Marketplace</a></li>
-            <li><a href="#features">Features</a></li>
-            <li><a href="#howItWorks">How It Works</a></li>
-            <li><a href="#pricing">Pricing Plans</a></li>
+            <li><a href="#marketplaceCatalog">Browse All Applications</a></li>
+            <li><a href="https://t.me/Acmart6666" target="_blank" rel="noopener noreferrer">Telegram: @Acmart6666</a></li>
+            <li><a href="tel:+85516905354">Phone: +855 16 905 354</a></li>
           </ul>
         </div>
         <div class="footer-col">
-          <h4 class="footer-title">Integrations</h4>
+          <h4 class="footer-title">Direct Payment</h4>
           <ul class="footer-links">
-            <li><a href="#features">ABA KHQR & Bakong</a></li>
-            <li><a href="#features">Telegram Order Bot</a></li>
-            <li><a href="#features">Instant Source Code Zip</a></li>
-            <li><a href="#features">Automated PDF Receipts</a></li>
+            <li><span>ABA Account: 000 138 112</span></li>
+            <li><span>Account Name: BOREY KEM</span></li>
+            <li><span>NBC Bakong Supported</span></li>
           </ul>
         </div>
         <div class="footer-col">
-          <h4 class="footer-title">Support</h4>
+          <h4 class="footer-title">Store Administration</h4>
           <ul class="footer-links">
-            <li><a href="#tutorial">Video Tutorials</a></li>
-            <li><a href="mailto:support@acmart.me">Contact Support</a></li>
-            <li><a href="#pricing">App Licenses</a></li>
-            <li><a href="#marketplace">Browse All Apps</a></li>
+            <li>
+              <button id="footerOwnerLoginBtn" class="btn btn-secondary btn-sm" style="margin-top: 4px; display: inline-flex; align-items: center; gap: 6px;">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                  <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                </svg>
+                <span>Store Owner Portal (PIN)</span>
+              </button>
+            </li>
           </ul>
         </div>
       </div>
@@ -620,10 +291,18 @@
         <div>© <span id="footerYear">2026</span> AC MART. All rights reserved.</div>
         <div style="display: flex; gap: 16px;">
           <span>🇰🇭 Proudly Made for Cambodia</span>
-          <span>⚡ High-Speed Edge Network</span>
+          <span>⚡ Instant Digital Delivery</span>
         </div>
       </div>
     </footer>
+
+    <!-- Floating Quick Telegram Contact Button -->
+    <a href="https://t.me/Acmart6666" target="_blank" rel="noopener noreferrer" class="floating-telegram-btn" id="floatingTelegramBtn" title="Chat on Telegram (@Acmart6666)">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/>
+      </svg>
+      <span id="floatingTelegramLabel">Chat Telegram</span>
+    </a>
   </main>
 
   <!-- =========================================================================
@@ -1151,37 +830,20 @@
        MODALS
        ========================================================================= -->
 
-  <!-- Interactive Live Demo & Screenshot Showcase Modal -->
+  <!-- Interactive App Detail & Multi-Screenshot Showcase Modal -->
   <div class="modal-overlay" id="demoSandboxModal">
-    <div class="modal-container demo-modal-container">
+    <div class="modal-container demo-modal-container" style="max-width: 1040px;">
       <div class="modal-header">
-        <div style="display: flex; align-items: center; gap: 12px;">
-          <h3 class="modal-title" id="demoModalAppTitle">App Live Screenshot Showcase</h3>
-          <span class="tech-tag" id="demoModalCategory">E-Commerce SaaS</span>
+        <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
+          <h3 class="modal-title" id="demoModalAppTitle">App Screenshots & Details</h3>
+          <span class="tech-tag" id="demoModalCategory">E-Commerce</span>
+          <span class="app-price-badge" id="demoModalPrice" style="font-size: 1.15rem; font-weight: 800; color: var(--brand-primary);">$129.00</span>
         </div>
         <button class="modal-close-btn" id="closeDemoModalBtn">&times;</button>
       </div>
 
-      <div class="demo-viewport-bar">
-        <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
-          <button class="viewport-btn active" id="btnDemoModeGallery">📸 Screenshots Demo</button>
-          <button class="viewport-btn" id="btnDemoModeSimulator">⚡ Live Simulator</button>
-          <div class="viewport-btns" id="demoDeviceViewportBtns" style="display: none; margin-left: 8px;">
-            <button class="viewport-btn active" data-viewport="desktop">🖥️ Desktop</button>
-            <button class="viewport-btn" data-viewport="tablet">📱 Tablet</button>
-            <button class="viewport-btn" data-viewport="mobile">📱 Mobile</button>
-          </div>
-        </div>
-        <div style="display: flex; gap: 8px; align-items: center;">
-          <a id="demoExternalLinkBtn" href="#" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm" style="display: none; text-decoration: none; align-items: center; gap: 4px;">
-            <span>↗ Open Fullscreen</span>
-          </a>
-          <button class="btn btn-primary btn-sm" id="demoModalBuyBtn">Buy This App Now</button>
-        </div>
-      </div>
-
-      <div class="modal-body">
-        <!-- MODE 1: SCREENSHOT GALLERY SHOWCASE (FASTEST & ZERO VERCEL BANDWIDTH) -->
+      <div class="modal-body" style="overflow-y: auto; max-height: calc(88vh - 130px); padding: 0;">
+        <!-- SCREENSHOT GALLERY SHOWCASE -->
         <div class="demo-gallery-view" id="demoGalleryView">
           <div class="demo-gallery-main-wrapper">
             <button class="demo-gallery-nav-btn prev" id="btnGalleryPrev" title="Previous Image">&#10094;</button>
@@ -1191,7 +853,7 @@
 
           <div class="demo-gallery-caption-bar">
             <span id="demoGalleryCounter" style="font-weight: 700; color: #f97316;">📸 Screenshot 1 of 3</span>
-            <span id="demoGalleryCaption" style="color: #94a3b8; font-size: 0.8rem;">High-Definition App Screen Preview</span>
+            <span id="demoGalleryCaption" style="color: #94a3b8; font-size: 0.8rem;">Click thumbnails below or arrows to browse screens</span>
           </div>
 
           <div class="demo-gallery-thumbnails-strip" id="demoGalleryThumbnails">
@@ -1199,11 +861,71 @@
           </div>
         </div>
 
-        <!-- MODE 2: CODE SIMULATOR -->
-        <div class="demo-sandbox-frame-wrapper" id="demoSimulatorWrapper" style="display: none;">
-          <div class="demo-device-frame" id="demoDeviceFrame">
-            <iframe id="demoSandboxIframe" class="demo-iframe-content" src="about:blank"></iframe>
+        <!-- APP EXPLANATION, HOW IT WORKS & FEATURES SECTION -->
+        <div class="app-detail-content-section" style="padding: 24px; background: var(--bg-card); border-top: 1px solid var(--border-color);">
+          <!-- Description -->
+          <div style="margin-bottom: 20px;">
+            <h4 style="font-size: 1.05rem; font-weight: 800; margin-bottom: 8px; color: var(--text-primary); display: flex; align-items: center; gap: 8px;">
+              <span>📝</span>
+              <span id="detailDescTitle">About This Application (អំពីកម្មវិធី)</span>
+            </h4>
+            <p id="demoModalFullDesc" style="font-size: 0.95rem; line-height: 1.6; color: var(--text-secondary);"></p>
           </div>
+
+          <!-- How It Works (របៀបដំណើរការ) -->
+          <div style="margin-bottom: 20px; background: var(--bg-surface-subtle); padding: 16px 20px; border-radius: 12px; border: 1px solid var(--border-color);">
+            <h4 style="font-size: 1rem; font-weight: 800; margin-bottom: 12px; color: var(--brand-primary); display: flex; align-items: center; gap: 8px;">
+              <span>⚡</span>
+              <span id="detailHowItWorksTitle">How It Works (របៀបដំណើរការ)</span>
+            </h4>
+            <div id="demoModalHowItWorks" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; font-size: 0.88rem;">
+              <!-- Rendered dynamically -->
+            </div>
+          </div>
+
+          <!-- Features List -->
+          <div style="margin-bottom: 20px;">
+            <h4 style="font-size: 1rem; font-weight: 800; margin-bottom: 10px; color: var(--text-primary); display: flex; align-items: center; gap: 8px;">
+              <span>✨</span>
+              <span id="detailFeaturesTitle">Key Features Included (មុខងារសំខាន់ៗ)</span>
+            </h4>
+            <ul id="demoModalFeaturesList" class="app-card-features" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 8px;">
+              <!-- Rendered dynamically -->
+            </ul>
+          </div>
+
+          <!-- Tech Stack Tags -->
+          <div>
+            <h4 style="font-size: 0.9rem; font-weight: 700; margin-bottom: 8px; color: var(--text-muted);">
+              <span id="detailTechTitle">Technology Stack (បច្ចេកវិទ្យាប្រើប្រាស់)</span>
+            </h4>
+            <div id="demoModalTechTags" class="app-tech-tags">
+              <!-- Rendered dynamically -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Action Bar Footer with Buy Now and Telegram -->
+      <div class="modal-footer" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <span style="font-size: 0.85rem; color: var(--text-muted);">💡 ត្រូវការកែសម្រួល ឬជំនួយការដំឡើង?</span>
+        </div>
+        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+          <a id="demoTelegramChatBtn" href="https://t.me/Acmart6666" target="_blank" rel="noopener noreferrer" class="btn btn-telegram btn-sm" style="display: inline-flex; align-items: center; gap: 6px;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/>
+            </svg>
+            <span id="demoTelegramBtnText">ឆាតសួរព័ត៌មាន (Telegram)</span>
+          </a>
+          <button class="btn btn-primary btn-sm" id="demoModalBuyBtn" style="display: inline-flex; align-items: center; gap: 6px;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <circle cx="9" cy="21" r="1"></circle>
+              <circle cx="20" cy="21" r="1"></circle>
+              <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+            </svg>
+            <span id="demoModalBuyBtnText">ទិញឥឡូវនេះ (ABA KHQR)</span>
+          </button>
         </div>
       </div>
     </div>
@@ -1264,9 +986,15 @@
             <div class="khqr-amount" id="khqrDisplayAmount">$129.00</div>
             <div class="khqr-merchant" id="khqrMerchantDisplay">000138112 (BOREY KEM)</div>
           </div>
-          <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 12px;">
+          <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 8px;">
             Scan with <strong>ABA Mobile</strong>, <strong>Bakong</strong>, or any Cambodian Banking App.
           </p>
+          <a id="checkoutTelegramBtn" href="https://t.me/Acmart6666" target="_blank" rel="noopener noreferrer" class="btn btn-telegram btn-sm" style="display: flex; align-items: center; justify-content: center; gap: 6px; margin: 8px 0 14px; padding: 8px 12px; border-radius: 8px;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/>
+            </svg>
+            <span>💬 Confirm / Send Slip on Telegram (@Acmart6666)</span>
+          </a>
         </div>
 
         <!-- Customer Details Form -->

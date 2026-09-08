@@ -8,25 +8,25 @@
 const translations = {
   en: {
     badge_apps: "AC MART",
-    nav_marketplace: "Our Apps",
+    nav_marketplace: "Browse Applications",
     nav_features: "Features",
     nav_how_it_works: "How to Buy",
     nav_demo: "Screenshots",
     nav_pricing: "App Licenses",
     nav_tutorial: "Tutorial",
-    nav_sign_in: "🔐 Owner Login",
+    nav_sign_in: "Owner PIN",
     nav_seller_panel: "Store Owner Panel",
     cta_owner_panel: "🛍️ Browse Apps",
     cta_marketplace: "🛒 Customer Storefront",
-    announcement_text: "🚀 Official AC MART Release: Full source code licenses with instant ABA KHQR active!",
+    announcement_text: "🚀 Official AC MART Release: Verified web applications with instant ABA KHQR checkout!",
     hero_title_1: "Production-Ready Web Apps &",
     hero_title_2: "SaaS Software For Sale",
-    hero_subtitle: "Developed and sold directly by AC MART. Explore high-resolution app screenshots, test all features, and get clean commercial source code with instant ABA KHQR payment.",
+    hero_subtitle: "Developed and sold directly by AC MART. Explore high-resolution app screenshots, review features, and purchase full clean commercial source code with instant ABA KHQR payment.",
     btn_get_started_free: "Browse App Catalog",
     btn_explore_demo: "View Screenshots",
     trust_khqr: "Instant ABA KHQR & Card",
     trust_source: "100% Clean Source Code",
-    trust_setup: "1-Click Interactive Test",
+    trust_setup: "Direct Telegram Support",
     trust_updates: "Free Lifetime Updates",
     
     title_marketplace: "AC MART Official Web Applications",
@@ -143,30 +143,30 @@ const translations = {
     modal_settings_title: "Payment & Store Settings",
     label_store_name: "Store Display Name",
     btn_save_changes: "Save Changes",
-    btn_live_demo: "View Screenshots",
-    btn_buy_now: "Buy License"
+    btn_live_demo: "View Details & Screens",
+    btn_buy_now: "Buy Now (ABA KHQR)"
   },
   kh: {
     badge_apps: "AC MART",
-    nav_marketplace: "ទីផ្សារកម្មវិធី",
+    nav_marketplace: "កាតាឡុកកម្មវិធីទាំងអស់",
     nav_features: "លក្ខណៈពិសេស",
     nav_how_it_works: "របៀបដំណើរការ",
     nav_demo: "រូបភាពលម្អិត",
     nav_pricing: "កញ្ចប់តម្លៃ",
     nav_tutorial: "វីដេអូបង្រៀន",
-    nav_sign_in: "🔐 ម្ចាស់ហាង (Owner Login)",
+    nav_sign_in: "Owner PIN",
     nav_seller_panel: "ផ្ទាំងគ្រប់គ្រងម្ចាស់ហាង",
     cta_owner_panel: "🛍️ មើលបញ្ជីកម្មវិធី",
     cta_marketplace: "🛒 មើលទីផ្សារកម្មវិធី",
-    announcement_text: "✨ ហាងផ្លូវការ AC MART: ផ្តល់ជូនកូដកម្មវិធីដើម (Source Code) ពេញលេញ និងទូទាត់ភ្លាមៗតាម ABA KHQR!",
-    hero_title_1: "កម្មវិធី & គេហទំព័រ Software រួចរាល់សម្រាប់លក់",
-    hero_title_2: "ហាងផ្លូវការ AC STORE",
-    hero_subtitle: "អភិវឌ្ឍន៍ និងលក់ផ្តាច់មុខដោយ AC MART។ មើលរូបភាពលម្អិតនៃកម្មវិធី និងទិញកូដកម្មវិធីដើម (Source Code) ជាមួយការទូទាត់រហ័សតាម ABA KHQR។",
-    btn_get_started_free: "មើលបញ្ជីកម្មវិធី / Catalog",
+    announcement_text: "✨ ហាងផ្លូវការ AC MART: កម្មវិធីគុណភាពខ្ពស់ ផ្តល់ជូនកូដកម្មវិធីដើម (Source Code) ពេញលេញ និងទូទាត់ភ្លាមៗតាម ABA KHQR!",
+    hero_title_1: "កម្មវិធីគេហទំព័រ & ប្រព័ន្ធ SaaS",
+    hero_title_2: "គុណភាពខ្ពស់ដាក់លក់",
+    hero_subtitle: "អភិវឌ្ឍន៍ និងធានាគុណភាពដោយ AC MART។ ពិនិត្យមើលរូបភាព Screenshot ជាក់ស្តែង មុខងារពេញលេញ និងទិញកូដកម្មវិធីដើម (Source Code) ជាមួយការទូទាត់រហ័សតាម ABA KHQR។",
+    btn_get_started_free: "មើលកាតាឡុកកម្មវិធី",
     btn_explore_demo: "មើលរូបភាពលម្អិត",
     trust_khqr: "ទូទាត់តាម ABA KHQR & កាត",
     trust_source: "ផ្តល់ជូន Source Code ពេញលេញ",
-    trust_setup: "មើលរូបភាពលម្អិតភ្លាមៗ",
+    trust_setup: "ជំនួយផ្ទាល់តាម Telegram",
     trust_updates: "ការអាប់ដេតឥតគិតថ្លៃរហូត",
     
     title_marketplace: "កម្មវិធីគេហទំព័រ & ហាងអនឡាញរួចជាស្រេច",
@@ -283,8 +283,8 @@ const translations = {
     modal_settings_title: "ការកំណត់ការទូទាត់ & ហាង",
     label_store_name: "ឈ្មោះហាង",
     btn_save_changes: "រក្សាទុកការផ្លាស់ប្តូរ",
-    btn_live_demo: "មើលរូបភាពលម្អិត",
-    btn_buy_now: "ទិញអាជ្ញាប័ណ្ណ"
+    btn_live_demo: "មើលព័ត៌មាន & រូប Demo",
+    btn_buy_now: "ទិញឥឡូវនេះ (ABA KHQR)"
   }
 };
 
@@ -873,13 +873,13 @@ function renderApps() {
 
     return `
       <div class="app-card" data-id="${app.id}">
-        <div class="app-card-preview">
+        <div class="app-card-preview" onclick="openLiveDemo('${app.id}')" title="Click to view screenshots & details">
           <span class="app-badge-featured">★ Verified App</span>
           <span class="app-badge-category">${app.category}</span>
           <img src="${app.previewImage}" alt="${title}" loading="lazy" decoding="async" onerror="this.src='https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=640&auto=format&fit=crop&q=80&fm=webp'">
         </div>
         <div class="app-card-body">
-          <div class="app-card-header">
+          <div class="app-card-header" onclick="openLiveDemo('${app.id}')" title="Click to view screenshots & details">
             <h3 class="app-title">${title}</h3>
             <div class="app-price-tag">
               <div class="app-price">$${app.price}</div>
@@ -887,7 +887,7 @@ function renderApps() {
             </div>
           </div>
           
-          <p class="app-description">${description}</p>
+          <p class="app-description" onclick="openLiveDemo('${app.id}')">${description}</p>
           
           <div class="app-tech-tags">
             ${techBadges}
@@ -898,7 +898,7 @@ function renderApps() {
           </ul>
 
           <div class="app-card-footer">
-            <button class="btn btn-secondary btn-sm btn-demo" onclick="openLiveDemo('${app.id}')">
+            <button class="btn btn-secondary btn-sm btn-demo" onclick="openLiveDemo('${app.id}')" title="View multi-screenshots and app details">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"></path>
                 <circle cx="12" cy="12" r="3"></circle>
@@ -1139,8 +1139,106 @@ window.openLiveDemo = function(appId) {
   if (!app) return;
   currentDemoApp = app;
 
-  if (demoModalAppTitle) demoModalAppTitle.textContent = app.name;
+  const isKh = currentLang === 'kh';
+  const title = isKh && app.khName ? app.khName : app.name;
+  const description = isKh && app.khDesc ? app.khDesc : app.desc;
+
+  if (demoModalAppTitle) demoModalAppTitle.textContent = title;
   if (demoModalCategory) demoModalCategory.textContent = app.category;
+
+  const priceEl = document.getElementById('demoModalPrice');
+  if (priceEl) {
+    priceEl.innerHTML = `$${app.price}.00 ${app.originalPrice ? `<span style="text-decoration: line-through; font-size: 0.85rem; color: var(--text-muted); margin-left: 6px; font-weight: normal;">$${app.originalPrice}</span>` : ''}`;
+  }
+
+  // Description & Titles
+  const descTitleEl = document.getElementById('detailDescTitle');
+  if (descTitleEl) descTitleEl.textContent = isKh ? "អំពីកម្មវិធី (About Application)" : "About This Application";
+
+  const fullDescEl = document.getElementById('demoModalFullDesc');
+  if (fullDescEl) fullDescEl.textContent = description;
+
+  const howTitleEl = document.getElementById('detailHowItWorksTitle');
+  if (howTitleEl) howTitleEl.textContent = isKh ? "របៀបដំណើរការរបស់កម្មវិធី (How It Works)" : "How It Works & Setup";
+
+  // How It Works Steps
+  const howItWorksEl = document.getElementById('demoModalHowItWorks');
+  if (howItWorksEl) {
+    if (isKh) {
+      howItWorksEl.innerHTML = `
+        <div style="background: var(--bg-card); padding: 12px 14px; border-radius: 8px; border: 1px solid var(--border-color);">
+          <div style="font-weight: 700; color: var(--brand-primary); margin-bottom: 2px;">១. ពិនិត្យរូបភាព Demo</div>
+          <div style="color: var(--text-secondary); font-size: 0.82rem;">មើលរូបភាពអេក្រង់ជាក់ស្តែង និងមុខងារមុនសម្រេចចិត្តទិញ</div>
+        </div>
+        <div style="background: var(--bg-card); padding: 12px 14px; border-radius: 8px; border: 1px solid var(--border-color);">
+          <div style="font-weight: 700; color: var(--brand-primary); margin-bottom: 2px;">២. ស្កេនទូទាត់ ABA KHQR</div>
+          <div style="color: var(--text-secondary); font-size: 0.82rem;">ទូទាត់រហ័សទាន់ចិត្តជាមួយ ABA Mobile ឬ Bakong</div>
+        </div>
+        <div style="background: var(--bg-card); padding: 12px 14px; border-radius: 8px; border: 1px solid var(--border-color);">
+          <div style="font-weight: 700; color: var(--brand-primary); margin-bottom: 2px;">៣. ទទួល Source Code ភ្លាមៗ</div>
+          <div style="color: var(--text-secondary); font-size: 0.82rem;">ទទួលបានកូដដើមពេញលេញ ជាមួយជំនួយការដំឡើងតាម Telegram</div>
+        </div>
+      `;
+    } else {
+      howItWorksEl.innerHTML = `
+        <div style="background: var(--bg-card); padding: 12px 14px; border-radius: 8px; border: 1px solid var(--border-color);">
+          <div style="font-weight: 700; color: var(--brand-primary); margin-bottom: 2px;">1. Review Screenshots</div>
+          <div style="color: var(--text-secondary); font-size: 0.82rem;">Inspect high-res UI screenshots, catalog & dashboard</div>
+        </div>
+        <div style="background: var(--bg-card); padding: 12px 14px; border-radius: 8px; border: 1px solid var(--border-color);">
+          <div style="font-weight: 700; color: var(--brand-primary); margin-bottom: 2px;">2. Scan ABA KHQR</div>
+          <div style="color: var(--text-secondary); font-size: 0.82rem;">Instant checkout with ABA Mobile, Bakong, or Card</div>
+        </div>
+        <div style="background: var(--bg-card); padding: 12px 14px; border-radius: 8px; border: 1px solid var(--border-color);">
+          <div style="font-weight: 700; color: var(--brand-primary); margin-bottom: 2px;">3. Instant Code Delivery</div>
+          <div style="color: var(--text-secondary); font-size: 0.82rem;">Receive clean unminified source code + Telegram support</div>
+        </div>
+      `;
+    }
+  }
+
+  // Features list
+  const featTitleEl = document.getElementById('detailFeaturesTitle');
+  if (featTitleEl) featTitleEl.textContent = isKh ? "មុខងារសំខាន់ៗដែលរួមបញ្ចូល (Included Features)" : "Key Features Included";
+
+  const featuresListEl = document.getElementById('demoModalFeaturesList');
+  if (featuresListEl && Array.isArray(app.features)) {
+    featuresListEl.innerHTML = app.features.map(f => `
+      <li style="display: flex; align-items: flex-start; gap: 8px; font-size: 0.88rem; color: var(--text-secondary);">
+        <svg style="color: #10b981; flex-shrink: 0; margin-top: 2px;" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+          <polyline points="20 6 9 17 4 12"></polyline>
+        </svg>
+        <span>${f}</span>
+      </li>
+    `).join('');
+  }
+
+  // Tech stack
+  const techTitleEl = document.getElementById('detailTechTitle');
+  if (techTitleEl) techTitleEl.textContent = isKh ? "បច្ចេកវិទ្យាប្រើប្រាស់ (Technology Stack)" : "Technology Stack";
+
+  const techTagsEl = document.getElementById('demoModalTechTags');
+  if (techTagsEl && Array.isArray(app.techStack)) {
+    techTagsEl.innerHTML = app.techStack.map(t => `<span class="tech-tag">${t}</span>`).join(' ');
+  }
+
+  // Telegram direct link with app title and price
+  const tgBtn = document.getElementById('demoTelegramChatBtn');
+  const tgTextEl = document.getElementById('demoTelegramBtnText');
+  if (tgBtn) {
+    const tgMsg = isKh 
+      ? `សួស្តីបង ខ្ញុំចាប់អារម្មណ៍ចង់ទិញកម្មវិធី "${app.name}" (តម្លៃ $${app.price}) នៅលើ AC MART សូមជួយប្រឹក្សាផងបង។`
+      : `Hello AC MART, I am interested in purchasing "${app.name}" ($${app.price}). Please assist me.`;
+    tgBtn.href = `https://t.me/Acmart6666?text=${encodeURIComponent(tgMsg)}`;
+  }
+  if (tgTextEl) {
+    tgTextEl.textContent = isKh ? "ឆាតសួរព័ត៌មាន (Telegram)" : "Chat on Telegram";
+  }
+
+  const buyBtnText = document.getElementById('demoModalBuyBtnText');
+  if (buyBtnText) {
+    buyBtnText.textContent = isKh ? `ទិញឥឡូវនេះ ($${app.price})` : `Buy Now ($${app.price})`;
+  }
 
   // Extract screenshots for image demo
   if (Array.isArray(app.screenshots) && app.screenshots.length > 0) {
@@ -1152,26 +1250,7 @@ window.openLiveDemo = function(appId) {
   }
 
   currentGalleryIndex = 0;
-  switchDemoMode('gallery');
   renderGalleryView();
-
-  const extBtn = document.getElementById('demoExternalLinkBtn');
-  if (demoSandboxIframe) {
-    if (app.demoUrl && (app.demoUrl.startsWith('http://') || app.demoUrl.startsWith('https://'))) {
-      demoSandboxIframe.removeAttribute('srcdoc');
-      demoSandboxIframe.src = app.demoUrl;
-      if (extBtn) {
-        extBtn.href = app.demoUrl;
-        extBtn.style.display = 'inline-flex';
-      }
-    } else {
-      demoSandboxIframe.removeAttribute('src');
-      demoSandboxIframe.srcdoc = generateDemoFrameHtml(app);
-      if (extBtn) {
-        extBtn.style.display = 'none';
-      }
-    }
-  }
 
   if (demoModalBuyBtn) {
     demoModalBuyBtn.onclick = () => {
@@ -2322,6 +2401,15 @@ window.openCheckout = function(appId) {
   const khqrMerchantEl = document.getElementById('khqrMerchantDisplay');
   if (khqrMerchantEl) khqrMerchantEl.textContent = storeSettings.merchantId || DEFAULT_STORE_SETTINGS.merchantId;
 
+  const checkoutTgBtn = document.getElementById('checkoutTelegramBtn');
+  if (checkoutTgBtn) {
+    const isKh = currentLang === 'kh';
+    const msg = isKh
+      ? `សួស្តីបង ខ្ញុំបានកុម្ម៉ង់ទិញកម្មវិធី "${app.name}" ($${app.price}) លើ AC MART។ នេះជាបង្កាន់ដៃទូទាត់ប្រាក់ ABA KHQR របស់ខ្ញុំបង។`
+      : `Hello AC MART, I placed an order for "${app.name}" ($${app.price}). Here is my ABA KHQR payment confirmation.`;
+    checkoutTgBtn.href = `https://t.me/Acmart6666?text=${encodeURIComponent(msg)}`;
+  }
+
   openModal(checkoutModal);
 };
 
@@ -3299,7 +3387,9 @@ function setupEventListeners() {
   }
 
   // Navigation Links & Buttons to Owner Panel
-  headerSignInBtn.addEventListener('click', requestAdminAccess);
+  if (headerSignInBtn) headerSignInBtn.addEventListener('click', requestAdminAccess);
+  const footerOwnerLoginBtn = document.getElementById('footerOwnerLoginBtn');
+  if (footerOwnerLoginBtn) footerOwnerLoginBtn.addEventListener('click', requestAdminAccess);
   headerCtaBtn.addEventListener('click', () => {
     if (currentView === 'dashboard') {
       switchView('marketplace');
