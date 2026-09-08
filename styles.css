@@ -304,34 +304,40 @@ input, select, textarea {
 }
 
 /* ==========================================================================
-   Header Preah Vihear Temple Cultural Showcase & Animation
+   Header Preah Vihear Temple Cultural Panorama Showcase & Animation
    ========================================================================== */
 .preah-vihear-nav-wrap {
+  flex: 1;
   display: flex;
   align-items: center;
-  justify-content: center;
+  margin: 0 20px;
+  height: 52px;
+  min-width: 0;
 }
 
 .preah-vihear-card {
-  display: inline-flex;
+  width: 100%;
+  height: 100%;
+  display: flex;
   align-items: center;
   text-decoration: none;
   border-radius: 12px;
   position: relative;
-  padding: 2.5px;
+  padding: 2px;
   background: linear-gradient(135deg, rgba(234, 179, 8, 0.45), rgba(249, 87, 22, 0.35), rgba(59, 130, 246, 0.25));
-  box-shadow: 0 0 14px rgba(234, 179, 8, 0.22);
+  box-shadow: 0 0 16px rgba(234, 179, 8, 0.22);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   animation: preahVihearGlow 4s ease-in-out infinite alternate;
+  overflow: hidden;
 }
 
 .preah-vihear-img-box {
-  width: 140px;
-  height: 44px;
-  border-radius: 9.5px;
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
   overflow: hidden;
   position: relative;
-  background: #000;
+  background: #0b0f17;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -341,13 +347,13 @@ input, select, textarea {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center 36%;
+  object-position: center 38%;
   display: block;
-  transition: transform 0.4s ease;
+  transition: transform 0.5s ease;
   filter: saturate(1.18) contrast(1.06);
 }
 
-/* Shimmer Light Sweep (ចលនាពន្លឺរលោងស្អាតឆ្លុះកាត់) */
+/* Shimmer Light Sweep (ចលនាពន្លឺរលោងស្អាតឆ្លុះកាត់ពេញផ្ទៃ) */
 .preah-vihear-shimmer {
   position: absolute;
   top: 0;
@@ -357,13 +363,13 @@ input, select, textarea {
   background: linear-gradient(
     90deg,
     transparent 0%,
-    rgba(255, 255, 255, 0.1) 20%,
-    rgba(255, 215, 0, 0.48) 50%,
-    rgba(255, 255, 255, 0.3) 60%,
+    rgba(255, 255, 255, 0.08) 20%,
+    rgba(255, 215, 0, 0.45) 50%,
+    rgba(255, 255, 255, 0.25) 60%,
     transparent 100%
   );
   transform: skewX(-25deg);
-  animation: shimmerPass 4.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  animation: shimmerPass 5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
   pointer-events: none;
 }
 
@@ -381,27 +387,27 @@ input, select, textarea {
     box-shadow: 0 0 10px rgba(234, 179, 8, 0.18), 0 2px 8px rgba(0, 0, 0, 0.4);
   }
   100% {
-    box-shadow: 0 0 20px rgba(234, 179, 8, 0.45), 0 4px 14px rgba(249, 87, 22, 0.25);
+    box-shadow: 0 0 22px rgba(234, 179, 8, 0.45), 0 4px 14px rgba(249, 87, 22, 0.25);
   }
 }
 
 .preah-vihear-card:hover {
-  transform: translateY(-2px) scale(1.05);
-  box-shadow: 0 0 24px rgba(234, 179, 8, 0.6), 0 6px 18px rgba(0, 0, 0, 0.6);
+  transform: translateY(-1.5px);
+  box-shadow: 0 0 28px rgba(234, 179, 8, 0.65), 0 6px 18px rgba(0, 0, 0, 0.6);
 }
 
 .preah-vihear-card:hover .preah-vihear-img {
-  transform: scale(1.12);
+  transform: scale(1.05);
 }
 
 .preah-vihear-card:hover .preah-vihear-shimmer {
-  animation-duration: 2.2s;
+  animation-duration: 2.5s;
 }
 
 @media (max-width: 900px) {
-  .preah-vihear-img-box {
-    width: 110px;
-    height: 38px;
+  .preah-vihear-nav-wrap {
+    height: 44px;
+    margin: 0 10px;
   }
 }
 
