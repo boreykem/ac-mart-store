@@ -2906,7 +2906,9 @@ function setupEventListeners() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 
-  headerSignInBtn.addEventListener('click', () => switchView('dashboard'));
+  if (headerSignInBtn) {
+    headerSignInBtn.addEventListener('click', () => switchView('dashboard'));
+  }
   
   headerCtaBtn.addEventListener('click', () => {
     switchView(currentView === 'marketplace' ? 'dashboard' : 'marketplace');
