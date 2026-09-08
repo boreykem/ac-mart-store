@@ -1,0 +1,14 @@
+# Node & Build artifacts
+node_modules/
+dist/
+
+# Test & Zip files
+verify.js
+verify_tabs.js
+acmart-production.zip
+
+# Python & IDE
+__pycache__/
+*.pyc
+.vscode/
+.idea/
