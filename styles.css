@@ -422,46 +422,130 @@ input, select, textarea {
    Hero Section
    ========================================================================== */
 .hero-section {
-  padding: 70px 0 50px;
+  padding: 48px 0 35px;
   text-align: center;
   position: relative;
   background: var(--hero-bg-gradient);
 }
 
-.announcement-pill {
+/* ==========================================================================
+   Full-Width Running Marquee Ticker Bar (Option 2)
+   ========================================================================== */
+.top-marquee-container {
+  width: 100%;
+  background: rgba(249, 87, 22, 0.05);
+  border-bottom: 1px solid rgba(249, 87, 22, 0.16);
+  border-top: 1px solid rgba(249, 87, 22, 0.08);
+  overflow: hidden;
+  user-select: none;
+  position: relative;
+  z-index: 10;
+  backdrop-filter: blur(8px);
+}
+
+[data-theme="dark"] .top-marquee-container {
+  background: rgba(249, 87, 22, 0.07);
+  border-bottom-color: rgba(249, 87, 22, 0.22);
+  border-top-color: rgba(255, 255, 255, 0.04);
+}
+
+.marquee-wrapper {
+  display: flex;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  mask-image: linear-gradient(to right, transparent 0%, black 4%, black 96%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 4%, black 96%, transparent 100%);
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marqueeScroll 34s linear infinite;
+  will-change: transform;
+}
+
+.marquee-wrapper:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+.marquee-group {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 10px 16px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.marquee-item {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  background: #fff6f2;
-  border: 1px solid rgba(249, 87, 22, 0.25);
-  color: #c2410c;
-  padding: 6px 16px;
-  border-radius: var(--radius-full);
-  font-size: 0.85rem;
+  gap: 6px;
+  font-size: 0.88rem;
   font-weight: 600;
-  margin-bottom: 24px;
-  box-shadow: 0 2px 8px rgba(249, 87, 22, 0.08);
+  color: var(--text-secondary);
 }
 
-[data-theme="dark"] .announcement-pill {
-  background: rgba(249, 87, 22, 0.12);
-  border-color: rgba(249, 87, 22, 0.3);
-  color: #fdba74;
+.marquee-item.highlight-item {
+  color: var(--brand-primary);
+  font-weight: 700;
 }
 
-.pulse-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--brand-primary);
-  box-shadow: 0 0 0 0 rgba(249, 87, 22, 0.7);
-  animation: pulse 1.8s infinite;
+.marquee-link {
+  color: var(--brand-primary) !important;
+  text-decoration: none;
+  font-weight: 700;
+  background: rgba(249, 87, 22, 0.1);
+  padding: 3px 12px;
+  border-radius: 99px;
+  border: 1px solid rgba(249, 87, 22, 0.28);
+  transition: all var(--transition-fast);
 }
 
-@keyframes pulse {
-  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(249, 87, 22, 0.7); }
-  70% { transform: scale(1); box-shadow: 0 0 0 8px rgba(249, 87, 22, 0); }
-  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(249, 87, 22, 0); }
+.marquee-link:hover {
+  background: var(--brand-primary) !important;
+  color: #ffffff !important;
+  border-color: var(--brand-primary);
+  box-shadow: 0 2px 10px rgba(249, 87, 22, 0.35);
+}
+
+.marquee-dot {
+  color: rgba(249, 87, 22, 0.45);
+  font-size: 0.95rem;
+  font-weight: 800;
+}
+
+.pulse-fire {
+  display: inline-block;
+  animation: flameBounce 1.5s ease-in-out infinite;
+}
+
+@keyframes flameBounce {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.25); }
+}
+
+@keyframes marqueeScroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@media (max-width: 768px) {
+  .marquee-item {
+    font-size: 0.8rem;
+  }
+  .marquee-group {
+    gap: 16px;
+    padding: 8px 12px;
+  }
+  .marquee-track {
+    animation-duration: 26s;
+  }
 }
 
 .hero-title {
