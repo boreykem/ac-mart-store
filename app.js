@@ -1071,95 +1071,348 @@ window.copyCoupon = function(code) {
 };
 
 // --- LIVE DEMO SIMULATOR ---
+// --- LIVE DEMO SIMULATOR ---
 window.openLiveDemo = function(appId) {
-  const app = appsList.find(a => a.id === appId) || appsList[0];
-  demoModalAppTitle.textContent = app.name;
-  demoModalCategory.textContent = app.category;
+  const app = (appsList && appsList.find(a => a.id === appId)) || (appsList && appsList[0]) || initialApps[0];
+  if (!app) return;
+  if (demoModalAppTitle) demoModalAppTitle.textContent = app.name;
+  if (demoModalCategory) demoModalCategory.textContent = app.category;
   
-  demoSandboxIframe.srcdoc = generateDemoFrameHtml(app);
-  demoModalBuyBtn.onclick = () => {
-    closeModal(demoSandboxModal);
-    openCheckout(app.id);
-  };
+  if (demoSandboxIframe) {
+    demoSandboxIframe.srcdoc = generateDemoFrameHtml(app);
+  }
+  if (demoModalBuyBtn) {
+    demoModalBuyBtn.onclick = () => {
+      closeModal(demoSandboxModal);
+      openCheckout(app.id);
+    };
+  }
   
   openModal(demoSandboxModal);
 };
 
 function generateDemoFrameHtml(app) {
-  return `
-    <!DOCTYPE html>
-    <html>
-    <head>
-      <meta charset="UTF-8">
-      <title>${app.name} Live Demo</title>
-      <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
-      <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; }
-        body { background: #0f172a; color: #f8fafc; padding: 24px; min-height: 100vh; }
-        .demo-bar { display: flex; align-items: center; justify-content: space-between; padding-bottom: 20px; border-bottom: 1px solid #334155; margin-bottom: 24px; }
-        .demo-brand { font-size: 1.3rem; font-weight: 800; color: #f97316; }
-        .badge { background: #1e293b; color: #38bdf8; padding: 4px 10px; border-radius: 99px; font-size: 0.8rem; font-weight: 700; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 24px; }
-        .card { background: #1e293b; border: 1px solid #334155; border-radius: 12px; padding: 18px; }
-        .card h4 { font-size: 0.9rem; color: #94a3b8; margin-bottom: 6px; }
-        .card .num { font-size: 1.6rem; font-weight: 800; color: #fff; }
-        .interactive-box { background: #141b2d; border: 1px solid #283548; border-radius: 12px; padding: 20px; text-align: center; }
-        .demo-btn { background: #f97316; color: white; border: none; padding: 10px 20px; border-radius: 8px; font-weight: 700; cursor: pointer; margin-top: 12px; transition: 0.2s; }
-        .demo-btn:hover { background: #ea580c; }
-        .sim-table { width: 100%; border-collapse: collapse; margin-top: 14px; text-align: left; font-size: 0.85rem; }
-        .sim-table th, .sim-table td { padding: 8px 12px; border-bottom: 1px solid #334155; }
-        .sim-table th { color: #94a3b8; }
-      </style>
-    </head>
-    <body>
-      <div class="demo-bar">
-        <div class="demo-brand">⚡ ${app.name}</div>
-        <div class="badge">Live Sandbox Mode</div>
-      </div>
-      <div class="grid">
-        <div class="card">
-          <h4>Active Buyers Online</h4>
-          <div class="num" id="liveUsers">1,482</div>
+  return `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>${app.name} - Interactive Demo</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; }
+    body { background: #0b0f19; color: #f8fafc; overflow-x: hidden; min-height: 100vh; display: flex; flex-direction: column; }
+    
+    /* Demo Header */
+    .top-header { background: #111827; border-bottom: 1px solid #1f2937; padding: 12px 20px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 50; }
+    .brand { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 1.15rem; color: #f97316; }
+    .nav-tabs { display: flex; gap: 6px; background: #0f172a; padding: 4px; border-radius: 8px; border: 1px solid #1e293b; }
+    .tab-btn { background: transparent; color: #94a3b8; border: none; padding: 6px 14px; border-radius: 6px; font-size: 0.82rem; font-weight: 700; cursor: pointer; transition: 0.2s; }
+    .tab-btn.active { background: #f97316; color: white; }
+    .cart-trigger { background: #1e293b; color: #38bdf8; border: 1px solid #334155; padding: 6px 14px; border-radius: 8px; font-size: 0.85rem; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 6px; }
+    .cart-badge { background: #ef4444; color: white; font-size: 0.72rem; padding: 2px 7px; border-radius: 99px; }
+
+    /* Main Container */
+    .content-area { flex-grow: 1; padding: 20px; max-width: 1000px; margin: 0 auto; width: 100%; }
+
+    /* Storefront View */
+    .hero-banner { background: linear-gradient(135deg, #1e293b, #0f172a); border: 1px solid #334155; border-radius: 14px; padding: 20px; margin-bottom: 24px; display: flex; align-items: center; justify-content: space-between; }
+    .hero-title { font-size: 1.3rem; font-weight: 800; margin-bottom: 6px; }
+    .hero-sub { font-size: 0.85rem; color: #94a3b8; }
+    .banner-pill { background: rgba(16, 185, 129, 0.15); color: #10b981; padding: 4px 10px; border-radius: 99px; font-size: 0.78rem; font-weight: 700; }
+
+    /* Product Grid */
+    .prod-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 16px; margin-bottom: 24px; }
+    .prod-card { background: #111827; border: 1px solid #1f2937; border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; transition: 0.2s; }
+    .prod-card:hover { border-color: #f97316; transform: translateY(-3px); }
+    .prod-img { width: 100%; height: 130px; object-fit: cover; background: #1e293b; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; }
+    .prod-info { padding: 14px; flex-grow: 1; display: flex; flex-direction: column; }
+    .prod-name { font-weight: 700; font-size: 0.95rem; margin-bottom: 6px; color: #fff; }
+    .prod-price-row { display: flex; align-items: center; justify-content: space-between; margin-top: auto; padding-top: 10px; }
+    .prod-price { font-weight: 800; font-size: 1.1rem; color: #10b981; }
+    .btn-add { background: #f97316; color: white; border: none; padding: 6px 12px; border-radius: 6px; font-size: 0.8rem; font-weight: 700; cursor: pointer; transition: 0.2s; }
+    .btn-add:hover { background: #ea580c; }
+
+    /* Admin View */
+    .metrics-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 20px; }
+    .metric-card { background: #111827; border: 1px solid #1f2937; border-radius: 12px; padding: 16px; }
+    .metric-card h5 { font-size: 0.8rem; color: #94a3b8; margin-bottom: 6px; }
+    .metric-card .val { font-size: 1.4rem; font-weight: 800; color: #fff; }
+    .table-card { background: #111827; border: 1px solid #1f2937; border-radius: 12px; overflow: hidden; }
+    .table-title { padding: 14px 18px; font-weight: 700; border-bottom: 1px solid #1f2937; font-size: 0.95rem; }
+    .orders-table { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
+    .orders-table th, .orders-table td { padding: 10px 16px; text-align: left; border-bottom: 1px solid #1f2937; }
+    .orders-table th { color: #94a3b8; font-weight: 600; }
+
+    /* Cart / Checkout Drawer */
+    .cart-drawer { position: fixed; top: 0; right: -360px; width: 340px; height: 100vh; background: #111827; border-left: 1px solid #1f2937; z-index: 100; display: flex; flex-direction: column; transition: 0.3s; box-shadow: -10px 0 30px rgba(0,0,0,0.5); }
+    .cart-drawer.open { right: 0; }
+    .cart-header { padding: 16px; border-bottom: 1px solid #1f2937; display: flex; justify-content: space-between; align-items: center; }
+    .cart-items { flex-grow: 1; overflow-y: auto; padding: 16px; display: flex; flex-direction: column; gap: 12px; }
+    .cart-item { display: flex; justify-content: space-between; align-items: center; background: #1e293b; padding: 10px; border-radius: 8px; }
+    .cart-footer { padding: 16px; border-top: 1px solid #1f2937; background: #0f172a; }
+    .total-row { display: flex; justify-content: space-between; font-weight: 800; font-size: 1.1rem; margin-bottom: 14px; }
+    .btn-checkout { width: 100%; background: #dc2626; color: white; border: none; padding: 12px; border-radius: 8px; font-weight: 800; font-size: 0.9rem; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; }
+
+    /* KHQR Simulation Modal */
+    .khqr-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.85); backdrop-filter: blur(5px); z-index: 200; display: none; align-items: center; justify-content: center; padding: 20px; }
+    .khqr-overlay.active { display: flex; }
+    .khqr-box { background: #dc2626; border-radius: 18px; width: 100%; max-width: 320px; color: white; padding: 24px; text-align: center; box-shadow: 0 20px 50px rgba(0,0,0,0.7); }
+    .khqr-qr-wrap { background: white; border-radius: 14px; padding: 16px; margin: 16px auto; width: 200px; height: 200px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+    .btn-pay-sim { background: #10b981; color: white; border: none; width: 100%; padding: 12px; border-radius: 8px; font-weight: 800; font-size: 0.95rem; cursor: pointer; margin-top: 12px; }
+    .btn-pay-close { background: rgba(255,255,255,0.2); color: white; border: none; width: 100%; padding: 8px; border-radius: 6px; font-size: 0.8rem; cursor: pointer; margin-top: 8px; }
+
+    /* Success Screen */
+    .success-box { display: none; background: #111827; border: 1px solid #10b981; border-radius: 16px; padding: 24px; text-align: center; margin: 20px 0; }
+    .success-icon { font-size: 3rem; margin-bottom: 10px; }
+  </style>
+</head>
+<body>
+
+  <!-- Top Navigation Bar -->
+  <header class="top-header">
+    <div class="brand">
+      <span>⚡</span>
+      <span>${app.name}</span>
+    </div>
+    <div class="nav-tabs">
+      <button class="tab-btn active" id="tabStore" onclick="switchDemoView('store')">🛍️ Storefront</button>
+      <button class="tab-btn" id="tabAdmin" onclick="switchDemoView('admin')">📊 Owner Dashboard</button>
+    </div>
+    <button class="cart-trigger" onclick="toggleCart()">
+      <span>🛒 Cart</span>
+      <span class="cart-badge" id="cartCount">0</span>
+    </button>
+  </header>
+
+  <main class="content-area">
+
+    <!-- STOREFRONT VIEW -->
+    <div id="viewStore">
+      <div class="hero-banner">
+        <div>
+          <div class="banner-pill">⚡ Interactive Customer Demo</div>
+          <h2 class="hero-title">${app.name}</h2>
+          <p class="hero-sub">Try browsing items, adding to cart, and testing real-time ABA KHQR checkout!</p>
         </div>
-        <div class="card">
-          <h4>Today's Sales</h4>
-          <div class="num" id="liveSales">$2,490.50</div>
+      </div>
+
+      <div class="prod-grid" id="demoProductGrid">
+        <div class="prod-card">
+          <div class="prod-img">📱</div>
+          <div class="prod-info">
+            <div class="prod-name">Pro Mobile Smart Device</div>
+            <div class="prod-price-row">
+              <span class="prod-price">$120.00</span>
+              <button class="btn-add" onclick="addToDemoCart('Pro Mobile Smart Device', 120)">+ Add</button>
+            </div>
+          </div>
         </div>
-        <div class="card">
-          <h4>KHQR Transactions</h4>
-          <div class="num">99.8%</div>
+
+        <div class="prod-card">
+          <div class="prod-img">🎧</div>
+          <div class="prod-info">
+            <div class="prod-name">Wireless ANC Headset</div>
+            <div class="prod-price-row">
+              <span class="prod-price">$45.00</span>
+              <button class="btn-add" onclick="addToDemoCart('Wireless ANC Headset', 45)">+ Add</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="prod-card">
+          <div class="prod-img">💻</div>
+          <div class="prod-info">
+            <div class="prod-name">Mechanical Keyboard RGB</div>
+            <div class="prod-price-row">
+              <span class="prod-price">$65.00</span>
+              <button class="btn-add" onclick="addToDemoCart('Mechanical Keyboard RGB', 65)">+ Add</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="prod-card">
+          <div class="prod-img">⚡</div>
+          <div class="prod-info">
+            <div class="prod-name">Fast Wireless Charger Pad</div>
+            <div class="prod-price-row">
+              <span class="prod-price">$25.00</span>
+              <button class="btn-add" onclick="addToDemoCart('Fast Wireless Charger Pad', 25)">+ Add</button>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="interactive-box">
-        <h3 style="margin-bottom: 6px;">Test Interactive Feature</h3>
-        <p style="color: #94a3b8; font-size: 0.9rem;">Click to simulate an instant KHQR transaction event</p>
-        <button class="demo-btn" onclick="triggerSimEvent()">Simulate New Order (+ $45.00)</button>
-        <div id="simLog" style="margin-top: 16px; font-size: 0.85rem; color: #10b981; font-weight: 600; min-height: 20px;"></div>
+
+      <!-- Payment Success Banner -->
+      <div class="success-box" id="successBox">
+        <div class="success-icon">🎉</div>
+        <h3 style="color: #10b981; margin-bottom: 6px;">ABA KHQR Payment Received!</h3>
+        <p style="color: #94a3b8; font-size: 0.9rem; margin-bottom: 12px;">The transaction was instantly settled and dispatched to the store owner.</p>
+        <button class="btn-add" onclick="document.getElementById('successBox').style.display='none'">Continue Shopping</button>
       </div>
-      <table class="sim-table">
-        <thead>
-          <tr><th>Event</th><th>Status</th><th>Timestamp</th></tr>
-        </thead>
-        <tbody id="simTableBody">
-          <tr><td>KHQR Scan Verified</td><td style="color:#10b981;">✓ Settled</td><td>Just now</td></tr>
-          <tr><td>Telegram Dispatch Bot</td><td style="color:#38bdf8;">✓ Notified</td><td>1 min ago</td></tr>
-        </tbody>
-      </table>
-      <script>
-        let sales = 2490.50;
-        function triggerSimEvent() {
-          sales += 45;
-          document.getElementById('liveSales').textContent = '$' + sales.toFixed(2);
-          document.getElementById('simLog').textContent = '⚡ Instant KHQR Payment of $45.00 confirmed! Receipt issued.';
-          const tb = document.getElementById('simTableBody');
-          const tr = document.createElement('tr');
-          tr.innerHTML = '<td>New Order Paid</td><td style="color:#10b981;">✓ Settled</td><td>Just now</td>';
-          tb.insertBefore(tr, tb.firstChild);
-        }
-      </script>
-    </body>
-    </html>
-  `;
+    </div>
+
+    <!-- OWNER DASHBOARD VIEW -->
+    <div id="viewAdmin" style="display: none;">
+      <div class="metrics-row">
+        <div class="metric-card">
+          <h5>Total Revenue Today</h5>
+          <div class="val" id="metricSales">$3,840.00</div>
+        </div>
+        <div class="metric-card">
+          <h5>Total Orders</h5>
+          <div class="val" id="metricOrders">28</div>
+        </div>
+        <div class="metric-card">
+          <h5>ABA KHQR Settlement</h5>
+          <div class="val" style="color: #10b981;">100% Instant</div>
+        </div>
+      </div>
+
+      <div class="table-card">
+        <div class="table-title">Recent Real-Time Customer Orders</div>
+        <table class="orders-table">
+          <thead>
+            <tr><th>Order ID</th><th>Customer</th><th>Item</th><th>Amount</th><th>Status</th></tr>
+          </thead>
+          <tbody id="demoOrdersTable">
+            <tr><td>#ORD-8941</td><td>Sok Dara</td><td>Pro Mobile Smart Device</td><td>$120.00</td><td style="color:#10b981;">✓ Paid (KHQR)</td></tr>
+            <tr><td>#ORD-8940</td><td>Bopha Chan</td><td>Wireless ANC Headset</td><td>$45.00</td><td style="color:#10b981;">✓ Paid (KHQR)</td></tr>
+            <tr><td>#ORD-8939</td><td>Vannak Meas</td><td>Mechanical Keyboard RGB</td><td>$65.00</td><td style="color:#10b981;">✓ Paid (KHQR)</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Sliding Cart Drawer -->
+  <div class="cart-drawer" id="cartDrawer">
+    <div class="cart-header">
+      <h3 style="font-size: 1.1rem; font-weight: 800;">Your Cart</h3>
+      <button onclick="toggleCart()" style="background:none; border:none; color:#94a3b8; font-size:1.4rem; cursor:pointer;">&times;</button>
+    </div>
+    <div class="cart-items" id="cartItemsList">
+      <div style="text-align: center; color: #94a3b8; padding: 40px 0;">Cart is empty. Add an item!</div>
+    </div>
+    <div class="cart-footer">
+      <div class="total-row">
+        <span>Total:</span>
+        <span id="cartTotalDisplay">$0.00</span>
+      </div>
+      <button class="btn-checkout" onclick="openSimKhqr()">
+        <span>🇰🇭 Pay with ABA KHQR</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Simulated ABA KHQR Modal -->
+  <div class="khqr-overlay" id="khqrModal">
+    <div class="khqr-box">
+      <h3 style="font-weight: 800; font-size: 1.15rem; letter-spacing: 1px;">🇰🇭 ABA KHQR</h3>
+      <p style="font-size: 0.78rem; opacity: 0.9; margin-top: 2px;">National Bank of Cambodia</p>
+      
+      <div class="khqr-qr-wrap">
+        <svg width="150" height="150" viewBox="0 0 100 100" fill="#000">
+          <path d="M0 0h30v30H0zM10 10h10v10H10zM70 0h30v30H70zM80 10h10v10H80zM0 70h30v30H0zM10 80h10v10H10zM40 10h10v10H40zM50 20h10v10H50zM10 40h10v10H10zM20 50h10v10H20zM40 40h20v20H40zM70 40h10v10H70zM80 50h20v10H80zM40 70h10v20H40zM60 70h20v10H60zM70 80h10v20H70zM90 70h10v30H90z"/>
+        </svg>
+      </div>
+
+      <div style="font-size: 1.3rem; font-weight: 800; margin-bottom: 2px;" id="khqrAmount">$0.00</div>
+      <div style="font-size: 0.8rem; opacity: 0.9;">Store: ${app.name}</div>
+
+      <button class="btn-pay-sim" onclick="simulateSuccessfulPayment()">
+        📱 Simulate Customer Payment
+      </button>
+      <button class="btn-pay-close" onclick="closeSimKhqr()">Cancel</button>
+    </div>
+  </div>
+
+  <script>
+    let cart = [];
+    let totalSales = 3840;
+    let orderCount = 28;
+
+    function switchDemoView(v) {
+      document.getElementById('viewStore').style.display = (v === 'store' ? 'block' : 'none');
+      document.getElementById('viewAdmin').style.display = (v === 'admin' ? 'block' : 'none');
+      document.getElementById('tabStore').classList.toggle('active', v === 'store');
+      document.getElementById('tabAdmin').classList.toggle('active', v === 'admin');
+    }
+
+    function toggleCart() {
+      document.getElementById('cartDrawer').classList.toggle('open');
+    }
+
+    function addToDemoCart(name, price) {
+      cart.push({ name, price });
+      renderCart();
+      toggleCart();
+    }
+
+    function renderCart() {
+      const list = document.getElementById('cartItemsList');
+      const countEl = document.getElementById('cartCount');
+      const totalEl = document.getElementById('cartTotalDisplay');
+      
+      countEl.textContent = cart.length;
+      if (cart.length === 0) {
+        list.innerHTML = '<div style="text-align: center; color: #94a3b8; padding: 40px 0;">Cart is empty. Add an item!</div>';
+        totalEl.textContent = '$0.00';
+        return;
+      }
+
+      let total = 0;
+      list.innerHTML = cart.map((item, idx) => {
+        total += item.price;
+        return '<div class="cart-item"><div><div style="font-weight:700;">' + item.name + '</div><div style="color:#10b981; font-weight:800;">$' + item.price.toFixed(2) + '</div></div><button onclick="removeFromCart(' + idx + ')" style="background:none; border:none; color:#ef4444; cursor:pointer; font-weight:bold;">&times;</button></div>';
+      }).join('');
+      totalEl.textContent = '$' + total.toFixed(2);
+    }
+
+    function removeFromCart(idx) {
+      cart.splice(idx, 1);
+      renderCart();
+    }
+
+    function openSimKhqr() {
+      if (cart.length === 0) {
+        alert("Please add at least one product to cart first!");
+        return;
+      }
+      let total = cart.reduce((acc, c) => acc + c.price, 0);
+      document.getElementById('khqrAmount').textContent = '$' + total.toFixed(2);
+      document.getElementById('khqrModal').classList.add('active');
+    }
+
+    function closeSimKhqr() {
+      document.getElementById('khqrModal').classList.remove('active');
+    }
+
+    function simulateSuccessfulPayment() {
+      let total = cart.reduce((acc, c) => acc + c.price, 0);
+      totalSales += total;
+      orderCount += 1;
+      
+      document.getElementById('metricSales').textContent = '$' + totalSales.toFixed(2);
+      document.getElementById('metricOrders').textContent = orderCount;
+
+      const tb = document.getElementById('demoOrdersTable');
+      const tr = document.createElement('tr');
+      const ordId = '#ORD-' + Math.floor(1000 + Math.random() * 9000);
+      tr.innerHTML = '<td>' + ordId + '</td><td>You (Live Demo)</td><td>' + cart[0].name + (cart.length > 1 ? ' +' + (cart.length - 1) + ' more' : '') + '</td><td>$' + total.toFixed(2) + '</td><td style="color:#10b981; font-weight:700;">✓ Paid (KHQR)</td>';
+      tb.insertBefore(tr, tb.firstChild);
+
+      cart = [];
+      renderCart();
+      closeSimKhqr();
+      document.getElementById('cartDrawer').classList.remove('open');
+      document.getElementById('successBox').style.display = 'block';
+      document.getElementById('successBox').scrollIntoView({ behavior: 'smooth' });
+    }
+  </script>
+</body>
+</html>`;
 }
 
 // --- CHECKOUT & ABA KHQR SYSTEM ---
@@ -1408,8 +1661,24 @@ function setupEventListeners() {
   langKH.addEventListener('click', () => applyLanguage('kh'));
 
   // Hero Actions with smooth scroll & switch
-  heroGetStartedBtn.addEventListener('click', () => switchView('dashboard'));
-  openFeaturedDemoBtn.addEventListener('click', () => openLiveDemo(appsList[0].id));
+  if (heroGetStartedBtn) {
+    heroGetStartedBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const catalogEl = document.getElementById('marketplaceCatalog');
+      if (catalogEl) {
+        const offsetPosition = catalogEl.getBoundingClientRect().top + window.pageYOffset - 76;
+        window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+      }
+    });
+  }
+
+  if (openFeaturedDemoBtn) {
+    openFeaturedDemoBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const targetId = (appsList && appsList.length) ? appsList[0].id : 'app-1';
+      openLiveDemo(targetId);
+    });
+  }
 
   // Search & Filter with Enter key support
   appSearchInput.addEventListener('input', renderApps);
