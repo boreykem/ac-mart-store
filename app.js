@@ -1107,8 +1107,22 @@ window.openLiveDemo = function(appId) {
   if (demoModalAppTitle) demoModalAppTitle.textContent = app.name;
   if (demoModalCategory) demoModalCategory.textContent = app.category;
   
+  const extBtn = document.getElementById('demoExternalLinkBtn');
   if (demoSandboxIframe) {
-    demoSandboxIframe.srcdoc = generateDemoFrameHtml(app);
+    if (app.demoUrl && (app.demoUrl.startsWith('http://') || app.demoUrl.startsWith('https://'))) {
+      demoSandboxIframe.removeAttribute('srcdoc');
+      demoSandboxIframe.src = app.demoUrl;
+      if (extBtn) {
+        extBtn.href = app.demoUrl;
+        extBtn.style.display = 'inline-flex';
+      }
+    } else {
+      demoSandboxIframe.removeAttribute('src');
+      demoSandboxIframe.srcdoc = generateDemoFrameHtml(app);
+      if (extBtn) {
+        extBtn.style.display = 'none';
+      }
+    }
   }
   if (demoModalBuyBtn) {
     demoModalBuyBtn.onclick = () => {
@@ -2155,6 +2169,7 @@ function setupEventListeners() {
     const origPrice = parseFloat(document.getElementById('formAppOrigPrice').value) || 149;
     const desc = document.getElementById('formAppDesc').value.trim() || "Full-featured web application ready to deploy.";
     const tech = document.getElementById('formAppTech').value.split(',').map(s => s.trim()).filter(Boolean);
+    const demoUrl = document.getElementById('formAppDemoUrl')?.value.trim() || "";
     const img = document.getElementById('formAppImg').value.trim() || "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=640&auto=format&fit=crop&q=80&fm=webp";
 
     if (!name) {
@@ -2181,6 +2196,7 @@ function setupEventListeners() {
         "Lifetime bug fix updates"
       ],
       demoType: "saas",
+      demoUrl: demoUrl,
       previewImage: img
     };
 
@@ -2197,6 +2213,8 @@ function setupEventListeners() {
     document.getElementById('formAppOrigPrice').value = '';
     document.getElementById('formAppDesc').value = '';
     document.getElementById('formAppTech').value = '';
+    const demoUrlField = document.getElementById('formAppDemoUrl');
+    if (demoUrlField) demoUrlField.value = '';
     document.getElementById('formAppImg').value = '';
 
     closeModal(appFormModal);

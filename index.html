@@ -1168,7 +1168,10 @@
           <button class="viewport-btn" data-viewport="tablet">📱 Tablet</button>
           <button class="viewport-btn" data-viewport="mobile">📱 Mobile</button>
         </div>
-        <div>
+        <div style="display: flex; gap: 8px; align-items: center;">
+          <a id="demoExternalLinkBtn" href="#" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm" style="display: none; text-decoration: none; align-items: center; gap: 4px;">
+            <span>↗ Open Fullscreen</span>
+          </a>
           <button class="btn btn-primary btn-sm" id="demoModalBuyBtn">Buy This App Now</button>
         </div>
       </div>
@@ -1304,6 +1307,13 @@
           <div class="form-group">
             <label class="form-label" data-i18n="label_app_tech">Tech Stack (comma separated)</label>
             <input type="text" id="formAppTech" class="form-control" placeholder="React, Node.js, Tailwind, SQLite, KHQR">
+          </div>
+          <div class="form-group">
+            <label class="form-label" style="display: flex; justify-content: space-between; align-items: center;">
+              <span>🌐 Custom Live Demo URL</span>
+              <span style="font-size: 0.76rem; color: #10b981; font-weight: 600;">(Optional - Leave blank for auto-simulator)</span>
+            </label>
+            <input type="url" id="formAppDemoUrl" class="form-control" placeholder="e.g. https://my-app.vercel.app (or leave empty)">
           </div>
           <div class="form-group">
             <label class="form-label" data-i18n="label_app_preview">Preview Image (URL or Upload from Computer)</label>
